@@ -1,0 +1,34 @@
+{
+  "samples": [
+    {
+      "id": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
+      "sampleCode": "1001",
+      "client": "Hotel Casino Internacional",
+      "getSampleDate": "2023-10-01",
+      "receptionDate": "2023-10-02",
+      "analysisDate": "2023-10-02",
+      "sampleLocation": "Hotel's restaurant",
+      "responsable": "Karen Martinez"
+    }
+  ],
+  "reports": [
+    {
+      "id": "79f23d64-dabb-4cb8-80a9-d004ce55f25c",
+      "reportDate": "2023-10-10",
+      "sample": {
+        "id": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
+        "sampleCode": "1001",
+        "client": "Hotel Casino Internacional",
+        "getSampleDate": "2023-10-01",
+        "receptionDate": "2023-10-02",
+        "analysisDate": "2023-10-02",
+        "responsable": "Karen Martinez",
+        "sampleLocation": "Hotel's restaurant"
+      },
+      "analyte": "Coliformes totales",
+      "analysisMethod": "NTC 4772:2008",
+      "criteria": "Resolución 2115/2007",
+      "result": "0 UFC/100 ml"
+    }
+  ]
+}
