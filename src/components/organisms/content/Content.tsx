@@ -1,19 +1,27 @@
 import { Box } from "@mui/material"
-import { Route, Routes } from "react-router-dom"
 
 import Reports from "../reports/reports"
 import Samples from "../samples/Samples"
 import { contentStyle } from "./ContentStyle"
+import { useMenu } from "../../../utils/hooks/useMenu"
 
 function Content() {
+  const {selectedItem} = useMenu();
+
+  let contentComponent;
+  switch (selectedItem) {
+    case "Samples":
+      contentComponent = <Samples />;
+      break;
+    case "Reports":
+      contentComponent = <Reports />;
+      break;
+    default:
+      contentComponent = <Samples />;
+  }
   return (
     <Box sx={contentStyle}>
-      <Routes>
-          <Route path="/" element={<Samples />} />
-          <Route path="/samples" element={<Samples />} />
-          <Route path="/reports" element={<Reports />} />
-        </Routes>
-      
+      {contentComponent}
     </Box>
   );
 }

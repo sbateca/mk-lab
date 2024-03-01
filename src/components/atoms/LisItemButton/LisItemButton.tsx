@@ -17,8 +17,8 @@ function ListItemButtonComponent({ component, to, label }:LisItemButtonProps){
     };
     return (
         <ListItemButton
-          component={component}
-          to={to}
+          // component={component}
+          // to={to}
           selected={selectedItem === label}
           onClick={() => handleItemClick(label)}
         >
