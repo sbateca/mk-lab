@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 
 import Reports from "../reports/reports"
-import Samples from "../samples/Samples"
+import SamplesContent from '../samplesContent/SamplesContent';
 import { contentStyle } from "./ContentStyle"
 import { useMenu } from "../../../utils/hooks/useMenu"
 
@@ -11,13 +11,13 @@ function Content() {
   let contentComponent;
   switch (selectedItem) {
     case "Samples":
-      contentComponent = <Samples />;
+      contentComponent = <SamplesContent />;
       break;
     case "Reports":
       contentComponent = <Reports />;
       break;
     default:
-      contentComponent = <Samples />;
+      contentComponent = <SamplesContent />;
   }
   return (
     <Box sx={contentStyle}>

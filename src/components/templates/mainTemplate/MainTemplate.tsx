@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 
 import { mainContentContainer, mainTemplayeStyle } from "./MainTemplateStyle"
-import { MenuProvider } from "../../../context/MenuContext"
+import { MenuProvider } from "../../../context/Menu/MenuContext"
 import { MainTemplateProps } from "./Type";
 
 function MainTemplate({ header, menu, mainContent }: MainTemplateProps) {

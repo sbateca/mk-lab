@@ -1,5 +1,4 @@
 import { Drawer, List } from "@mui/material"
-import { Link } from "react-router-dom"
 
 import { useMenu } from "../../../utils/hooks/useMenu"
 import ListItemButtonComponent from "../../atoms/LisItemButton/LisItemButton"
@@ -19,8 +18,6 @@ function Menu() {
           MENU_ITEMS.map((item, index) => (
             <ListItemButtonComponent
               key={index}
-              component={Link}
-              to={item.to}
               label={item.label}
             />
         ))}
