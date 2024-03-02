@@ -6,7 +6,7 @@ function TableHeadComponent({headerLabels}: TableHeadProps) {
 	return (
 		<TableHead>
 			<TableRow>
-				{headerLabels.map((label: string, index: any) => (
+				{headerLabels.map((label: string, index: number) => (
 					<TableCellComponent key={index} align='center' text={label} />
 				))}
 			</TableRow>

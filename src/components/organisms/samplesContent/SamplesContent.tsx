@@ -4,10 +4,10 @@ import { Box } from "@mui/material"
 import { SAMPLES_TABLE_HEADER_LABELS } from "../../../config/constants"
 import { samplesToTableRowPropList } from "../../../adapters/TableRow"
 import { TableRowProps } from "../../molecules/TableRow/Types"
-import { useSample } from '../../../utils/hooks/useSample'
-import Typography from '../../atoms/Typography/Typography'
+import { useSample } from "../../../utils/hooks/useSample"
+import Typography from "../../atoms/Typography/Typography"
 import CircularSpinner from "../../atoms/Spinner/Spinner"
-import TableComponent from '../table/Table'
+import TableComponent from "../table/Table"
 
 function SamplesContent() {
     const { samples, getSamples, loading, error } = useSample();
@@ -21,6 +21,7 @@ function SamplesContent() {
                     setRowsValue(samplesToTableRowPropList(samples));
                 }
             } catch (error) {
+                throw new Error("error getting samples");
             }
         }
         getSampleList();
@@ -32,7 +33,6 @@ function SamplesContent() {
         }
     }, [samples])
 
-    
     if(loading) return <CircularSpinner />
     if(error) return <Typography text="Error" variant="h6" />
 

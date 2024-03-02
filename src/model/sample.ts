@@ -4,7 +4,7 @@ export interface ISample {
     client: string,
     getSampleDate: string,
     receptionDate: string,
-    analysisDate:  string,
+    analysisDate: string,
     sampleLocation: string,
     responsable: string
 }

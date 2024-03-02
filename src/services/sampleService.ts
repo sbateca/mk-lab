@@ -7,7 +7,6 @@ export const getSamplesService = async () => {
         const response = await axios.get<ISample[]>(`${EnvManager.BACKEND_URL}/samples`);
         return response.data;
     } catch (error) {
-        console.error(error);
         throw new Error("Error getting samples");
     }
 }

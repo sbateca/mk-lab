@@ -3,7 +3,7 @@ import { Typography as MuiTypography } from "@mui/material"
 import ITypographyProps from "./Types"
 import typographyStyle from "./typographyStyle";
 
-const Typography = ({
+function Typography ({
     text,
     size,
     padding,
@@ -12,7 +12,7 @@ const Typography = ({
     gutterBottom = false,
     align = "left",
     color = "black",
-  }: ITypographyProps) => {
+  }: ITypographyProps) {
     const textColor = typographyStyle[color];
     return (
       <MuiTypography
@@ -27,6 +27,6 @@ const Typography = ({
         {text}
       </MuiTypography>
     );
-  };
+  }
   
   export default Typography;

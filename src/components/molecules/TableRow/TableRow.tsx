@@ -1,6 +1,6 @@
-import TableCellComponent from '../../atoms/TableCell/TableCell'
-import { TableRow } from '@mui/material'
-import { TableRowProps } from './Types'
+import TableCellComponent from "../../atoms/TableCell/TableCell"
+import { TableRow } from "@mui/material"
+import { TableRowProps } from "./Types"
 
 function TableRowComponent({ cells }: TableRowProps) {
 	return <TableRow>

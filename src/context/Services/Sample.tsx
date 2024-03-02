@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react"
 
 import { ISample } from "../../model/sample"
-import { getSamplesService } from '../../services/sampleService'
+import { getSamplesService } from "../../services/sampleService"
 
 const SampleContext = createContext<{
     samples: ISample[] | null;
@@ -51,6 +51,6 @@ function SampleProvider({ children }: IProviderProps) {
         }}>
         {children}
     </SampleContext.Provider>;
-};
+}
 
 export { SampleContext, SampleProvider };
