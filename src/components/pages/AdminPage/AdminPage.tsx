@@ -6,16 +6,19 @@ import Menu from "../../molecules/menu/Menu";
 import Content from "../../organisms/content/Content";
 import { COMPANY_NAME } from "../../../config/constants";
 import { adminPageStyle } from "./AdminPageStyle";
+import { SampleProvider } from "../../../context/Services/Sample";
 
 function AdminPage() {
   return (
-    <Box sx={adminPageStyle}>
-      <MainTemplate
-        header={<Header companyName={COMPANY_NAME} />}
-        menu={<Menu />}
-        mainContent={<Content />}
+    <SampleProvider>
+      <Box sx={adminPageStyle}>
+        <MainTemplate
+          header={<Header companyName={COMPANY_NAME} />}
+          menu={<Menu />}
+          mainContent={<Content />}
         />
-    </Box>
+      </Box>
+    </SampleProvider>
   );
 }
 

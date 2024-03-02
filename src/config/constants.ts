@@ -9,3 +9,12 @@ export const MENU_ITEMS = [
         label: "Reports",
     }
 ];
+export const SAMPLES_TABLE_HEADER_LABELS = [
+    "Sample Code",
+    "Client",
+    "Get Date",
+    "Reception Date",
+     "Analysis Date",
+    "Location",
+    "Responsable"
+];

@@ -9,6 +9,46 @@
       "analysisDate": "2023-10-02",
       "sampleLocation": "Hotel's restaurant",
       "responsable": "Karen Martinez"
+    },
+    {
+      "id": "bbd4a1e1-2340-431a-8055-e7dc33bbd81d",
+      "sampleCode": "1002",
+      "client": "Pasabocas D'Chic",
+      "getSampleDate": "2024-02-12",
+      "receptionDate": "2024-02-12",
+      "analysisDate": "2024-02-12",
+      "sampleLocation": "Main Vault",
+      "responsable": "Karen Martinez"
+    },
+    {
+      "id": "ce59c2ba-c7f2-4df5-a8db-7dd74b7381a9",
+      "sampleCode": "1003",
+      "client": "Monterres",
+      "getSampleDate": "2024-02-13",
+      "receptionDate": "2024-02-13",
+      "analysisDate": "2024-02-14",
+      "sampleLocation": "Water vault",
+      "responsable": "Juan Pérez"
+    },
+    {
+      "id": "8f129b91-08cf-4cbf-9d89-28545a1b1023",
+      "sampleCode": "1004",
+      "client": "Fábrica de Galletas La Moderna",
+      "getSampleDate": "2023-09-20",
+      "receptionDate": "2023-09-21",
+      "analysisDate": "2023-09-22",
+      "sampleLocation": "Production Line",
+      "responsable": "David López"
+    },
+    {
+      "id": "e3d05cb2-343d-4ad5-a617-c7dbba54f4b5",
+      "sampleCode": "1005",
+      "client": "Cervecería Artesanal La Buena Espuma",
+      "getSampleDate": "2023-08-10",
+      "receptionDate": "2023-08-11",
+      "analysisDate": "2023-08-12",
+      "sampleLocation": "Brewery",
+      "responsable": "Ana Gómez"
     }
   ],
   "reports": [
@@ -29,6 +69,24 @@
       "analysisMethod": "NTC 4772:2008",
       "criteria": "Resolución 2115/2007",
       "result": "0 UFC/100 ml"
+    },
+    {
+      "id": "cf0f69f0-dad8-4c8d-9a0a-69fdd29c2f8f",
+      "reportDate": "2023-09-25",
+      "sample": {
+        "id": "bbd4a1e1-2340-431a-8055-e7dc33bbd81d",
+        "sampleCode": "1002",
+        "client": "Pasabocas D'Chic",
+        "getSampleDate": "2024-02-12",
+        "receptionDate": "2024-02-12",
+        "analysisDate": "2024-02-12",
+        "responsable": "Karen Martinez",
+        "sampleLocation": "Main Vault"
+      },
+      "analyte": "Contenido de grasa",
+      "analysisMethod": "AOAC 945.16",
+      "criteria": "Estándar de la industria",
+      "result": "15%"
     }
   ]
 }
