@@ -1,10 +1,7 @@
 import { ListItemButton, ListItemText } from "@mui/material"
 
 import { useMenu } from "../../../utils/hooks/useMenu"
-
-interface LisItemButtonProps {
-    label: string;
-}
+import { LisItemButtonProps } from "./Types"
 
 function ListItemButtonComponent({ label }:LisItemButtonProps){
     const { selectedItem, setSelectedItem, toggleMenu } = useMenu();
