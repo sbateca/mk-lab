@@ -1,14 +1,15 @@
+import { MenuElementProps } from "../components/molecules/menu/Types";
+
 export const COMPANY_NAME = "Microlab App";
-export const MENU_ITEMS = [
+export const MENU_ITEMS: MenuElementProps[] = [
     {
-        to: "/samples",
         label: "Samples",
     },
     {
-        to: "/reports",
         label: "Reports",
     }
 ];
+
 export const SAMPLES_TABLE_HEADER_LABELS = [
     "Sample Code",
     "Client",
