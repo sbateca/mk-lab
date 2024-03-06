@@ -3,9 +3,9 @@ import { Drawer, List } from "@mui/material"
 import { useMenu } from "../../../utils/hooks/useMenu"
 import ListItemButtonComponent from "../../atoms/LisItemButton/LisItemButton"
 import { MenuStyle } from "./MenuStyle"
-import { MENU_ITEMS } from "../../../config/constants"
+import { MenuProps } from "./Types"
 
-function Menu() {
+function Menu({menuItems}: MenuProps) {
     const { menuOpen, toggleMenu } = useMenu();
     return (
     <Drawer
@@ -15,7 +15,7 @@ function Menu() {
     >
       <List sx={MenuStyle}>
         {
-          MENU_ITEMS.map((item, index) => (
+          menuItems.map((item, index) => (
             <ListItemButtonComponent
               key={index}
               label={item.label}
