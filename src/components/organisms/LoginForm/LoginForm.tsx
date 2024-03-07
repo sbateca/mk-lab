@@ -3,28 +3,16 @@ import { Navigate } from "react-router-dom"
 import { FormControl, Button, Box, FormHelperText } from "@mui/material"
 
 import { getUserByUserNameAndPassword } from "../../../services/userService"
-import { LoginFormStyles } from "./LoginFormStyles"
 import TextFieldComponent from "../../atoms/TextField/TextField"
 import { useCookies } from "../../../utils/hooks/useCookies"
+import { LoginFormStyles } from "./LoginFormStyles"
+import { LoginFormProps } from "./Types"
 
-function LoginForm() {
+function LoginForm({fields}: LoginFormProps ) {
 	const [fieldsValues, setFieldsValues] = useState<{ [key: string]: string }>({});
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 	const cookies = useCookies();
-
-	const fieldItems = [
-		{
-			name: "username",
-			label: "Username",
-			type: "text" as const,
-		},
-		{
-			name: "password",
-			label: "Password",
-			type: "password" as const,
-		}
-	]
 
 	const handleFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const field = event.target.name;
@@ -38,7 +26,6 @@ function LoginForm() {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
-			console.log(fieldsValues["username"], fieldsValues["password"]);
 			const response = await getUserByUserNameAndPassword({
 				username: fieldsValues["username"],
 				password: fieldsValues["password"],
@@ -54,9 +41,15 @@ function LoginForm() {
 		}
 	};
 
+	const getFieldRequiredValue = (field: string): boolean | undefined => {
+		return fields.find((item) => item.name === field)?.required;
+	};
+
 	const handleBlur = (field: string) => {
 		if (!field) return;
-		if (!errors[field] && !fieldsValues[field]) {
+		if (!errors[field] &&
+			!fieldsValues[field] &&
+			getFieldRequiredValue(field)){
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				[field]: `${field} is required`,
@@ -76,11 +69,9 @@ function LoginForm() {
 				<Navigate to='/admin' />
 			) : (
 				<form onSubmit={handleSubmit}>
-					<Box
-						sx={LoginFormStyles.form}
-					>
-						{fieldItems.map((fieldItem) => (
-							<FormControl required error={!!errors[fieldItem.name]} key={fieldItem.name}>
+					<Box sx={LoginFormStyles.form}>
+						{fields.map((fieldItem) => (
+							<FormControl required={fieldItem.required} error={!!errors[fieldItem.name]} key={fieldItem.name}>
 								<TextFieldComponent
 									name={fieldItem.name}
 									label={fieldItem.label}
@@ -89,15 +80,15 @@ function LoginForm() {
 									value={fieldsValues[fieldItem.name] || ""}
 									onChange={handleFieldChange}
 									onBlur={() => handleBlur(fieldItem.name)}
-									required
+									required={fieldItem.required}
 									error={!!errors[fieldItem.name]}
 								/>
 								{errors[fieldItem.name] && <FormHelperText>{errors[fieldItem.name]}</FormHelperText>}
 							</FormControl>
 						))}
-						{errors["form"] && <FormHelperText>{errors["form"]}</FormHelperText>}
+						{errors["form"] && <FormHelperText sx={{color: "red"}}>{errors["form"]}</FormHelperText>}
 						<Button type='submit' variant='contained' color='primary'>
-							Log in
+							sign in
 						</Button>
 					</Box>
 				</form>
