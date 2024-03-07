@@ -88,5 +88,14 @@
       "criteria": "Estándar de la industria",
       "result": "15%"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "username": "admin",
+      "password": "123456",
+      "email": "admin@example.com"
+    }
   ]
 }

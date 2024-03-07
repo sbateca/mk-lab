@@ -3,5 +3,5 @@ export interface MenuElementProps {
 }
   
 export interface MenuProps {
-    menuItems:  MenuElementProps[]
+    menuItems: MenuElementProps[]
 }
