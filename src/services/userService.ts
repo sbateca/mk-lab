@@ -1,9 +1,8 @@
-import axios from "axios";
-import EnvManager from "../config/envManager";
-import { IUser } from "../model/user";
+import axios from "axios"
+import EnvManager from "../config/envManager"
+import { IUser } from "../model/user"
 
 interface getUserProps{ [key: string]: string; }
-
 
 export const getUserByUserNameAndPassword = async ({username, password}: getUserProps) => {
     try {
