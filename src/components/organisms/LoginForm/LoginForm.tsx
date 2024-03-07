@@ -23,13 +23,19 @@ function LoginForm({fields}: LoginFormProps ) {
 		resetTextFieldError(field);
 	};
 
+	const buildParametersObject = (fields: { [key: string]: string }) => {
+		const parameters: { [key: string]: string } = {};
+		Object.keys(fields).forEach((key) => {
+			parameters[key] = fields[key].trim();
+		});
+		return parameters;
+	};
+
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
-			const response = await getUserByUserNameAndPassword({
-				username: fieldsValues["username"],
-				password: fieldsValues["password"],
-			});
+			const requestParameters = buildParametersObject(fieldsValues);
+			const response = await getUserByUserNameAndPassword(requestParameters);
 			if (response.length > 0) {
 				cookies?.set("userData", response, { path: "/" });
 				setIsLoggedIn(true);
@@ -77,7 +83,7 @@ function LoginForm({fields}: LoginFormProps ) {
 									label={fieldItem.label}
 									variant='outlined'
 									type={fieldItem.type}
-									value={fieldsValues[fieldItem.name] || ""}
+									value={fieldsValues[fieldItem.name]?.trim() || ""}
 									onChange={handleFieldChange}
 									onBlur={() => handleBlur(fieldItem.name)}
 									required={fieldItem.required}

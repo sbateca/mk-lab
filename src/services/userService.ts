@@ -2,10 +2,8 @@ import axios from "axios";
 import EnvManager from "../config/envManager";
 import { IUser } from "../model/user";
 
-interface getUserProps{
-    username: string;
-    password: string;
-}
+interface getUserProps{ [key: string]: string; }
+
 
 export const getUserByUserNameAndPassword = async ({username, password}: getUserProps) => {
     try {
