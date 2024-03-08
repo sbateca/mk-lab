@@ -5,12 +5,14 @@ import Header from "../../molecules/header/Header"
 import Menu from "../../molecules/menu/Menu"
 import Content from "../../organisms/content/Content"
 import { COMPANY_NAME, MENU_ITEMS } from "../../../config/constants"
-import { adminPageStyle } from "./AdminPageStyle"
 import { SampleProvider } from "../../../context/Services/Sample"
+import { ReportsProvider } from "../../../context/Services/Reports"
+import { adminPageStyle } from "./AdminPageStyle"
 
 function AdminPage() {
   return (
     <SampleProvider>
+      <ReportsProvider>
       <Box sx={adminPageStyle}>
         <MainTemplate
           header={<Header companyName={COMPANY_NAME} />}
@@ -18,6 +20,7 @@ function AdminPage() {
           mainContent={<Content />}
         />
       </Box>
+      </ReportsProvider>
     </SampleProvider>
   );
 }

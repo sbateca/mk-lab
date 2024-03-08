@@ -1,4 +1,5 @@
 import { TableRowProps } from "../components/molecules/TableRow/Types"
+import { IReport } from "../model/report"
 import { ISample } from "../model/sample"
 
 export const samplesToTableRowPropList = (samples: ISample[]): TableRowProps[] => {
@@ -15,4 +16,18 @@ export const samplesToTableRowPropList = (samples: ISample[]): TableRowProps[] =
             ]}
         })
     
+}
+
+export const reportsToTableRowPropList = (reports: IReport[]): TableRowProps[] => {
+    return reports.map((report) => {
+        return {
+            cells: [
+                { text: report.reportDate, align: "left" },
+                { text: `${report.sample.sampleCode} - ${report.sample.client}`, align: "left" },
+                { text: report.analyte, align: "left" },
+                { text: report.analysisMethod, align: "left" },
+                { text: report.criteria, align: "left" },
+                { text: report.result, align: "left" },
+        ]}
+    })
 }
