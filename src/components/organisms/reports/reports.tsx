@@ -45,7 +45,7 @@ function Reports() {
                     variant="h1"
                     padding="10px 0px"
                 />
-                <TableComponent headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rowsValue} />
+                <TableComponent headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rowsValue} actions={true} />
             </Box>
         </Box>
     )

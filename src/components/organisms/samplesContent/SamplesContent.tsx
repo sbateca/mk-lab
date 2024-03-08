@@ -35,7 +35,6 @@ function SamplesContent() {
 
     if(loading) return <CircularSpinner />
     if(error) return <Typography text="Error" variant="h6" />
-
     return(
         <Box>
             <Box>
@@ -45,7 +44,7 @@ function SamplesContent() {
                     variant="h1"
                     padding="10px 0px"
                 />
-                <TableComponent headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rowsValue} />
+                <TableComponent headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rowsValue} actions={true} />
             </Box>
         </Box>
     )

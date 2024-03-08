@@ -5,5 +5,7 @@ export interface TableCellProps {
     | "inherit"
     | "justify"
     | "left"
-    | "right"
+    | "right",
+    actions?: boolean,
+    index?: number
 }

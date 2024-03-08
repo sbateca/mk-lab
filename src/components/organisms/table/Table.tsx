@@ -8,8 +8,16 @@ import TableHeadComponent from "../../molecules/TableHead/TableHead"
 import TableRowComponent from "../../molecules/TableRow/TableRow"
 import { TableStyles } from "./TableStyles"
 import { TableProps } from "./Types"
+import { useEffect, useState } from "react"
 
-export default function TableComponent({ headerLabels, rows }: TableProps) {
+export default function TableComponent({ headerLabels, rows, actions }: TableProps) {
+	const [newHeaderLabels, setNewHeaderLabels] = useState(headerLabels);
+	useEffect(() => {
+		if (actions) {
+			setNewHeaderLabels(["Actions", ...headerLabels]);
+		}
+	}, [actions]);
+
 	return (
 		<TableContainer component={Paper}>
 			{rows.length == 0 ? (
@@ -18,10 +26,10 @@ export default function TableComponent({ headerLabels, rows }: TableProps) {
 				</Typography>
 			) : (
 				<Table sx={{ minWidth: 650 }} aria-label='sample table'>
-					<TableHeadComponent headerLabels={headerLabels} />
+					<TableHeadComponent headerLabels={newHeaderLabels} />
 					<TableBody>
 						{rows.map((row, index) => (
-							<TableRowComponent key={index} cells={row.cells} />
+							<TableRowComponent key={index} cells={row.cells} actions={actions} />
 						))}
 					</TableBody>
 				</Table>
