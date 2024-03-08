@@ -3,6 +3,7 @@ import { MenuProps } from "./Types"
 import Menu from "./Menu"
 import Header from "../header/Header"
 import { MenuProvider } from "../../../context/Menu/MenuContext"
+import { CookiesProvider } from "../../../context/Cookie/CookieContext"
 
 describe("Menu component", () => {
     it("should render the menu with the elements passed by arguments successfuly", () => {
@@ -15,10 +16,12 @@ describe("Menu component", () => {
         const companyName = "Company Name test";
 
         render(
+            <CookiesProvider>
             <MenuProvider>
                 <Header companyName={companyName} />
                 <Menu menuItems={mockMenuProps.menuItems} />
             </MenuProvider>
+            </CookiesProvider>
         );
         const menu = screen.getByLabelText("menu");
         fireEvent.click(menu);
@@ -39,9 +42,11 @@ describe("Menu component", () => {
         };
 
         render(
+            <CookiesProvider>
             <MenuProvider>
                 <Menu menuItems={mockMenuProps.menuItems} />
             </MenuProvider>
+            </CookiesProvider>
         );
 
         const menuItems = screen.queryByRole("presentation");

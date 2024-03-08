@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Header from "./Header";
+import { CookiesProvider } from "../../../context/Cookie/CookieContext";
 
 describe("Header", ()=>{
 
@@ -7,7 +8,10 @@ describe("Header", ()=>{
 
     beforeEach(() => {
         companyName = "Company Name test";
-        render(<Header companyName={companyName} />);
+        render(
+            <CookiesProvider>
+                <Header companyName={companyName} />
+            </CookiesProvider>);
     });
 
     it("should render the company name passed by arguments", ()=>{
