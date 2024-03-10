@@ -1,7 +1,8 @@
-import TableCellComponent from "../../atoms/TableCell/TableCell";
-import { TableRow } from "@mui/material";
-import { TableRowProps } from "./Types";
-import { useEffect, useState } from "react";
+import TableCellComponent from "../../atoms/TableCell/TableCell"
+import { TableRow } from "@mui/material"
+import { useEffect, useState } from "react"
+
+import { TableRowProps } from "./Types"
 
 function TableRowComponent({ cells, actions }: TableRowProps) {
 	const [newCells, setNewCells] = useState(cells);

@@ -5,4 +5,5 @@ export interface ActionsButtonsComponentProps {
 export interface ActionsButtonsProps {
 	action: string;
 	color: "primary" | "secondary" | "error" | "info" | "success" | "warning" | "inherit" | "default";
+	icon?: "view" | "edit" | "create" | "delete";
 }

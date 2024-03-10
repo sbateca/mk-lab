@@ -9,12 +9,20 @@ import { useReports } from "../../../utils/hooks/useReports"
 import Typography from "../../atoms/Typography/Typography"
 import CircularSpinner from "../../atoms/Spinner/Spinner"
 import TableComponent from "../table/Table"
+import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons"
 
 function Reports() {
     const { reports, getReports, loading, error } = useReports();
     const [rowsValue, setRowsValue] = useState<TableRowProps[]>([]);
-    const reportActions: ActionsButtonsComponentProps = {actions:[
-        {action: "View details", color: "primary"},
+    const tableActions: ActionsButtonsComponentProps = {actions:[
+        {action: "Detail", color: "primary" },
+        {action: "Edit", color: "primary" },
+        {action: "Delete", color: "error" },
+    ]}
+
+    const reportsActions: ActionsButtonsComponentProps = {
+        actions: [
+            {action: "create report", color: "primary", icon: "create"},
     ]}
     
     useEffect(() => {
@@ -42,15 +50,18 @@ function Reports() {
 
     return(
         <Box>
-            <Box>
+            <Box sx={{display:"flex", flexDirection: "row"}}>
                 <Typography
                     text="Reports"
                     size="20px"
                     variant="h1"
                     padding="10px 0px"
                 />
-                <TableComponent headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rowsValue} actions={reportActions} />
+                <Box sx={{marginLeft: "auto"}}>
+                    <ActionsButtonsComponent actions={reportsActions.actions} />
+                </Box>
             </Box>
+            <TableComponent headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rowsValue} actions={tableActions} />
         </Box>
     )
 }
