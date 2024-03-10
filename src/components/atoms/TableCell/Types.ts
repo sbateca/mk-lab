@@ -1,3 +1,4 @@
+import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
 export interface TableCellProps {
     key?: number,
     text: string,
@@ -5,5 +6,7 @@ export interface TableCellProps {
     | "inherit"
     | "justify"
     | "left"
-    | "right"
+    | "right",
+    actions?: ActionsButtonsComponentProps | null,
+    index?: number
 }

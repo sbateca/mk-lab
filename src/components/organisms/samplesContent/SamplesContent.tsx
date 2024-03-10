@@ -8,10 +8,16 @@ import { useSample } from "../../../utils/hooks/useSample"
 import Typography from "../../atoms/Typography/Typography"
 import CircularSpinner from "../../atoms/Spinner/Spinner"
 import TableComponent from "../table/Table"
+import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
 
 function SamplesContent() {
     const { samples, getSamples, loading, error } = useSample();
     const [rowsValue, setRowsValue] = useState<TableRowProps[]>([]);
+    const actions: ActionsButtonsComponentProps = {
+        actions: [
+            {action: "View details", color: "primary"},
+            {action: "Edit Sample", color: "primary"},
+    ]}
     
     useEffect(() => {
         const getSampleList = async () =>{
@@ -35,7 +41,6 @@ function SamplesContent() {
 
     if(loading) return <CircularSpinner />
     if(error) return <Typography text="Error" variant="h6" />
-
     return(
         <Box>
             <Box>
@@ -45,7 +50,7 @@ function SamplesContent() {
                     variant="h1"
                     padding="10px 0px"
                 />
-                <TableComponent headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rowsValue} />
+                <TableComponent headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rowsValue} actions={actions} />
             </Box>
         </Box>
     )
