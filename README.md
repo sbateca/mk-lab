@@ -1,30 +1,149 @@
-# React + TypeScript + Vite
+# Microlab App Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the FrontEnd part of the Microlab App. It's built with React and TypeScript. It allows users to manage information about sample collections, sample reports with clients, and other options.
 
-Currently, two official plugins are available:
+## Getting Started 🚀
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+These instructions will allow you to obtain a copy of the project and then run it on your local machine, for development and testing purposes.
 
-## Expanding the ESLint configuration
+### Prerequisites 📋
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+What things you need to install the software and how to install them.
 
-- Configure the top-level `parserOptions` property like this:
+- Node.js version 20.11.0. You can download it from [Node.js official](https://nodejs.org/).
+- npm (comes with Node.js).
+- GNU Make. You can donwload it from [GNU Make Official](https://www.gnu.org/software/make/)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Installation 🔧
+
+A step-by-step series of examples that tell you how to get a development environment running.
+
+#### Environment Variables
+Before starting the application, you need to set up the following environment variables in your `.env` file:
+```bash
+VITE_BACKEND_URL="http://localhost:4000"
+```
+If you do not have a `.env` file, create one in the root directory of the project. You can use the provided valur `.env.example`.
+
+Ensure the variable names match those in the src/config/constants file for consistency.
+
+1. Clone the repository:
+```bash
+git clone https://github.com/sbateca/mk-lab.git
+```
+2. Install the dependencies:
+```bash
+npm install
+```
+3. Run the mock server:
+```bash
+make start-server
+```
+4. Run the project:
+```bash
+npm run dev
+```
+this will start the project in development mode. Open [ localhost:5173]( http://localhost:5173/) to view it in the browser.
+
+
+Once you have started the application, you can log in using the following credentials:
+```
+Username: admin
+Password: 123456
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Running the tests ⚙️
+
+To run the tests, use the following command:
+  
+  ```bash
+  npm run test
+  ```
+
+## Running the linter ⚙️
+
+To run the linter, use the following command:
+  
+  ```bash
+  npm run lint
+  ```
+## Project Structure 📁
+
+This project follows the Atomic Design pattern for frontend, meaning we organize our components into atoms, molecules, organisms, templates, and pages to promote reusability and maintainability.
+
+```
+src/
+├── adapters
+├── assets
+├── components
+│   ├── atoms
+│   │   ├── LisItemButton
+│   │   ├── Spinner
+│   │   ├── TableCell
+│   │   ├── TextField
+│   │   └── Typography
+│   ├── molecules
+│   │   ├── ActionButton
+│   │   ├── TableHead
+│   │   ├── TableRow
+│   │   ├── header
+│   │   ├── menu
+│   │   └── userMenu
+│   ├── organisms
+│   │   ├── LoginForm
+│   │   ├── content
+│   │   ├── reports
+│   │   ├── samplesContent
+│   │   └── table
+│   ├── pages
+│   │   ├── AdminPage
+│   │   └── Login
+│   └── templates
+│       ├── loginTemplate
+│       └── mainTemplate
+├── config
+├── context
+│   ├── Cookie
+│   ├── Menu
+│   └── Services
+├── model
+├── services
+└── utils
+    └── hooks
+  
+```
+
+### Guidelines 
+
+- **Atoms**: These are the smallest building blocks of our application. They are the basic HTML elements like buttons, inputs, and labels. They are reusable and can be used across different components.
+
+- **Molecules**: These are a combination of atoms. They are more complex than atoms and are usually used to create a specific part of a UI.
+
+- **Organisms**: These are a combination of molecules and atoms. They are more complex than molecules and are usually used to create a section of a UI.
+
+- **Templates**: These are a combination of organisms, molecules, and atoms. They are used to create a complete page layout.
+
+- **Pages**: These are the final step in the Atomic Design pattern. They are a combination of templates, organisms, molecules, and atoms. They are used to create a complete page.
+
+- **Assets**: This folder contains all the images, icons, and other assets used in the application.
+
+- **Utils**: This folder contains all the utility functions.
+
+- **Context**: This folder contains all the context providers.
+
+## Code Style 🎨
+
+- **Components**: The components are written as a normal function and has the export default at the end of the file. The internal functions, hooks, services and utils uses the arrow functions style and use the export in its declaration part.
+
+- **Imports**: The imports are grouped in the following order: React, third-party libraries, local imports, and styles.
+
+
+- **Naming**: The name of functions that handle events must be prefixed with handle. For example, handleOnClick.
+
+## Built with 🛠️
+
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+- [TypeScript](https://www.typescriptlang.org/) - A typed superset of JavaScript that compiles to plain JavaScript.
+- [Jest](https://jestjs.io/) - A delightful JavaScript Testing Framework with a focus on simplicity.
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - A library for testing React components.
+- [ESLint](https://eslint.org/) - A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript.
