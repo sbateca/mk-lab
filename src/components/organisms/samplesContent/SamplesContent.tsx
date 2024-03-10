@@ -9,14 +9,21 @@ import Typography from "../../atoms/Typography/Typography"
 import CircularSpinner from "../../atoms/Spinner/Spinner"
 import TableComponent from "../table/Table"
 import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
+import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons"
 
 function SamplesContent() {
     const { samples, getSamples, loading, error } = useSample();
     const [rowsValue, setRowsValue] = useState<TableRowProps[]>([]);
-    const actions: ActionsButtonsComponentProps = {
+    const tableActions: ActionsButtonsComponentProps = {
         actions: [
-            {action: "View details", color: "primary"},
-            {action: "Edit Sample", color: "primary"},
+            {action: "Detail", color: "primary" },
+            {action: "Edit", color: "primary" },
+            {action: "Delete", color: "error" },
+    ]}
+
+    const samplesActions: ActionsButtonsComponentProps = {
+        actions: [
+            {action: "create Sample", color: "primary", icon: "create"},
     ]}
     
     useEffect(() => {
@@ -43,15 +50,18 @@ function SamplesContent() {
     if(error) return <Typography text="Error" variant="h6" />
     return(
         <Box>
-            <Box>
+            <Box sx={{display:"flex", flexDirection: "row"}}>
                 <Typography
                     text="Samples"
                     size="20px"
                     variant="h1"
                     padding="10px 0px"
                 />
-                <TableComponent headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rowsValue} actions={actions} />
+                <Box sx={{marginLeft: "auto"}}>
+                    <ActionsButtonsComponent actions={samplesActions.actions} />
+                </Box>
             </Box>
+            <TableComponent headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rowsValue} actions={tableActions} />
         </Box>
     )
 }

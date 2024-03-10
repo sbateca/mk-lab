@@ -32,4 +32,21 @@ describe("ActionsButtonsComponent", () => {
 			expect(buttonText).toBeInTheDocument();
 		});
 	});
+
+	it("renders buttons with the icon passed in parameters", () => {
+		const mockActions: ActionsButtonsComponentProps = {
+			actions: [
+				{ action: "Action 1", color: "primary", icon: "create"},
+				{ action: "Action 2", color: "secondary", icon: "delete"},
+			],
+		};
+		const dataTestIds = ["AddIcon", "DeleteIcon"];
+
+		render(<ActionsButtonsComponent actions={mockActions.actions} />);
+
+		mockActions.actions.forEach((_actionItem, index) => {
+			const buttonText = screen.getByTestId(dataTestIds[index]);
+			expect(buttonText).toBeInTheDocument();
+		});
+	});
 });
