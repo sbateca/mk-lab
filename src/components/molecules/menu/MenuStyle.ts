@@ -1,4 +1,4 @@
-import { SxProps, Theme } from "@mui/system";
+import { SxProps, Theme } from "@mui/system"
 
 export const MenuStyle: SxProps<Theme> = {
   width: 250,

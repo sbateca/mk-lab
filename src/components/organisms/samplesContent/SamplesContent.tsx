@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
+import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
+import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons"
 import { SAMPLES_TABLE_HEADER_LABELS } from "../../../config/constants"
 import { samplesToTableRowPropList } from "../../../adapters/TableRow"
 import { TableRowProps } from "../../molecules/TableRow/Types"
@@ -8,8 +10,6 @@ import { useSample } from "../../../utils/hooks/useSample"
 import Typography from "../../atoms/Typography/Typography"
 import CircularSpinner from "../../atoms/Spinner/Spinner"
 import TableComponent from "../table/Table"
-import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
-import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons"
 
 function SamplesContent() {
     const { samples, getSamples, loading, error } = useSample();

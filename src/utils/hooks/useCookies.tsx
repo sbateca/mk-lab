@@ -1,4 +1,5 @@
 import { useContext } from "react"
+
 import { CookiesContext } from "../../context/Cookie/CookieContext"
 
 export const useCookies = () => {

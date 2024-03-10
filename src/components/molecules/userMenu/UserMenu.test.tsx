@@ -1,6 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react"
-import UserMenu from "./UserMenu"
+
 import { CookiesProvider } from "../../../context/Cookie/CookieContext"
+import UserMenu from "./UserMenu"
 
 const mockCookies = {
   remove: jest.fn(),

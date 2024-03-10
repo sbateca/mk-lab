@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react"
+
+import { CookiesProvider } from "../../../context/Cookie/CookieContext"
+import { MenuProvider } from "../../../context/Menu/MenuContext"
+import Header from "../header/Header"
 import { MenuProps } from "./Types"
 import Menu from "./Menu"
-import Header from "../header/Header"
-import { MenuProvider } from "../../../context/Menu/MenuContext"
-import { CookiesProvider } from "../../../context/Cookie/CookieContext"
 
 describe("Menu component", () => {
     it("should render the menu with the elements passed by arguments successfuly", () => {

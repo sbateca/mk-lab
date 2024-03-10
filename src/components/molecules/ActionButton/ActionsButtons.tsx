@@ -1,7 +1,7 @@
 import { Button } from "@mui/material"
 
 import { ActionsButtonsComponentProps, ActionsButtonsProps } from "./Types"
-import { getIcon } from "../../../utils/icons";
+import { getIcon } from "../../../utils/icons"
 
 function ActionsButtonsComponent({ actions }: ActionsButtonsComponentProps) {
 

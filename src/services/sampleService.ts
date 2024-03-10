@@ -1,6 +1,7 @@
-import axios from "axios";
-import { ISample } from "../model/sample";
-import EnvManager from "../config/envManager";
+import axios from "axios"
+
+import { ISample } from "../model/sample"
+import EnvManager from "../config/envManager"
 
 export const getSamplesService = async () => {
     try {

@@ -1,7 +1,7 @@
-import TableCellComponent from "../../atoms/TableCell/TableCell"
-import { TableRow } from "@mui/material"
 import { useEffect, useState } from "react"
+import { TableRow } from "@mui/material"
 
+import TableCellComponent from "../../atoms/TableCell/TableCell"
 import { TableRowProps } from "./Types"
 
 function TableRowComponent({ cells, actions }: TableRowProps) {

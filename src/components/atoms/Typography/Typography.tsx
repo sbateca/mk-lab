@@ -1,7 +1,7 @@
 import { Typography as MuiTypography } from "@mui/material"
 
 import ITypographyProps from "./Types"
-import typographyStyle from "./typographyStyle";
+import typographyStyle from "./typographyStyle"
 
 function Typography ({
     text,

@@ -1,4 +1,5 @@
 import { TableHead, TableRow } from "@mui/material"
+
 import TableCellComponent from "../../atoms/TableCell/TableCell"
 import { TableHeadProps } from "./Types"
 
