@@ -1,5 +1,6 @@
-import { render } from "@testing-library/react";
-import CircularSpinner from "./Spinner";
+import { render } from "@testing-library/react"
+
+import CircularSpinner from "./Spinner"
 
 describe("CircularSpinner", () => {
   it("renders circular spinner", () => {

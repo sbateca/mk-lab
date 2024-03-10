@@ -5,8 +5,8 @@ import { FormControl, Button, Box, FormHelperText } from "@mui/material"
 import { getUserByUserNameAndPassword } from "../../../services/userService"
 import TextFieldComponent from "../../atoms/TextField/TextField"
 import { useCookies } from "../../../utils/hooks/useCookies"
-import { LoginFormStyles } from "./LoginFormStyles"
 import { LoginFormProps } from "./Types"
+import { LoginFormStyles } from "./LoginFormStyles"
 
 function LoginForm({fields}: LoginFormProps ) {
 	const [fieldsValues, setFieldsValues] = useState<{ [key: string]: string }>({});

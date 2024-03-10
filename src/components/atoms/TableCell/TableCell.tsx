@@ -1,7 +1,7 @@
-import { TableCell } from "@mui/material";
+import { TableCell } from "@mui/material"
 
-import { TableCellProps } from "./Types";
-import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons";
+import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons"
+import { TableCellProps } from "./Types"
 
 function TableCellComponent({ text, align, actions, index }: TableCellProps) {
 	return actions && index == 0 ? (

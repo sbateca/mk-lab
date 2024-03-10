@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
-import Header from "./Header";
-import { CookiesProvider } from "../../../context/Cookie/CookieContext";
+import { render, screen } from "@testing-library/react"
+
+import Header from "./Header"
+import { CookiesProvider } from "../../../context/Cookie/CookieContext"
 
 describe("Header", ()=>{
 

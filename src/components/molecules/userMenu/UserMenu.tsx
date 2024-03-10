@@ -1,8 +1,9 @@
-import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
-import { useState } from "react";
-import { AccountCircle } from "@mui/icons-material";
-import { Cookie } from "universal-cookie";
-import { UserMenuStyle } from "./UserMenuStyle";
+import { useState } from "react"
+import { IconButton, Menu, MenuItem, Typography } from "@mui/material"
+import { AccountCircle } from "@mui/icons-material"
+import { Cookie } from "universal-cookie"
+
+import { UserMenuStyle } from "./UserMenuStyle"
 
 interface UserMenuProps {
     username: string;

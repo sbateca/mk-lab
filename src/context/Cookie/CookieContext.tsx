@@ -1,5 +1,6 @@
 import { createContext, useState } from "react"
 import Cookies from "universal-cookie"
+
 import { CookiesProviderProps } from "./Types"
 
 const CookiesContext = createContext<Cookies | null>(null);

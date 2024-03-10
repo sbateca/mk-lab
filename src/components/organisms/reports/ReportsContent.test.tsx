@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react"
 
-import { IReport } from "../../../model/report"
 import * as useReportsModule from "../../../utils/hooks/useReports"
+import { IReport } from "../../../model/report"
 import Reports from "./reports"
 
 const mockReports: IReport[] = [

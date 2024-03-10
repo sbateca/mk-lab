@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
-import { ChildrenProps, MenuContextType } from "./Types";
+import { createContext, useState } from "react"
+
+import { ChildrenProps, MenuContextType } from "./Types"
 
 export const MenuContext = createContext<MenuContextType>({
   menuOpen: false,

@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react"
+import { Typography } from "@mui/material"
 import TableContainer from "@mui/material/TableContainer"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
-import { Typography } from "@mui/material"
 import Paper from "@mui/material/Paper"
 
 import TableHeadComponent from "../../molecules/TableHead/TableHead"
 import TableRowComponent from "../../molecules/TableRow/TableRow"
-import { TableStyles } from "./TableStyles"
 import { TableProps } from "./Types"
-import { useEffect, useState } from "react"
+import { TableStyles } from "./TableStyles"
 
 export default function TableComponent({ headerLabels, rows, actions }: TableProps) {
 	const [newHeaderLabels, setNewHeaderLabels] = useState(headerLabels);

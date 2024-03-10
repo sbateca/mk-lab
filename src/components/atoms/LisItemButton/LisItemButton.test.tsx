@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react"
-import ListItemButtonComponent from "./LisItemButton";
+
+import ListItemButtonComponent from "./LisItemButton"
 
 describe("LisItemButtonComponent", ()=>{
     it("should render the label passed by props correctly", ()=>{

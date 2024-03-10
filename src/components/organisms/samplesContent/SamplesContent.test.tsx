@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import SamplesContent from "./SamplesContent";
-import { ISample } from "../../../model/sample";
-import * as useSampleModule from "../../../utils/hooks/useSample";
+import { render, screen, waitFor } from "@testing-library/react"
+
+import SamplesContent from "./SamplesContent"
+import { ISample } from "../../../model/sample"
+import * as useSampleModule from "../../../utils/hooks/useSample"
 
 const mockSamples: ISample[] = [
     {
