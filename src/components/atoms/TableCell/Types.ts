@@ -1,3 +1,4 @@
+import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
 export interface TableCellProps {
     key?: number,
     text: string,
@@ -6,6 +7,6 @@ export interface TableCellProps {
     | "justify"
     | "left"
     | "right",
-    actions?: boolean,
+    actions?: ActionsButtonsComponentProps | null,
     index?: number
 }

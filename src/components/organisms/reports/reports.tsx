@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 
+import { ActionsButtonsComponentProps } from "../../molecules/ActionButton/Types"
 import { REPORTS_TABLE_HEADER_LABELS } from "../../../config/constants"
 import { reportsToTableRowPropList } from "../../../adapters/TableRow"
 import { TableRowProps } from "../../molecules/TableRow/Types"
@@ -12,6 +13,9 @@ import TableComponent from "../table/Table"
 function Reports() {
     const { reports, getReports, loading, error } = useReports();
     const [rowsValue, setRowsValue] = useState<TableRowProps[]>([]);
+    const reportActions: ActionsButtonsComponentProps = {actions:[
+        {action: "View details", color: "primary"},
+    ]}
     
     useEffect(() => {
         const getReportsList = async () =>{
@@ -45,7 +49,7 @@ function Reports() {
                     variant="h1"
                     padding="10px 0px"
                 />
-                <TableComponent headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rowsValue} actions={true} />
+                <TableComponent headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rowsValue} actions={reportActions} />
             </Box>
         </Box>
     )
