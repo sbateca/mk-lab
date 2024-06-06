@@ -1,9 +1,17 @@
 export interface ActionsButtonsComponentProps {
-    actions: ActionsButtonsProps[];
+  actions: ActionsButtonsProps[];
 }
 
 export interface ActionsButtonsProps {
-	action: string;
-	color: "primary" | "secondary" | "error" | "info" | "success" | "warning" | "inherit" | "default";
-	icon?: "view" | "edit" | "create" | "delete";
+  action: string;
+  color:
+    | "primary"
+    | "secondary"
+    | "error"
+    | "info"
+    | "success"
+    | "warning"
+    | "inherit"
+    | "default";
+  icon?: "view" | "edit" | "create" | "delete";
 }

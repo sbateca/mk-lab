@@ -1,7 +1,7 @@
 export interface MenuElementProps {
-    label: string;
+  label: string;
 }
-  
+
 export interface MenuProps {
-    menuItems: MenuElementProps[]
+  menuItems: MenuElementProps[];
 }

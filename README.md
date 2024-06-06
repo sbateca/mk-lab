@@ -73,42 +73,42 @@ This project follows the Atomic Design pattern for frontend, meaning we organize
 
 ```
 src/
-├── adapters
-├── assets
-├── components
-│   ├── atoms
+├── Adapters
+├── Assets
+├── Components
+│   ├── Atoms
 │   │   ├── LisItemButton
 │   │   ├── Spinner
 │   │   ├── TableCell
 │   │   ├── TextField
 │   │   └── Typography
-│   ├── molecules
+│   ├── Molecules
 │   │   ├── ActionButton
 │   │   ├── TableHead
 │   │   ├── TableRow
 │   │   ├── header
 │   │   ├── menu
 │   │   └── userMenu
-│   ├── organisms
+│   ├── Organisms
 │   │   ├── LoginForm
-│   │   ├── content
+│   │   ├── Content
 │   │   ├── reports
 │   │   ├── samplesContent
 │   │   └── table
-│   ├── pages
+│   ├── Pages
 │   │   ├── AdminPage
 │   │   └── Login
-│   └── templates
+│   └── Templates
 │       ├── loginTemplate
 │       └── mainTemplate
-├── config
-├── context
+├── Config
+├── Context
 │   ├── Cookie
 │   ├── Menu
 │   └── Services
 ├── model
 ├── services
-└── utils
+└── Utils
     └── hooks
   
 ```

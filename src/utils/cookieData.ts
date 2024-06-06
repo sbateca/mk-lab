@@ -1,6 +1,9 @@
-import Cookies from "universal-cookie"
+import Cookies from "universal-cookie";
 
-export const checkFieldInCookies = (cookies: Cookies, fieldName: string): boolean => {
-    const userData = cookies.get(fieldName);
-    return userData === undefined ? false : true;
+export const checkFieldInCookies = (
+  cookies: Cookies,
+  fieldName: string,
+): boolean => {
+  const userData = cookies.get(fieldName);
+  return userData === undefined ? false : true;
 };

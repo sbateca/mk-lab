@@ -1,3 +1,3 @@
-export const loginTemplateStyles={
-    textAlign: "center"
-}
+export const loginTemplateStyles = {
+  textAlign: "center",
+};

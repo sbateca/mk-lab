@@ -1,3 +1,3 @@
-export interface TableHeadProps{
-	headerLabels: string[];
+export interface TableHeadProps {
+  headerLabels: string[];
 }
