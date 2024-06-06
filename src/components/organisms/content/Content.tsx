@@ -2,8 +2,8 @@ import {Box} from "@mui/material";
 
 import SamplesContent from "../SamplesContent/SamplesContent";
 import {useMenu} from "../../../Utils/Hooks/useMenu";
-import Reports from "../Reports/Reports";
 import {contentStyle} from "./ContentStyle";
+import Reports from "../Reports/Reports";
 
 function Content() {
   const {selectedItem} = useMenu();

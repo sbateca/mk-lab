@@ -1,8 +1,8 @@
 import {Box} from "@mui/material";
 
 import LoginForm from "../../Organisms/LoginForm/LoginForm";
-import {COMPANY_NAME} from "../../../Config/Constants";
 import {loginTemplateStyles} from "./LoginTemplateStyles";
+import {COMPANY_NAME} from "../../../Config/constants";
 
 function LoginTemplate() {
   const fieldItems = [

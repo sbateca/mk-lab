@@ -3,7 +3,7 @@ import {Box} from "@mui/material";
 
 import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
 import ActionsButtonsComponent from "../../Molecules/ActionButton/ActionsButtons";
-import {SAMPLES_TABLE_HEADER_LABELS} from "../../../Config/Constants";
+import {SAMPLES_TABLE_HEADER_LABELS} from "../../../Config/constants";
 import {samplesToTableRowPropList} from "../../../Adapters/TableRow";
 import {TableRowProps} from "../../Molecules/TableRow/Types";
 import {useSample} from "../../../Utils/Hooks/useSample";

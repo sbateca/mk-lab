@@ -4,7 +4,7 @@ import MainTemplate from "../../Templates/MainTemplate/MainTemplate";
 import Header from "../../Molecules/Header/Header";
 import Menu from "../../Molecules/Menu/Menu";
 import Content from "../../Organisms/Content/Content";
-import {COMPANY_NAME, MENU_ITEMS} from "../../../Config/Constants";
+import {COMPANY_NAME, MENU_ITEMS} from "../../../Config/constants";
 import {SampleProvider} from "../../../Context/Services/Sample";
 import {ReportsProvider} from "../../../Context/Services/Reports";
 import {adminPageStyle} from "./AdminPageStyle";

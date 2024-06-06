@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
 import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
-import {REPORTS_TABLE_HEADER_LABELS} from "../../../Config/Constants";
+import {REPORTS_TABLE_HEADER_LABELS} from "../../../Config/constants";
 import {reportsToTableRowPropList} from "../../../Adapters/TableRow";
 import {TableRowProps} from "../../Molecules/TableRow/Types";
 import {useReports} from "../../../Utils/Hooks/useReports";
