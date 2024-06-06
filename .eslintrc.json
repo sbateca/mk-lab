@@ -1,0 +1,49 @@
+{
+  "root": true,
+  "env": {
+      "browser": true,
+      "es2020": true,
+      "jest": true
+  },
+  "extends": [
+      "./node_modules/gts/",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react-hooks/recommended",
+      "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "react-refresh"],
+
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "node/no-unpublished-import": "off",
+    "node/no-extraneous-import": "off",
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ],
+    "quotes": ["error", "double"],
+    "spaced-comment": "warn",
+    "no-duplicate-imports": "warn",
+    "no-console": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "ignorePatterns": ["dist", ".eslintrc.cjs"]
+}
