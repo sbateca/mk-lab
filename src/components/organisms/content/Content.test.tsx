@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react"
+import {render, screen} from "@testing-library/react";
 
-import { MenuContext, MenuProvider } from "../../../context/Menu/MenuContext"
-import Content from "./Content"
+import {MenuContext, MenuProvider} from "../../../context/Menu/MenuContext";
+import Content from "./Content";
 
 jest.mock("../../../config/envManager", () => ({
   __esModule: true,
@@ -26,12 +26,12 @@ const renderWithCustomContext = (selectedItem: string) => {
       value={{
         menuOpen: false,
         selectedItem: selectedItem,
-        setSelectedItem: () => { },
-        toggleMenu: () => { },
+        setSelectedItem: () => {},
+        toggleMenu: () => {},
       }}
     >
       <Content />
-    </MenuContext.Provider>
+    </MenuContext.Provider>,
   );
 };
 
@@ -40,7 +40,7 @@ describe("Content component", () => {
     render(
       <MenuProvider>
         <Content />
-      </MenuProvider>
+      </MenuProvider>,
     );
     expect(screen.getByLabelText("samples-content")).toBeInTheDocument();
   });
@@ -55,7 +55,7 @@ describe("Content component", () => {
     render(
       <MenuProvider>
         <Content />
-      </MenuProvider>
+      </MenuProvider>,
     );
     expect(screen.getByLabelText("samples-content")).toBeInTheDocument();
   });

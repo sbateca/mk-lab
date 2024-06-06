@@ -1,10 +1,10 @@
 export interface LoginFormProps {
-    fields: FieldItemProps[];
+  fields: FieldItemProps[];
 }
 
-interface FieldItemProps{
-    name: string;
-    label: string;
-    type: "text" | "password";
-    required: boolean;
+interface FieldItemProps {
+  name: string;
+  label: string;
+  type: "text" | "password";
+  required: boolean;
 }

@@ -1,3 +1,3 @@
 export interface HeaderProps {
-    companyName: string;
+  companyName: string;
 }

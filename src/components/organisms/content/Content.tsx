@@ -1,9 +1,9 @@
-import { Box } from "@mui/material"
+import {Box} from "@mui/material";
 
-import SamplesContent from "../samplesContent/SamplesContent"
-import { useMenu } from "../../../utils/hooks/useMenu"
-import Reports from "../reports/reports"
-import { contentStyle } from "./ContentStyle"
+import SamplesContent from "../samplesContent/SamplesContent";
+import {useMenu} from "../../../utils/hooks/useMenu";
+import Reports from "../reports/reports";
+import {contentStyle} from "./ContentStyle";
 
 function Content() {
   const {selectedItem} = useMenu();
@@ -19,11 +19,7 @@ function Content() {
     default:
       contentComponent = <SamplesContent />;
   }
-  return (
-    <Box sx={contentStyle}>
-      {contentComponent}
-    </Box>
-  );
+  return <Box sx={contentStyle}>{contentComponent}</Box>;
 }
 
 export default Content;

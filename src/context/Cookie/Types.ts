@@ -1,3 +1,3 @@
 export interface CookiesProviderProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }

@@ -1,6 +1,6 @@
-import { createContext, useState } from "react"
+import {createContext, useState} from "react";
 
-import { ChildrenProps, MenuContextType } from "./Types"
+import {ChildrenProps, MenuContextType} from "./Types";
 
 export const MenuContext = createContext<MenuContextType>({
   menuOpen: false,
@@ -9,7 +9,7 @@ export const MenuContext = createContext<MenuContextType>({
   toggleMenu: () => {},
 });
 
-export function MenuProvider({ children }: ChildrenProps) {
+export function MenuProvider({children}: ChildrenProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
 
@@ -18,12 +18,14 @@ export function MenuProvider({ children }: ChildrenProps) {
   };
 
   return (
-    <MenuContext.Provider value={{
-      menuOpen,
-      toggleMenu,
-      selectedItem,
-      setSelectedItem
-    }}>
+    <MenuContext.Provider
+      value={{
+        menuOpen,
+        toggleMenu,
+        selectedItem,
+        setSelectedItem,
+      }}
+    >
       {children}
     </MenuContext.Provider>
   );

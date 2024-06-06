@@ -1,3 +1,3 @@
 export interface LisItemButtonProps {
-    label: string;
+  label: string;
 }
