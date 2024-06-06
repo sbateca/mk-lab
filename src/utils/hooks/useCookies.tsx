@@ -1,6 +1,6 @@
 import {useContext} from "react";
 
-import {CookiesContext} from "../../context/Cookie/CookieContext";
+import {CookiesContext} from "../../Context/Cookie/CookieContext";
 
 export const useCookies = () => {
   const context = useContext(CookiesContext);

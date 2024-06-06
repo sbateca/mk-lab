@@ -1,6 +1,6 @@
 import {TableCell} from "@mui/material";
 
-import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons";
+import ActionsButtonsComponent from "../../Molecules/ActionButton/ActionsButtons";
 import {TableCellProps} from "./Types";
 
 function TableCellComponent({text, align, actions, index}: TableCellProps) {

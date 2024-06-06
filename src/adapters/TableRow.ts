@@ -1,6 +1,6 @@
-import {TableRowProps} from "../components/molecules/TableRow/Types";
-import {IReport} from "../model/report";
-import {ISample} from "../model/sample";
+import {TableRowProps} from "../Components/Molecules/TableRow/Types";
+import {IReport} from "../Model/Report";
+import {ISample} from "../Model/Sample";
 
 export const samplesToTableRowPropList = (
   samples: ISample[],

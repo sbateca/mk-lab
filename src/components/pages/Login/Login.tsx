@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {Navigate} from "react-router";
 
-import {checkFieldInCookies} from "../../../utils/cookieData";
-import {useCookies} from "../../../utils/hooks/useCookies";
-import LoginTemplate from "../../templates/loginTemplate/LoginTemplate";
+import {checkFieldInCookies} from "../../../Utils/cookieData";
+import {useCookies} from "../../../Utils/Hooks/useCookies";
+import LoginTemplate from "../../Templates/LoginTemplate/LoginTemplate";
 
 function LoginPage() {
   const cookies = useCookies();

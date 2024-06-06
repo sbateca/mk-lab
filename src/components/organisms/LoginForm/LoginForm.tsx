@@ -2,9 +2,9 @@ import {ChangeEvent, useState} from "react";
 import {Navigate} from "react-router-dom";
 import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 
-import {getUserByUserNameAndPassword} from "../../../services/userService";
-import TextFieldComponent from "../../atoms/TextField/TextField";
-import {useCookies} from "../../../utils/hooks/useCookies";
+import {getUserByUserNameAndPassword} from "../../../Services/userService";
+import TextFieldComponent from "../../Atoms/TextField/TextField";
+import {useCookies} from "../../../Utils/Hooks/useCookies";
 import {LoginFormProps} from "./Types";
 import {LoginFormStyles} from "./LoginFormStyles";
 

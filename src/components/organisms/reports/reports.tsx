@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
-import {ActionsButtonsComponentProps} from "../../molecules/ActionButton/Types";
-import {REPORTS_TABLE_HEADER_LABELS} from "../../../config/constants";
-import {reportsToTableRowPropList} from "../../../adapters/TableRow";
-import {TableRowProps} from "../../molecules/TableRow/Types";
-import {useReports} from "../../../utils/hooks/useReports";
-import Typography from "../../atoms/Typography/Typography";
-import CircularSpinner from "../../atoms/Spinner/Spinner";
-import TableComponent from "../table/Table";
-import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons";
+import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
+import {REPORTS_TABLE_HEADER_LABELS} from "../../../Config/Constants";
+import {reportsToTableRowPropList} from "../../../Adapters/TableRow";
+import {TableRowProps} from "../../Molecules/TableRow/Types";
+import {useReports} from "../../../Utils/Hooks/useReports";
+import Typography from "../../Atoms/Typography/Typography";
+import CircularSpinner from "../../Atoms/Spinner/Spinner";
+import TableComponent from "../Table/Table";
+import ActionsButtonsComponent from "../../Molecules/ActionButton/ActionsButtons";
 
 function Reports() {
   const {reports, getReports, loading, error} = useReports();

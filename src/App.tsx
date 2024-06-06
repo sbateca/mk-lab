@@ -1,8 +1,8 @@
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
 
-import {CookiesProvider} from "./context/Cookie/CookieContext";
-import AdminPage from "./components/pages/AdminPage/AdminPage";
-import LoginPage from "./components/pages/Login/Login";
+import {CookiesProvider} from "./Context/Cookie/CookieContext";
+import AdminPage from "./Components/Pages/AdminPage/AdminPage";
+import LoginPage from "./Components/Pages/Login/Login";
 import "./App.css";
 
 function App() {

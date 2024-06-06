@@ -1,20 +1,20 @@
 import {render, screen, fireEvent, waitFor} from "@testing-library/react";
 
-import {getUserByUserNameAndPassword} from "../../../services/userService";
+import {getUserByUserNameAndPassword} from "../../../Services/userService";
 import LoginForm from "./LoginForm";
 
-jest.mock("../../../config/envManager", () => ({
+jest.mock("../../../Config/EnvManager", () => ({
   __esModule: true,
   default: {
     BACKEND_URL: "http://mockurl.com/api",
   },
 }));
 
-jest.mock("../../../utils/hooks/useCookies", () => ({
+jest.mock("../../../Utils/Hooks/useCookies", () => ({
   useCookies: () => ({set: jest.fn()}),
 }));
 
-jest.mock("../../../services/userService", () => ({
+jest.mock("../../../Services/userService", () => ({
   getUserByUserNameAndPassword: jest.fn(),
 }));
 

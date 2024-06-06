@@ -1,12 +1,12 @@
 import {Box} from "@mui/material";
 
-import MainTemplate from "../../templates/mainTemplate/MainTemplate";
-import Header from "../../molecules/header/Header";
-import Menu from "../../molecules/menu/Menu";
-import Content from "../../organisms/content/Content";
-import {COMPANY_NAME, MENU_ITEMS} from "../../../config/constants";
-import {SampleProvider} from "../../../context/Services/Sample";
-import {ReportsProvider} from "../../../context/Services/Reports";
+import MainTemplate from "../../Templates/MainTemplate/MainTemplate";
+import Header from "../../Molecules/Header/Header";
+import Menu from "../../Molecules/Menu/Menu";
+import Content from "../../Organisms/Content/Content";
+import {COMPANY_NAME, MENU_ITEMS} from "../../../Config/Constants";
+import {SampleProvider} from "../../../Context/Services/Sample";
+import {ReportsProvider} from "../../../Context/Services/Reports";
 import {adminPageStyle} from "./AdminPageStyle";
 
 function AdminPage() {

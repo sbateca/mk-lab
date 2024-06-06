@@ -1,4 +1,4 @@
-import {ISample} from "./sample";
+import {ISample} from "./Sample";
 
 export interface IReport {
   id: string;

@@ -1,7 +1,7 @@
 import {render, screen} from "@testing-library/react";
 
 import Header from "./Header";
-import {CookiesProvider} from "../../../context/Cookie/CookieContext";
+import {CookiesProvider} from "../../../Context/Cookie/CookieContext";
 
 describe("Header", () => {
   let companyName: string;

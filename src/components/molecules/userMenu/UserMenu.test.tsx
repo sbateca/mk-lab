@@ -1,6 +1,6 @@
 import {render, fireEvent, screen} from "@testing-library/react";
 
-import {CookiesProvider} from "../../../context/Cookie/CookieContext";
+import {CookiesProvider} from "../../../Context/Cookie/CookieContext";
 import UserMenu from "./UserMenu";
 
 const mockCookies = {

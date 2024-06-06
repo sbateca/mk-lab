@@ -5,8 +5,8 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
 
-import TableHeadComponent from "../../molecules/TableHead/TableHead";
-import TableRowComponent from "../../molecules/TableRow/TableRow";
+import TableHeadComponent from "../../Molecules/TableHead/TableHead";
+import TableRowComponent from "../../Molecules/TableRow/TableRow";
 import {TableProps} from "./Types";
 import {TableStyles} from "./TableStyles";
 

@@ -1,4 +1,4 @@
-import {TableCellProps} from "../../atoms/TableCell/Types";
+import {TableCellProps} from "../../Atoms/TableCell/Types";
 import {ActionsButtonsComponentProps} from "../ActionButton/Types";
 
 export interface TableRowProps {

@@ -2,9 +2,9 @@ import {Box} from "@mui/material";
 import {Navigate} from "react-router";
 
 import {mainContentContainer, mainTemplayeStyle} from "./MainTemplateStyle";
-import {MenuProvider} from "../../../context/Menu/MenuContext";
-import {checkFieldInCookies} from "../../../utils/cookieData";
-import {useCookies} from "../../../utils/hooks/useCookies";
+import {MenuProvider} from "../../../Context/Menu/MenuContext";
+import {checkFieldInCookies} from "../../../Utils/cookieData";
+import {useCookies} from "../../../Utils/Hooks/useCookies";
 import {MainTemplateProps} from "./Type";
 
 function MainTemplate({header, menu, mainContent}: MainTemplateProps) {

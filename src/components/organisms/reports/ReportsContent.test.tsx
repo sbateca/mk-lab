@@ -1,8 +1,8 @@
 import {render, screen, waitFor} from "@testing-library/react";
 
-import * as useReportsModule from "../../../utils/hooks/useReports";
-import {IReport} from "../../../model/report";
-import Reports from "./reports";
+import * as useReportsModule from "../../../Utils/Hooks/useReports";
+import {IReport} from "../../../Model/Report";
+import Reports from "./Reports";
 
 const mockReports: IReport[] = [
   {
@@ -25,7 +25,7 @@ const mockReports: IReport[] = [
   },
 ];
 
-jest.mock("../../../config/envManager", () => ({
+jest.mock("../../../Config/envManager", () => ({
   __esModule: true,
   default: {
     BACKEND_URL: "http://mockurl.com/api",

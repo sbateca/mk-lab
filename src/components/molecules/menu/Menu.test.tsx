@@ -1,8 +1,8 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 
-import {CookiesProvider} from "../../../context/Cookie/CookieContext";
-import {MenuProvider} from "../../../context/Menu/MenuContext";
-import Header from "../header/Header";
+import {CookiesProvider} from "../../../Context/Cookie/CookieContext";
+import {MenuProvider} from "../../../Context/Menu/MenuContext";
+import Header from "../Header/Header";
 import {MenuProps} from "./Types";
 import Menu from "./Menu";
 

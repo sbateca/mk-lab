@@ -1,5 +1,5 @@
-import {ActionsButtonsComponentProps} from "../../molecules/ActionButton/Types";
-import {TableRowProps} from "../../molecules/TableRow/Types";
+import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
+import {TableRowProps} from "../../Molecules/TableRow/Types";
 
 export interface TableProps {
   headerLabels: string[];

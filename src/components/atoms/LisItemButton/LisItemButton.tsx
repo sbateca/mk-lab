@@ -1,6 +1,6 @@
 import {ListItemButton, ListItemText} from "@mui/material";
 
-import {useMenu} from "../../../utils/hooks/useMenu";
+import {useMenu} from "../../../Utils/Hooks/useMenu";
 import {LisItemButtonProps} from "./Types";
 
 function ListItemButtonComponent({label}: LisItemButtonProps) {

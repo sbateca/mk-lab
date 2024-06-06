@@ -1,8 +1,8 @@
 import {Box} from "@mui/material";
 
-import SamplesContent from "../samplesContent/SamplesContent";
-import {useMenu} from "../../../utils/hooks/useMenu";
-import Reports from "../reports/reports";
+import SamplesContent from "../SamplesContent/SamplesContent";
+import {useMenu} from "../../../Utils/Hooks/useMenu";
+import Reports from "../Reports/Reports";
 import {contentStyle} from "./ContentStyle";
 
 function Content() {

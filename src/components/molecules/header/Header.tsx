@@ -2,10 +2,10 @@ import {useEffect, useState} from "react";
 import {AppBar, Toolbar, IconButton, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import {useMenu} from "../../../utils/hooks/useMenu";
-import {useCookies} from "../../../utils/hooks/useCookies";
-import {cookieToUser} from "../../../adapters/User";
-import UserMenu from "../userMenu/UserMenu";
+import {useMenu} from "../../../Utils/Hooks/useMenu";
+import {useCookies} from "../../../Utils/Hooks/useCookies";
+import {cookieToUser} from "../../../Adapters/User";
+import UserMenu from "../UserMenu/UserMenu";
 import {HeaderProps} from "./Type";
 
 function Header({companyName}: HeaderProps) {

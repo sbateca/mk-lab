@@ -1,6 +1,6 @@
 import {Cookie} from "universal-cookie";
 
-import {IUser} from "../model/user";
+import {IUser} from "../Model/User";
 
 export const cookieToUser = (cookies: Cookie): IUser | null => {
   const cookieData = cookies.get("userData");

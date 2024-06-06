@@ -1,6 +1,6 @@
 import {useContext} from "react";
 
-import {ReportsContext} from "../../context/Services/Reports";
+import {ReportsContext} from "../../Context/Services/Reports";
 
 export const useReports = () => {
   const context = useContext(ReportsContext);

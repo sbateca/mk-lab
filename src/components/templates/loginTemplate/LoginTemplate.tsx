@@ -1,7 +1,7 @@
 import {Box} from "@mui/material";
 
-import LoginForm from "../../organisms/LoginForm/LoginForm";
-import {COMPANY_NAME} from "../../../config/constants";
+import LoginForm from "../../Organisms/LoginForm/LoginForm";
+import {COMPANY_NAME} from "../../../Config/Constants";
 import {loginTemplateStyles} from "./LoginTemplateStyles";
 
 function LoginTemplate() {

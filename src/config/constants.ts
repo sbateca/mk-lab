@@ -1,4 +1,4 @@
-import {MenuElementProps} from "../components/molecules/menu/Types";
+import {MenuElementProps} from "../Components/Molecules/Menu/Types";
 
 export const COMPANY_NAME = "Microlab App";
 export const MENU_ITEMS: MenuElementProps[] = [

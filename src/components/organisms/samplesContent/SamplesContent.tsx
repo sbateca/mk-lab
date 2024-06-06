@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
-import {ActionsButtonsComponentProps} from "../../molecules/ActionButton/Types";
-import ActionsButtonsComponent from "../../molecules/ActionButton/ActionsButtons";
-import {SAMPLES_TABLE_HEADER_LABELS} from "../../../config/constants";
-import {samplesToTableRowPropList} from "../../../adapters/TableRow";
-import {TableRowProps} from "../../molecules/TableRow/Types";
-import {useSample} from "../../../utils/hooks/useSample";
-import Typography from "../../atoms/Typography/Typography";
-import CircularSpinner from "../../atoms/Spinner/Spinner";
-import TableComponent from "../table/Table";
+import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
+import ActionsButtonsComponent from "../../Molecules/ActionButton/ActionsButtons";
+import {SAMPLES_TABLE_HEADER_LABELS} from "../../../Config/Constants";
+import {samplesToTableRowPropList} from "../../../Adapters/TableRow";
+import {TableRowProps} from "../../Molecules/TableRow/Types";
+import {useSample} from "../../../Utils/Hooks/useSample";
+import Typography from "../../Atoms/Typography/Typography";
+import CircularSpinner from "../../Atoms/Spinner/Spinner";
+import TableComponent from "../Table/Table";
 
 function SamplesContent() {
   const {samples, getSamples, loading, error} = useSample();

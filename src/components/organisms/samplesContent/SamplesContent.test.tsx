@@ -1,8 +1,8 @@
 import {render, screen, waitFor} from "@testing-library/react";
 
 import SamplesContent from "./SamplesContent";
-import {ISample} from "../../../model/sample";
-import * as useSampleModule from "../../../utils/hooks/useSample";
+import {ISample} from "../../../Model/Sample";
+import * as useSampleModule from "../../../Utils/Hooks/useSample";
 
 const mockSamples: ISample[] = [
   {
@@ -17,7 +17,7 @@ const mockSamples: ISample[] = [
   },
 ];
 
-jest.mock("../../../config/envManager", () => ({
+jest.mock("../../../Config/envManager", () => ({
   __esModule: true,
   default: {
     BACKEND_URL: "http://mockurl.com/api",

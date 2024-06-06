@@ -1,6 +1,6 @@
 import {TableHead, TableRow} from "@mui/material";
 
-import TableCellComponent from "../../atoms/TableCell/TableCell";
+import TableCellComponent from "../../Atoms/TableCell/TableCell";
 import {TableHeadProps} from "./Types";
 
 function TableHeadComponent({headerLabels}: TableHeadProps) {

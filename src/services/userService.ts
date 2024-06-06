@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import EnvManager from "../config/envManager";
-import {IUser} from "../model/user";
+import EnvManager from "../Config/EnvManager";
+import {IUser} from "../Model/User";
 
 interface getUserProps {
   [key: string]: string;

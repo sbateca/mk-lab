@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 
-import {TableCellProps} from "../../atoms/TableCell/Types";
+import {TableCellProps} from "../../Atoms/TableCell/Types";
 import TableRowComponent from "./TableRow";
 
 describe("TableRow component", () => {

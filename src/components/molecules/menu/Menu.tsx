@@ -1,7 +1,7 @@
 import {Drawer, List} from "@mui/material";
 
-import ListItemButtonComponent from "../../atoms/LisItemButton/LisItemButton";
-import {useMenu} from "../../../utils/hooks/useMenu";
+import ListItemButtonComponent from "../../Atoms/LisItemButton/LisItemButton";
+import {useMenu} from "../../../Utils/Hooks/useMenu";
 import {MenuStyle} from "./MenuStyle";
 import {MenuProps} from "./Types";
 
