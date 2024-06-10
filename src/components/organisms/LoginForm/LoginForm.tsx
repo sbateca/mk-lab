@@ -40,10 +40,10 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
         cookies?.set("userData", response, {path: "/"});
         setIsLoggedIn(true);
       } else {
-        setErrors({form: "email or password incorrect, please try again."});
+        setErrors({form: "Email or password incorrect, please try again."});
       }
     } catch (error) {
-      setErrors({form: "something happened when try to get data."});
+      setErrors({form: (error as unknown as Error).message});
     }
   };
 

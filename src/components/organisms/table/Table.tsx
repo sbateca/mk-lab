@@ -15,15 +15,15 @@ import {TableStyles} from "./TableStyles";
 function Table({
   headerLabels,
   rows,
-  actionButtons,
+  buttonConfigs,
 }: TableProps): React.ReactElement {
   const [newHeaderLabels, setNewHeaderLabels] = useState(headerLabels);
 
   useEffect(() => {
-    if (actionButtons) {
+    if (buttonConfigs) {
       setNewHeaderLabels(["Actions", ...headerLabels]);
     }
-  }, [actionButtons]);
+  }, [buttonConfigs, headerLabels]);
 
   return (
     <TableContainer component={Paper}>
@@ -39,7 +39,7 @@ function Table({
               <TableRow
                 key={index}
                 cells={row.cells}
-                actionButtons={actionButtons}
+                buttonConfigs={buttonConfigs}
               />
             ))}
           </TableBody>

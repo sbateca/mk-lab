@@ -5,7 +5,11 @@ import {LisItemButtonProps} from "./Types";
 import React from "react";
 
 function ListItemButton({label}: LisItemButtonProps): React.ReactElement {
-  const {selectedMenuItem: selectedMenuItem, setSelectedMenuItem: setSelectedItem, toggleMenu} = useMenu();
+  const {
+    selectedMenuItem: selectedMenuItem,
+    setSelectedMenuItem: setSelectedItem,
+    toggleMenu,
+  } = useMenu();
 
   const handleClick = (item: string) => {
     setSelectedItem(item);

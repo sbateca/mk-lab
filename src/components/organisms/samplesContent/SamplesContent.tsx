@@ -54,7 +54,7 @@ function SamplesContent(): React.ReactElement {
       <Table
         headerLabels={SAMPLES_TABLE_HEADER_LABELS}
         rows={rows}
-        actionButtons={tableButtonConfigs}
+        buttonConfigs={tableButtonConfigs}
       />
     </Box>
   );

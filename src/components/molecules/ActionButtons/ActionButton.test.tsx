@@ -33,7 +33,7 @@ describe("ActionsButtons", () => {
   });
 
   it("renders buttons with the icon passed in parameters", () => {
-    const mockActions: ButtonConfigs = {
+    const mockActionButtons: ButtonConfigs = {
       buttonConfigs: [
         {label: "Action 1", color: "primary", icon: "create"},
         {label: "Action 2", color: "secondary", icon: "delete"},
@@ -41,9 +41,9 @@ describe("ActionsButtons", () => {
     };
     const dataTestIds = ["AddIcon", "DeleteIcon"];
 
-    render(<ActionButtons buttonConfigs={mockActions.buttonConfigs} />);
+    render(<ActionButtons buttonConfigs={mockActionButtons.buttonConfigs} />);
 
-    mockActions.buttonConfigs.forEach((_actionItem, index) => {
+    mockActionButtons.buttonConfigs.forEach((_actionItem, index) => {
       const buttonText = screen.getByTestId(dataTestIds[index]);
       expect(buttonText).toBeInTheDocument();
     });

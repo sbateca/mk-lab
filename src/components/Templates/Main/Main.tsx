@@ -21,9 +21,7 @@ function Main({
     <MenuProvider>
       <Box sx={mainTemplayeStyle}>
         <Box component="header">{header}</Box>
-
         {menu}
-
         <Box sx={mainContentContainer}>{mainContent}</Box>
       </Box>
     </MenuProvider>

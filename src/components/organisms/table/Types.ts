@@ -4,5 +4,5 @@ import {TableRowProps} from "../../Molecules/TableRow/Types";
 export interface TableProps {
   headerLabels: string[];
   rows: TableRowProps[];
-  actionButtons?: ButtonConfigs | null;
+  buttonConfigs?: ButtonConfigs | null;
 }

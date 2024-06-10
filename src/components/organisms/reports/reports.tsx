@@ -55,7 +55,7 @@ function Reports(): React.ReactElement {
       <Table
         headerLabels={REPORTS_TABLE_HEADER_LABELS}
         rows={rows}
-        actionButtons={tableButtonConfigs}
+        buttonConfigs={tableButtonConfigs}
       />
     </Box>
   );
