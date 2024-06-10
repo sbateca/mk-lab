@@ -2,28 +2,14 @@ import {Box} from "@mui/material";
 
 import LoginForm from "../../Organisms/LoginForm/LoginForm";
 import {LoginTemplateStyles} from "./LoginTemplateStyles";
-import {COMPANY_NAME} from "../../../Config/constants";
+import {COMPANY_NAME} from "../../../Utils/Constants/pages/admin";
+import {LOGIN_FORM_FIELDS} from "../../../Utils/Constants/pages/login";
 
 function LoginTemplate(): React.ReactElement {
-  const fieldItems = [
-    {
-      name: "username",
-      label: "Username",
-      type: "text" as const,
-      required: true,
-    },
-    {
-      name: "password",
-      label: "Password",
-      type: "password" as const,
-      required: true,
-    },
-  ];
-
   return (
     <Box sx={LoginTemplateStyles}>
       <h1>{COMPANY_NAME}</h1>
-      <LoginForm fields={fieldItems} />
+      <LoginForm fields={LOGIN_FORM_FIELDS} />
     </Box>
   );
 }

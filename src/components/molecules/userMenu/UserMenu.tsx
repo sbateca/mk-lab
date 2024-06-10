@@ -4,6 +4,7 @@ import {AccountCircle} from "@mui/icons-material";
 import {Cookie} from "universal-cookie";
 
 import {UserMenuStyle} from "./UserMenuStyle";
+import {USER_MENU_LOGOUT} from "../../../Utils/Constants/pages/admin";
 
 interface UserMenuProps {
   username: string;
@@ -45,7 +46,7 @@ function UserMenu({username, cookies}: UserMenuProps): React.ReactElement {
         onClose={handleClose}
         keepMounted
       >
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>{USER_MENU_LOGOUT}</MenuItem>
       </Menu>
     </div>
   );

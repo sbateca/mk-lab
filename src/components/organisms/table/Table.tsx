@@ -9,6 +9,7 @@ import {
 
 import TableHead from "../../Molecules/TableHead/TableHead";
 import TableRow from "../../Molecules/TableRow/TableRow";
+import {TABLE_ACTIONS_COLUMN_HEADER} from "../../../Utils/Constants/pages/shared";
 import {TableProps} from "./Types";
 import {TableStyles} from "./TableStyles";
 
@@ -21,7 +22,7 @@ function Table({
 
   useEffect(() => {
     if (buttonConfigs) {
-      setNewHeaderLabels(["Actions", ...headerLabels]);
+      setNewHeaderLabels([TABLE_ACTIONS_COLUMN_HEADER, ...headerLabels]);
     }
   }, [buttonConfigs, headerLabels]);
 
