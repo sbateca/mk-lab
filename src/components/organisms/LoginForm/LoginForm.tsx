@@ -5,6 +5,11 @@ import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 import {getUserByUserNameAndPassword} from "../../../Services/userService";
 import TextField from "../../Atoms/TextField/TextField";
 import {useCookies} from "../../../Utils/Hooks/useCookies";
+import {requiredField} from "../../../Utils/Constants/form/validations";
+import {
+  LOGIN_FORM_REQUIRED_FIELD_ERROR,
+  LOGIN_FORM_SIGN_IN,
+} from "../../../Utils/Constants/pages/login";
 import {LoginFormProps} from "./Types";
 import {LoginFormStyles} from "./LoginFormStyles";
 
@@ -40,7 +45,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
         cookies?.set("userData", response, {path: "/"});
         setIsLoggedIn(true);
       } else {
-        setErrors({form: "Email or password incorrect, please try again."});
+        setErrors({form: LOGIN_FORM_REQUIRED_FIELD_ERROR});
       }
     } catch (error) {
       setErrors({form: (error as unknown as Error).message});
@@ -60,7 +65,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
     ) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [field]: `${field} is required`,
+        [field]: requiredField(field),
       }));
     }
   };
@@ -106,7 +111,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
               </FormHelperText>
             )}
             <Button type="submit" variant="contained" color="primary">
-              sign in
+              {LOGIN_FORM_SIGN_IN}
             </Button>
           </Box>
         </form>

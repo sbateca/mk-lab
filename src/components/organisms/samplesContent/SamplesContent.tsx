@@ -1,9 +1,13 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
-import {ButtonConfigs} from "../../Molecules/ActionButtons/Types";
 import ActionButtons from "../../Molecules/ActionButtons/ActionButtons";
-import {SAMPLES_TABLE_HEADER_LABELS} from "../../../Config/constants";
+import {
+  SAMPLES_BUTTON_CONFIGS,
+  SAMPLES_TABLE_HEADER_LABELS,
+  SAMPLES_TABLE_BUTTON_CONFIGS,
+  SAMPLES_TITLE_CONFIG,
+} from "../../../Utils/Constants/pages/samples";
 import {samplesToTableRows} from "../../../Adapters/tableRow";
 import {TableRowProps} from "../../Molecules/TableRow/Types";
 import {useSample} from "../../../Utils/Hooks/useSample";
@@ -14,17 +18,6 @@ import Table from "../Table/Table";
 function SamplesContent(): React.ReactElement {
   const {samples, getSamples, loading, error} = useSample();
   const [rows, setRows] = useState<TableRowProps[]>([]);
-
-  const tableButtonConfigs: ButtonConfigs = {
-    buttonConfigs: [
-      {label: "Detail", color: "primary"},
-      {label: "Edit", color: "primary"},
-      {label: "Delete", color: "error"},
-    ],
-  };
-  const buttonConfigs: ButtonConfigs = {
-    buttonConfigs: [{label: "Create Sample", color: "primary", icon: "create"}],
-  };
 
   useEffect(() => {
     getSamples();
@@ -41,20 +34,15 @@ function SamplesContent(): React.ReactElement {
   return (
     <Box>
       <Box sx={{display: "flex", flexDirection: "row"}}>
-        <Typography
-          text="Samples"
-          size="20px"
-          variant="h1"
-          padding="10px 0px"
-        />
+        <Typography {...SAMPLES_TITLE_CONFIG} />
         <Box sx={{marginLeft: "auto"}}>
-          <ActionButtons buttonConfigs={buttonConfigs.buttonConfigs} />
+          <ActionButtons buttonConfigs={SAMPLES_BUTTON_CONFIGS.buttonConfigs} />
         </Box>
       </Box>
       <Table
         headerLabels={SAMPLES_TABLE_HEADER_LABELS}
         rows={rows}
-        buttonConfigs={tableButtonConfigs}
+        buttonConfigs={SAMPLES_TABLE_BUTTON_CONFIGS}
       />
     </Box>
   );

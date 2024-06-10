@@ -4,9 +4,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import {useMenu} from "../../../Utils/Hooks/useMenu";
 import {useCookies} from "../../../Utils/Hooks/useCookies";
-import {cookiesToUser} from "../../../Adapters/user";
 import UserMenu from "../UserMenu/UserMenu";
 import {HeaderProps} from "./Type";
+import {cookiesToUser} from "../../../Adapters/user";
 
 function Header({companyName}: HeaderProps): React.ReactElement {
   const {toggleMenu} = useMenu();
