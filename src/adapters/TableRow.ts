@@ -1,10 +1,8 @@
 import {TableRowProps} from "../Components/Molecules/TableRow/Types";
-import {IReport} from "../Model/Report";
-import {ISample} from "../Model/Sample";
+import {Report} from "../Model/Report";
+import {Sample} from "../Model/Sample";
 
-export const samplesToTableRowPropList = (
-  samples: ISample[],
-): TableRowProps[] => {
+export const samplesToTableRows = (samples: Sample[]): TableRowProps[] => {
   return samples.map((sample) => {
     return {
       cells: [
@@ -20,9 +18,7 @@ export const samplesToTableRowPropList = (
   });
 };
 
-export const reportsToTableRowPropList = (
-  reports: IReport[],
-): TableRowProps[] => {
+export const reportsToTableRows = (reports: Report[]): TableRowProps[] => {
   return reports.map((report) => {
     return {
       cells: [

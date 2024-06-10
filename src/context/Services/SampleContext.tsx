@@ -1,10 +1,10 @@
-import React, {createContext, useState, useEffect} from "react";
+import React, {createContext, useState, useEffect, useCallback} from "react";
 
-import {ISample} from "../../Model/Sample";
+import {Sample} from "../../Model/Sample";
 import {getSamplesService} from "../../Services/sampleService";
 
 const SampleContext = createContext<{
-  samples: ISample[] | null;
+  samples: Sample[] | null;
   loading: boolean;
   error: string | unknown;
   getSamples: () => void;
@@ -20,26 +20,27 @@ interface IProviderProps {
 }
 
 function SampleProvider({children}: IProviderProps) {
-  const [samples, setSamples] = useState<ISample[] | null>(null);
+  const [samples, setSamples] = useState<Sample[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | unknown>(null);
 
-  const getSamples = async () => {
+  const getSamples = useCallback(async () => {
     try {
+      setLoading(true);
       const samples = await getSamplesService();
       if (samples !== null) {
         setSamples(samples);
       }
     } catch (error) {
-      setError(error);
+      setError((error as Error).message);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getSamples();
-  }, []);
+  }, [getSamples]);
 
   return (
     <SampleContext.Provider

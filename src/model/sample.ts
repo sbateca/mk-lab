@@ -1,4 +1,4 @@
-export interface ISample {
+export interface Sample {
   id: string;
   sampleCode: string;
   client: string;

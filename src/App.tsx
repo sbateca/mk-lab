@@ -1,7 +1,7 @@
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
 
 import {CookiesProvider} from "./Context/Cookie/CookieContext";
-import AdminPage from "./Components/Pages/AdminPage/AdminPage";
+import Admin from "./Components/Pages/Admin/Admin";
 import LoginPage from "./Components/Pages/Login/Login";
 import "./App.css";
 
@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </CookiesProvider>

@@ -1,9 +1,9 @@
-import {ISample} from "./Sample";
+import {Sample} from "./Sample";
 
-export interface IReport {
+export interface Report {
   id: string;
   reportDate: string;
-  sample: ISample;
+  sample: Sample;
   analyte: string;
   analysisMethod: string;
   criteria: string;

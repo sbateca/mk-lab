@@ -1,10 +1,10 @@
 import {Box} from "@mui/material";
 
 import LoginForm from "../../Organisms/LoginForm/LoginForm";
-import {loginTemplateStyles} from "./LoginTemplateStyles";
+import {LoginTemplateStyles} from "./LoginTemplateStyles";
 import {COMPANY_NAME} from "../../../Config/constants";
 
-function LoginTemplate() {
+function LoginTemplate(): React.ReactElement {
   const fieldItems = [
     {
       name: "username",
@@ -21,7 +21,7 @@ function LoginTemplate() {
   ];
 
   return (
-    <Box sx={loginTemplateStyles}>
+    <Box sx={LoginTemplateStyles}>
       <h1>{COMPANY_NAME}</h1>
       <LoginForm fields={fieldItems} />
     </Box>

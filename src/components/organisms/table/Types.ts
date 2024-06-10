@@ -1,8 +1,8 @@
-import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
+import {ButtonConfigs} from "../../Molecules/ActionButtons/Types";
 import {TableRowProps} from "../../Molecules/TableRow/Types";
 
 export interface TableProps {
   headerLabels: string[];
   rows: TableRowProps[];
-  actions?: ActionsButtonsComponentProps | null;
+  buttonConfigs?: ButtonConfigs | null;
 }

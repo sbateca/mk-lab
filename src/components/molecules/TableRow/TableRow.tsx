@@ -1,34 +1,34 @@
 import {useEffect, useState} from "react";
-import {TableRow} from "@mui/material";
+import {TableRow as MuiTableRow} from "@mui/material";
 
-import TableCellComponent from "../../Atoms/TableCell/TableCell";
+import TableCell from "../TableCell/TableCell";
 import {TableRowProps} from "./Types";
 
-function TableRowComponent({cells, actions}: TableRowProps) {
-  const [newCells, setNewCells] = useState(cells);
+function TableRow({cells, buttonConfigs}: TableRowProps): React.ReactElement {
+  const [cellsWithButtonsCell, setCellsWithButtonsCell] = useState(cells);
   useEffect(() => {
-    if (actions) {
-      setNewCells([{text: "", align: "center"}, ...cells]);
+    if (buttonConfigs) {
+      setCellsWithButtonsCell([{text: "", align: "center"}, ...cells]);
     }
-  }, [actions]);
+  }, [buttonConfigs, cells]);
 
   return (
-    <TableRow>
-      {newCells.map((cell, index) => {
-        return actions ? (
-          <TableCellComponent
+    <MuiTableRow>
+      {cellsWithButtonsCell.map((cell, index) => {
+        return buttonConfigs ? (
+          <TableCell
             key={index}
             align={cell.align}
             text={cell.text}
-            actions={actions}
+            buttonConfigs={buttonConfigs}
             index={index}
           />
         ) : (
-          <TableCellComponent key={index} align={cell.align} text={cell.text} />
+          <TableCell key={index} align={cell.align} text={cell.text} />
         );
       })}
-    </TableRow>
+    </MuiTableRow>
   );
 }
 
-export default TableRowComponent;
+export default TableRow;

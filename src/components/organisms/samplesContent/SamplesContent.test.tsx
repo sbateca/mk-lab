@@ -1,10 +1,10 @@
 import {render, screen, waitFor} from "@testing-library/react";
 
 import SamplesContent from "./SamplesContent";
-import {ISample} from "../../../Model/Sample";
+import {Sample} from "../../../Model/Sample";
 import * as useSampleModule from "../../../Utils/Hooks/useSample";
 
-const mockSamples: ISample[] = [
+const mockSamples: Sample[] = [
   {
     id: "1",
     sampleCode: "1234",

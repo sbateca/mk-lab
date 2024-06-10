@@ -1,12 +1,14 @@
 import {Button} from "@mui/material";
 
-import {ActionsButtonsComponentProps, ActionsButtonsProps} from "./Types";
+import {ButtonConfigs, ButtonConfig} from "./Types";
 import {getIcon} from "../../../Utils/icons";
 
-function ActionsButtonsComponent({actions}: ActionsButtonsComponentProps) {
-  const buttons: (JSX.Element | null)[] = actions.map(
-    (actionItem: ActionsButtonsProps, index: number) => {
-      const {action, color, icon} = actionItem;
+function ActionButtons({
+  buttonConfigs,
+}: ButtonConfigs): (React.ReactElement | null)[] {
+  const renderedButtons: (JSX.Element | null)[] = buttonConfigs.map(
+    (buttonConfig: ButtonConfig, index: number) => {
+      const {label, color, icon} = buttonConfig;
       const button: JSX.Element | null = (
         <Button
           key={index}
@@ -17,13 +19,13 @@ function ActionsButtonsComponent({actions}: ActionsButtonsComponentProps) {
           startIcon={getIcon(icon || "")}
           sx={{fontSize: "9px", margin: "2px"}}
         >
-          {action}
+          {label}
         </Button>
       );
       return button;
     },
   );
-  return buttons;
+  return renderedButtons;
 }
 
-export default ActionsButtonsComponent;
+export default ActionButtons;

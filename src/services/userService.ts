@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import EnvManager from "../Config/envManager";
-import {IUser} from "../Model/User";
+import {User} from "../Model/User";
 
 interface getUserProps {
   [key: string]: string;
@@ -10,13 +10,13 @@ interface getUserProps {
 export const getUserByUserNameAndPassword = async ({
   username,
   password,
-}: getUserProps) => {
+}: getUserProps): Promise<User[]> => {
   try {
-    const response = await axios.get<IUser[]>(
+    const response = await axios.get<User[]>(
       `${EnvManager.BACKEND_URL}/users?username=${username}&password=${password}`,
     );
     return response.data;
   } catch (error) {
-    throw new Error("Error getting user by username and password");
+    throw new Error("Error retrieving user by username and password.");
   }
 };

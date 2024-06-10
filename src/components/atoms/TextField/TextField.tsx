@@ -1,8 +1,8 @@
-import {TextField} from "@mui/material";
+import {TextField as MuiTextField} from "@mui/material";
 
 import {TexFieldProps} from "./Types";
 
-function TextFieldComponent({
+function TextField({
   name,
   label,
   variant,
@@ -12,9 +12,9 @@ function TextFieldComponent({
   onBlur,
   required,
   error,
-}: TexFieldProps) {
+}: TexFieldProps): React.ReactElement {
   return (
-    <TextField
+    <MuiTextField
       name={name}
       label={label}
       variant={variant}
@@ -28,4 +28,4 @@ function TextFieldComponent({
   );
 }
 
-export default TextFieldComponent;
+export default TextField;

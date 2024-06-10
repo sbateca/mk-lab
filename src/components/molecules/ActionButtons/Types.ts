@@ -1,9 +1,9 @@
-export interface ActionsButtonsComponentProps {
-  actions: ActionsButtonsProps[];
+export interface ButtonConfigs {
+  buttonConfigs: ButtonConfig[];
 }
 
-export interface ActionsButtonsProps {
-  action: string;
+export interface ButtonConfig {
+  label: string;
   color:
     | "primary"
     | "secondary"

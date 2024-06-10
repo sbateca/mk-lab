@@ -12,7 +12,7 @@ function Typography({
   gutterBottom = false,
   align = "left",
   color = "black",
-}: ITypographyProps) {
+}: ITypographyProps): React.ReactElement {
   const textColor = typographyStyle[color];
   return (
     <MuiTypography

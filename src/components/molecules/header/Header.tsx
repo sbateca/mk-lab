@@ -4,18 +4,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import {useMenu} from "../../../Utils/Hooks/useMenu";
 import {useCookies} from "../../../Utils/Hooks/useCookies";
-import {cookieToUser} from "../../../Adapters/User";
+import {cookiesToUser} from "../../../Adapters/user";
 import UserMenu from "../UserMenu/UserMenu";
 import {HeaderProps} from "./Type";
 
-function Header({companyName}: HeaderProps) {
+function Header({companyName}: HeaderProps): React.ReactElement {
   const {toggleMenu} = useMenu();
   const [username, setUsername] = useState("");
   const [userMenu, setUserMenu] = useState(false);
   const cookies = useCookies();
 
   useEffect(() => {
-    const user = cookieToUser(cookies);
+    const user = cookiesToUser(cookies);
     if (user) {
       setUsername(user?.name);
       setUserMenu(true);

@@ -4,7 +4,7 @@ export interface ChildrenProps {
 
 export interface MenuContextType {
   menuOpen: boolean;
-  selectedItem: string;
-  setSelectedItem: (item: string) => void;
+  selectedMenuItem: string;
+  setSelectedMenuItem: (item: string) => void;
   toggleMenu: () => void;
 }
