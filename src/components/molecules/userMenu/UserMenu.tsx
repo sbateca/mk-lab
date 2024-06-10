@@ -10,7 +10,7 @@ interface UserMenuProps {
   cookies: Cookie;
 }
 
-function UserMenu({username, cookies}: UserMenuProps) {
+function UserMenu({username, cookies}: UserMenuProps): React.ReactElement {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {

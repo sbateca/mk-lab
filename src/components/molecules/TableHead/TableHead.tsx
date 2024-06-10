@@ -1,18 +1,18 @@
-import {TableHead, TableRow} from "@mui/material";
+import {TableHead as MuiTableHead, TableRow} from "@mui/material";
 
-import TableCellComponent from "../../Atoms/TableCell/TableCell";
+import TableCell from "../../Atoms/TableCell/TableCell";
 import {TableHeadProps} from "./Types";
 
-function TableHeadComponent({headerLabels}: TableHeadProps) {
+function TableHead({headerLabels}: TableHeadProps): React.ReactElement {
   return (
-    <TableHead>
+    <MuiTableHead>
       <TableRow>
         {headerLabels.map((label: string, index: number) => (
-          <TableCellComponent key={index} align="left" text={label} />
+          <TableCell key={index} align="left" text={label} />
         ))}
       </TableRow>
-    </TableHead>
+    </MuiTableHead>
   );
 }
 
-export default TableHeadComponent;
+export default TableHead;

@@ -1,12 +1,12 @@
-import React, {createContext, useState, useEffect} from "react";
+import React, {createContext, useState, useEffect, useCallback} from "react";
 
-import {IReport} from "../../Model/Report";
+import {Report} from "../../Model/Report";
 import {getReportsService} from "../../Services/reportsService";
 
 const ReportsContext = createContext<{
-  reports: IReport[] | null;
+  reports: Report[] | null;
   loading: boolean;
-  error: string | unknown;
+  error: string | null;
   getReports: () => void;
 }>({
   reports: [],
@@ -20,26 +20,26 @@ interface IProviderProps {
 }
 
 function ReportsProvider({children}: IProviderProps) {
-  const [reports, setReports] = useState<IReport[] | null>(null);
+  const [reports, setReports] = useState<Report[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | unknown>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const getReports = async () => {
+  const getReports = useCallback(async () => {
     try {
       const reports = await getReportsService();
       if (reports !== null) {
         setReports(reports);
       }
     } catch (error) {
-      setError(error);
+      setError((error as Error).message);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getReports();
-  }, []);
+  }, [getReports]);
 
   return (
     <ReportsContext.Provider

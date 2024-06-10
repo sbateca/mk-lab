@@ -1,10 +1,10 @@
 import {render} from "@testing-library/react";
 
-import CircularSpinner from "./Spinner";
+import Spinner from "./Spinner";
 
-describe("CircularSpinner", () => {
-  it("renders circular spinner", () => {
-    const {getByRole} = render(<CircularSpinner />);
+describe("Spinner", () => {
+  it("renders Spinner", () => {
+    const {getByRole} = render(<Spinner />);
     const spinner = getByRole("progressbar");
     expect(spinner).toBeInTheDocument();
   });

@@ -1,34 +1,34 @@
 import {useEffect, useState} from "react";
-import {TableRow} from "@mui/material";
+import {TableRow as MuiTableRow} from "@mui/material";
 
-import TableCellComponent from "../../Atoms/TableCell/TableCell";
+import TableCell from "../../Atoms/TableCell/TableCell";
 import {TableRowProps} from "./Types";
 
-function TableRowComponent({cells, actions}: TableRowProps) {
+function TableRow({cells, actionButtons}: TableRowProps): React.ReactElement {
   const [newCells, setNewCells] = useState(cells);
   useEffect(() => {
-    if (actions) {
+    if (actionButtons) {
       setNewCells([{text: "", align: "center"}, ...cells]);
     }
-  }, [actions]);
+  }, [actionButtons]);
 
   return (
-    <TableRow>
+    <MuiTableRow>
       {newCells.map((cell, index) => {
-        return actions ? (
-          <TableCellComponent
+        return actionButtons ? (
+          <TableCell
             key={index}
             align={cell.align}
             text={cell.text}
-            actions={actions}
+            actionButtons={actionButtons}
             index={index}
           />
         ) : (
-          <TableCellComponent key={index} align={cell.align} text={cell.text} />
+          <TableCell key={index} align={cell.align} text={cell.text} />
         );
       })}
-    </TableRow>
+    </MuiTableRow>
   );
 }
 
-export default TableRowComponent;
+export default TableRow;

@@ -7,9 +7,14 @@ import {checkFieldInCookies} from "../../../Utils/cookieData";
 import {useCookies} from "../../../Utils/Hooks/useCookies";
 import {MainTemplateProps} from "./Type";
 
-function MainTemplate({header, menu, mainContent}: MainTemplateProps) {
+function Main({
+  header,
+  menu,
+  mainContent,
+}: MainTemplateProps): React.ReactElement {
   const cookies = useCookies();
   const existsUserData = checkFieldInCookies(cookies, "userData");
+
   return !existsUserData ? (
     <Navigate to="/" />
   ) : (
@@ -25,4 +30,4 @@ function MainTemplate({header, menu, mainContent}: MainTemplateProps) {
   );
 }
 
-export default MainTemplate;
+export default Main;

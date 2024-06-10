@@ -20,13 +20,13 @@ jest.mock("../../Organisms/reports/reports", () => ({
   default: () => <div aria-label="reports-content"></div>,
 }));
 
-const renderWithCustomContext = (selectedItem: string) => {
+const renderWithCustomContext = (selectedMenuItem: string) => {
   return render(
     <MenuContext.Provider
       value={{
         menuOpen: false,
-        selectedItem: selectedItem,
-        setSelectedItem: () => {},
+        selectedMenuItem: selectedMenuItem,
+        setSelectedMenuItem: () => {},
         toggleMenu: () => {},
       }}
     >
@@ -36,7 +36,7 @@ const renderWithCustomContext = (selectedItem: string) => {
 };
 
 describe("Content component", () => {
-  it("renders SamplesContent when selectedItem is 'Samples'", () => {
+  it("renders SamplesContent when selectedMenuItem is 'Samples'", () => {
     render(
       <MenuProvider>
         <Content />
@@ -45,13 +45,13 @@ describe("Content component", () => {
     expect(screen.getByLabelText("samples-content")).toBeInTheDocument();
   });
 
-  it("renders Reports when selectedItem is 'Reports'", () => {
+  it("renders Reports when selectedMenuItem is 'Reports'", () => {
     renderWithCustomContext("Reports");
 
     expect(screen.getByLabelText("reports-content")).toBeInTheDocument();
   });
 
-  it("renders SamplesContent by default when selectedItem is unknown", () => {
+  it("renders SamplesContent by default when selectedMenuItem is unknown", () => {
     render(
       <MenuProvider>
         <Content />

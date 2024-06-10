@@ -4,14 +4,14 @@ import {ChildrenProps, MenuContextType} from "./Types";
 
 export const MenuContext = createContext<MenuContextType>({
   menuOpen: false,
-  selectedItem: "",
-  setSelectedItem: () => {},
+  selectedMenuItem: "",
+  setSelectedMenuItem: () => {},
   toggleMenu: () => {},
 });
 
-export function MenuProvider({children}: ChildrenProps) {
+export function MenuProvider({children}: ChildrenProps): React.ReactElement {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedMenuItem, setSelectedMenuItem] = useState("");
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -22,8 +22,8 @@ export function MenuProvider({children}: ChildrenProps) {
       value={{
         menuOpen,
         toggleMenu,
-        selectedItem,
-        setSelectedItem,
+        selectedMenuItem: selectedMenuItem,
+        setSelectedMenuItem: setSelectedMenuItem,
       }}
     >
       {children}

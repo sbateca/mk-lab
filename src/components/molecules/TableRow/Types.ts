@@ -1,8 +1,8 @@
 import {TableCellProps} from "../../Atoms/TableCell/Types";
-import {ActionsButtonsComponentProps} from "../ActionButton/Types";
+import {ButtonConfigs} from "../ActionButtons/Types";
 
 export interface TableRowProps {
   key?: number;
   cells: TableCellProps[];
-  actions?: ActionsButtonsComponentProps | null;
+  actionButtons?: ButtonConfigs | null;
 }

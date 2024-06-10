@@ -1,26 +1,29 @@
 import {useEffect, useState} from "react";
-import {Typography} from "@mui/material";
-import TableContainer from "@mui/material/TableContainer";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import Paper from "@mui/material/Paper";
+import {
+  Paper,
+  Typography,
+  Table as MuiTable,
+  TableBody,
+  TableContainer,
+} from "@mui/material";
 
-import TableHeadComponent from "../../Molecules/TableHead/TableHead";
-import TableRowComponent from "../../Molecules/TableRow/TableRow";
+import TableHead from "../../Molecules/TableHead/TableHead";
+import TableRow from "../../Molecules/TableRow/TableRow";
 import {TableProps} from "./Types";
 import {TableStyles} from "./TableStyles";
 
-export default function TableComponent({
+function Table({
   headerLabels,
   rows,
-  actions,
-}: TableProps) {
+  actionButtons,
+}: TableProps): React.ReactElement {
   const [newHeaderLabels, setNewHeaderLabels] = useState(headerLabels);
+
   useEffect(() => {
-    if (actions) {
+    if (actionButtons) {
       setNewHeaderLabels(["Actions", ...headerLabels]);
     }
-  }, [actions]);
+  }, [actionButtons]);
 
   return (
     <TableContainer component={Paper}>
@@ -29,19 +32,21 @@ export default function TableComponent({
           No records to display
         </Typography>
       ) : (
-        <Table sx={{minWidth: 650}} aria-label="sample table">
-          <TableHeadComponent headerLabels={newHeaderLabels} />
+        <MuiTable sx={{minWidth: 650}} aria-label="sample table">
+          <TableHead headerLabels={newHeaderLabels} />
           <TableBody>
             {rows.map((row, index) => (
-              <TableRowComponent
+              <TableRow
                 key={index}
                 cells={row.cells}
-                actions={actions}
+                actionButtons={actionButtons}
               />
             ))}
           </TableBody>
-        </Table>
+        </MuiTable>
       )}
     </TableContainer>
   );
 }
+
+export default Table;

@@ -1,22 +1,25 @@
-import {ListItemButton, ListItemText} from "@mui/material";
+import {ListItemButton as MuiListItemButton, ListItemText} from "@mui/material";
 
 import {useMenu} from "../../../Utils/Hooks/useMenu";
 import {LisItemButtonProps} from "./Types";
+import React from "react";
 
-function ListItemButtonComponent({label}: LisItemButtonProps) {
-  const {selectedItem, setSelectedItem, toggleMenu} = useMenu();
-  const handleItemClick = (item: string) => {
+function ListItemButton({label}: LisItemButtonProps): React.ReactElement {
+  const {selectedMenuItem: selectedMenuItem, setSelectedMenuItem: setSelectedItem, toggleMenu} = useMenu();
+
+  const handleClick = (item: string) => {
     setSelectedItem(item);
     toggleMenu();
   };
+
   return (
-    <ListItemButton
-      selected={selectedItem === label}
-      onClick={() => handleItemClick(label)}
+    <MuiListItemButton
+      selected={selectedMenuItem === label}
+      onClick={() => handleClick(label)}
     >
       <ListItemText primary={label} />
-    </ListItemButton>
+    </MuiListItemButton>
   );
 }
 
-export default ListItemButtonComponent;
+export default ListItemButton;

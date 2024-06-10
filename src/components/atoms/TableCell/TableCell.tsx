@@ -1,16 +1,21 @@
-import {TableCell} from "@mui/material";
+import {TableCell as MuiTableCell} from "@mui/material";
 
-import ActionsButtonsComponent from "../../Molecules/ActionButton/ActionsButtons";
+import ActionButtons from "../../Molecules/ActionButtons/ActionButtons";
 import {TableCellProps} from "./Types";
 
-function TableCellComponent({text, align, actions, index}: TableCellProps) {
-  return actions && index === 0 ? (
-    <TableCell sx={{margin: 0, padding: 0}} align={align}>
-      {<ActionsButtonsComponent actions={actions.actions} />}
-    </TableCell>
+function TableCell({
+  text,
+  align,
+  actionButtons,
+  index,
+}: TableCellProps): React.ReactElement {
+  return actionButtons && index === 0 ? (
+    <MuiTableCell sx={{margin: 0, padding: 0}} align={align}>
+      {<ActionButtons buttonConfigs={actionButtons.buttonConfigs} />}
+    </MuiTableCell>
   ) : (
-    <TableCell align={align}>{text}</TableCell>
+    <MuiTableCell align={align}>{text}</MuiTableCell>
   );
 }
 
-export default TableCellComponent;
+export default TableCell;

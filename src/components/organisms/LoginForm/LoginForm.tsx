@@ -3,12 +3,12 @@ import {Navigate} from "react-router-dom";
 import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 
 import {getUserByUserNameAndPassword} from "../../../Services/userService";
-import TextFieldComponent from "../../Atoms/TextField/TextField";
+import TextField from "../../Atoms/TextField/TextField";
 import {useCookies} from "../../../Utils/Hooks/useCookies";
 import {LoginFormProps} from "./Types";
 import {LoginFormStyles} from "./LoginFormStyles";
 
-function LoginForm({fields}: LoginFormProps) {
+function LoginForm({fields}: LoginFormProps): React.ReactElement {
   const [fieldsValues, setFieldsValues] = useState<{[key: string]: string}>({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
@@ -84,7 +84,7 @@ function LoginForm({fields}: LoginFormProps) {
                 error={!!errors[fieldItem.name]}
                 key={fieldItem.name}
               >
-                <TextFieldComponent
+                <TextField
                   name={fieldItem.name}
                   label={fieldItem.label}
                   variant="outlined"

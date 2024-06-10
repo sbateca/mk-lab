@@ -1,7 +1,7 @@
 import {render, screen} from "@testing-library/react";
 
 import {TableCellProps} from "../../Atoms/TableCell/Types";
-import TableRowComponent from "./TableRow";
+import TableRow from "./TableRow";
 
 describe("TableRow component", () => {
   it("should render correctly", () => {
@@ -11,7 +11,7 @@ describe("TableRow component", () => {
       {align: "center", text: "cell3"},
     ];
 
-    render(<TableRowComponent cells={mockCells} />);
+    render(<TableRow cells={mockCells} />);
 
     mockCells.forEach((cell) => {
       expect(screen.getByText(cell.text)).toBeInTheDocument();

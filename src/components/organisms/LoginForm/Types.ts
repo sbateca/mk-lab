@@ -1,8 +1,8 @@
 export interface LoginFormProps {
-  fields: FieldItemProps[];
+  fields: FieldProps[];
 }
 
-interface FieldItemProps {
+interface FieldProps {
   name: string;
   label: string;
   type: "text" | "password";

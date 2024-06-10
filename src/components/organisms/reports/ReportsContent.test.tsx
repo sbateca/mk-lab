@@ -1,10 +1,10 @@
 import {render, screen, waitFor} from "@testing-library/react";
 
 import * as useReportsModule from "../../../Utils/Hooks/useReports";
-import {IReport} from "../../../Model/Report";
+import {Report} from "../../../Model/Report";
 import Reports from "./Reports";
 
-const mockReports: IReport[] = [
+const mockReports: Report[] = [
   {
     id: "1234",
     reportDate: "2021-10-10",

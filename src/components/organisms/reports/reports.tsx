@@ -1,53 +1,43 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
-import {ActionsButtonsComponentProps} from "../../Molecules/ActionButton/Types";
+import {ButtonConfigs} from "../../Molecules/ActionButtons/Types";
 import {REPORTS_TABLE_HEADER_LABELS} from "../../../Config/constants";
-import {reportsToTableRowPropList} from "../../../Adapters/TableRow";
+import {reportsToTableRows} from "../../../Adapters/tableRow";
 import {TableRowProps} from "../../Molecules/TableRow/Types";
 import {useReports} from "../../../Utils/Hooks/useReports";
 import Typography from "../../Atoms/Typography/Typography";
-import CircularSpinner from "../../Atoms/Spinner/Spinner";
-import TableComponent from "../Table/Table";
-import ActionsButtonsComponent from "../../Molecules/ActionButton/ActionsButtons";
+import Spinner from "../../Atoms/Spinner/Spinner";
+import Table from "../Table/Table";
+import ActionButtons from "../../Molecules/ActionButtons/ActionButtons";
 
-function Reports() {
+function Reports(): React.ReactElement {
   const {reports, getReports, loading, error} = useReports();
-  const [rowsValue, setRowsValue] = useState<TableRowProps[]>([]);
-  const tableActions: ActionsButtonsComponentProps = {
-    actions: [
-      {action: "Detail", color: "primary"},
-      {action: "Edit", color: "primary"},
-      {action: "Delete", color: "error"},
+  const [rows, setRows] = useState<TableRowProps[]>([]);
+
+  const tableButtonConfigs: ButtonConfigs = {
+    buttonConfigs: [
+      {label: "Detail", color: "primary"},
+      {label: "Edit", color: "primary"},
+      {label: "Delete", color: "error"},
     ],
   };
-
-  const reportsActions: ActionsButtonsComponentProps = {
-    actions: [{action: "create report", color: "primary", icon: "create"}],
+  const buttonConfigs: ButtonConfigs = {
+    buttonConfigs: [{label: "Create Report", color: "primary", icon: "create"}],
   };
 
   useEffect(() => {
-    const getReportsList = async () => {
-      try {
-        await getReports();
-        if (reports) {
-          setRowsValue(reportsToTableRowPropList(reports));
-        }
-      } catch (error) {
-        throw new Error("error getting samples");
-      }
-    };
-    getReportsList();
-  }, []);
+    getReports();
+  }, [getReports]);
 
   useEffect(() => {
     if (reports) {
-      setRowsValue(reportsToTableRowPropList(reports));
+      setRows(reportsToTableRows(reports));
     }
   }, [reports]);
 
-  if (loading) return <CircularSpinner />;
-  if (error) return <Typography text="Error" variant="h6" />;
+  if (loading) return <Spinner />;
+  if (error) return <Typography text={error} variant="h6" />;
 
   return (
     <Box>
@@ -59,13 +49,13 @@ function Reports() {
           padding="10px 0px"
         />
         <Box sx={{marginLeft: "auto"}}>
-          <ActionsButtonsComponent actions={reportsActions.actions} />
+          <ActionButtons buttonConfigs={buttonConfigs.buttonConfigs} />
         </Box>
       </Box>
-      <TableComponent
+      <Table
         headerLabels={REPORTS_TABLE_HEADER_LABELS}
-        rows={rowsValue}
-        actions={tableActions}
+        rows={rows}
+        actionButtons={tableButtonConfigs}
       />
     </Box>
   );

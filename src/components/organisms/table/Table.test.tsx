@@ -1,7 +1,7 @@
 import {render, screen} from "@testing-library/react";
 
 import {TableRowProps} from "../../Molecules/TableRow/Types";
-import TableComponent from "./Table";
+import Table from "./Table";
 
 const mockHeaderLabels = ["header1", "header2"];
 const mockRows: TableRowProps[] = [
@@ -21,14 +21,14 @@ const mockRows: TableRowProps[] = [
 
 describe("Table", () => {
   it("should render the table component with headers and cells provided", () => {
-    render(<TableComponent headerLabels={mockHeaderLabels} rows={mockRows} />);
+    render(<Table headerLabels={mockHeaderLabels} rows={mockRows} />);
 
     expect(screen.getByText("header1")).toBeInTheDocument();
     expect(screen.getByText("cell1")).toBeInTheDocument();
   });
 
   it("should render no results text when an empty rows list has been provided", () => {
-    render(<TableComponent headerLabels={mockHeaderLabels} rows={[]} />);
+    render(<Table headerLabels={mockHeaderLabels} rows={[]} />);
 
     expect(screen.getByText("No records to display")).toBeInTheDocument();
   });

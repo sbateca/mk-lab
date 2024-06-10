@@ -1,19 +1,19 @@
 import {Box} from "@mui/material";
 
-import MainTemplate from "../../Templates/MainTemplate/MainTemplate";
+import MainTemplate from "../../Templates/Main/Main";
 import Header from "../../Molecules/Header/Header";
 import Menu from "../../Molecules/Menu/Menu";
 import Content from "../../Organisms/Content/Content";
 import {COMPANY_NAME, MENU_ITEMS} from "../../../Config/constants";
-import {SampleProvider} from "../../../Context/Services/Sample";
-import {ReportsProvider} from "../../../Context/Services/Reports";
-import {adminPageStyle} from "./AdminPageStyle";
+import {SampleProvider} from "../../../Context/Services/SampleContext";
+import {ReportsProvider} from "../../../Context/Services/ReportsContext";
+import {AdminStyle} from "./AdminStyle";
 
-function AdminPage() {
+function Admin(): React.ReactElement {
   return (
     <SampleProvider>
       <ReportsProvider>
-        <Box sx={adminPageStyle}>
+        <Box sx={AdminStyle}>
           <MainTemplate
             header={<Header companyName={COMPANY_NAME} />}
             menu={<Menu menuItems={MENU_ITEMS} />}
@@ -25,4 +25,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default Admin;
