@@ -15,10 +15,6 @@ jest.mock("../../../Config/EnvManager", () => ({
   },
 }));
 
-jest.mock("../../../Utils/Hooks/useCookies", () => ({
-  useCookies: () => ({set: jest.fn()}),
-}));
-
 jest.mock("../../../Services/userService", () => ({
   getUserByUserName: jest.fn(),
 }));

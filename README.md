@@ -103,7 +103,6 @@ src/
 │       └── mainTemplate
 ├── Config
 ├── Context
-│   ├── Cookie
 │   ├── Menu
 │   └── Services
 ├── model

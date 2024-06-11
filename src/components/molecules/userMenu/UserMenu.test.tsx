@@ -1,6 +1,5 @@
 import {render, fireEvent, screen} from "@testing-library/react";
 
-import {CookiesProvider} from "../../../Context/Cookie/CookieContext";
 import UserMenu from "./UserMenu";
 import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
 
@@ -14,11 +13,7 @@ describe("UserMenu component", () => {
     Storage.prototype.removeItem = jest.fn();
     jest.spyOn(window.location, "reload").mockImplementation(() => {});
 
-    render(
-      <CookiesProvider>
-        <UserMenu username="testuser" />
-      </CookiesProvider>,
-    );
+    render(<UserMenu username="testuser" />);
   });
 
   it("renders username correctly", () => {
