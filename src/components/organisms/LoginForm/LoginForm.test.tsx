@@ -1,7 +1,12 @@
 import {render, screen, fireEvent, waitFor} from "@testing-library/react";
-
-import {getUserByUserNameAndPassword} from "../../../Services/userService";
+import {getUserByUserName} from "../../../Services/userService";
 import LoginForm from "./LoginForm";
+import {
+  LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
+  LOGIN_FORM_SIGN_IN,
+} from "../../../Utils/Constants/pages/login";
+import {requiredField} from "../../../Utils/Constants/form/validations";
+import {LoginFormProps} from "./Types";
 
 jest.mock("../../../Config/EnvManager", () => ({
   __esModule: true,
@@ -15,89 +20,77 @@ jest.mock("../../../Utils/Hooks/useCookies", () => ({
 }));
 
 jest.mock("../../../Services/userService", () => ({
-  getUserByUserNameAndPassword: jest.fn(),
+  getUserByUserName: jest.fn(),
 }));
 
 describe("LoginForm component", () => {
+  const originalLocation = window.location;
+  const mockReload = jest.fn();
+
+  beforeAll(() => {
+    Storage.prototype.removeItem = jest.fn();
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      value: {...window.location, reload: mockReload},
+    });
+  });
+
+  afterAll(() => {
+    Object.defineProperty(window, "location", {value: originalLocation});
+  });
+
   it("renders form fields correctly", () => {
     render(
       <LoginForm
         fields={[
           {name: "username", label: "Username", type: "text", required: true},
-          {
-            name: "password",
-            label: "Password",
-            type: "password",
-            required: true,
-          },
         ]}
       />,
     );
 
     expect(screen.getByText("Username")).toBeInTheDocument();
-    expect(screen.getByText("Password")).toBeInTheDocument();
   });
 
   it("displays error message if login fails", async () => {
-    (getUserByUserNameAndPassword as jest.Mock).mockResolvedValue([]);
+    (getUserByUserName as jest.Mock).mockResolvedValue([]);
     render(
       <LoginForm
         fields={[
           {name: "username", label: "Username", type: "text", required: true},
-          {
-            name: "password",
-            label: "Password",
-            type: "password",
-            required: true,
-          },
         ]}
       />,
     );
 
     // eslint-disable-next-line quotes
     const usernameInput = document.querySelector('input[name="username"]');
-    // eslint-disable-next-line quotes
-    const passwordInput = document.querySelector('input[name="password"]');
-    if (usernameInput && passwordInput) {
+    if (usernameInput) {
       fireEvent.change(usernameInput, {target: {value: "testuser"}});
-      fireEvent.change(passwordInput, {target: {value: "testpassword"}});
-      const submitButton = screen.getByText("sign in");
+      const submitButton = screen.getByText(LOGIN_FORM_SIGN_IN);
       fireEvent.click(submitButton);
     }
 
     await waitFor(() => {
-      expect(getUserByUserNameAndPassword).toHaveBeenCalled();
+      expect(getUserByUserName).toHaveBeenCalled();
       expect(
-        screen.getByText("email or password incorrect, please try again."),
+        screen.getByText(LOGIN_ERROR_ACCESS_DENIED_MESSAGE),
       ).toBeInTheDocument();
     });
   });
 
   it("displays required error if fields are empty and blur event has been dispatched", () => {
-    render(
-      <LoginForm
-        fields={[
-          {name: "username", label: "Username", type: "text", required: true},
-          {
-            name: "password",
-            label: "Password",
-            type: "password",
-            required: true,
-          },
-        ]}
-      />,
-    );
+    const loginFormProps: LoginFormProps = {
+      fields: [
+        {name: "username", label: "Username", type: "text", required: true},
+      ],
+    };
+    render(<LoginForm fields={loginFormProps.fields} />);
 
     // eslint-disable-next-line quotes
     const usernameInput = document.querySelector('input[name="username"]');
-    // eslint-disable-next-line quotes
-    const passwordInput = document.querySelector('input[name="password"]');
-
-    if (usernameInput && passwordInput) {
+    if (usernameInput) {
       fireEvent.blur(usernameInput);
-      fireEvent.blur(passwordInput);
-      expect(screen.getByText("username is required")).toBeInTheDocument();
-      expect(screen.getByText("password is required")).toBeInTheDocument();
+      const errorMessage = requiredField(loginFormProps.fields[0].name);
+      expect(screen.getByText(errorMessage)).toBeInTheDocument();
     }
   });
 });

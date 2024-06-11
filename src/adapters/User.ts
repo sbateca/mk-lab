@@ -1,13 +1,9 @@
-import {Cookie} from "universal-cookie";
-
 import {User} from "../Model/User";
 
-export const cookiesToUser = (cookies: Cookie): User | null => {
-  const cookieData = cookies.get("userData");
-  let user = null;
-  if (cookieData) {
-    user = cookieData[0];
+export const localStorageToUser = (userData: string | null): User | null => {
+  if (userData !== null) {
+    const user: User = JSON.parse(userData);
     return user;
   }
-  return user;
+  return null;
 };

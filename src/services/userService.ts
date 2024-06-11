@@ -7,16 +7,15 @@ interface getUserProps {
   [key: string]: string;
 }
 
-export const getUserByUserNameAndPassword = async ({
+export const getUserByUserName = async ({
   username,
-  password,
 }: getUserProps): Promise<User[]> => {
   try {
     const response = await axios.get<User[]>(
-      `${EnvManager.BACKEND_URL}/users?username=${username}&password=${password}`,
+      `${EnvManager.BACKEND_URL}/users?username=${username}`,
     );
     return response.data;
   } catch (error) {
-    throw new Error("Error retrieving user by username and password.");
+    throw new Error(`Error retrieving user by username ${username}.`);
   }
 };

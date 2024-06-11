@@ -2,10 +2,8 @@ import {render, fireEvent, screen} from "@testing-library/react";
 
 import {CookiesProvider} from "../../../Context/Cookie/CookieContext";
 import UserMenu from "./UserMenu";
+import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
 
-const mockCookies = {
-  remove: jest.fn(),
-};
 const mockReload = jest.fn();
 Object.defineProperty(window, "location", {
   value: {reload: mockReload},
@@ -13,9 +11,12 @@ Object.defineProperty(window, "location", {
 
 describe("UserMenu component", () => {
   beforeEach(() => {
+    Storage.prototype.removeItem = jest.fn();
+    jest.spyOn(window.location, "reload").mockImplementation(() => {});
+
     render(
       <CookiesProvider>
-        <UserMenu username="testuser" cookies={mockCookies} />
+        <UserMenu username="testuser" />
       </CookiesProvider>,
     );
   });
@@ -34,7 +35,9 @@ describe("UserMenu component", () => {
     fireEvent.click(screen.getByLabelText("account of current user"));
     fireEvent.click(screen.getByText("Logout"));
 
-    expect(mockCookies.remove).toHaveBeenCalledWith("userData");
+    expect(localStorage.removeItem).toHaveBeenCalledWith(
+      LOCAL_STORAGE_USER_KEY,
+    );
     expect(mockReload).toHaveBeenCalled();
   });
 });
