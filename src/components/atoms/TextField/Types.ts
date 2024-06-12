@@ -6,6 +6,6 @@ export interface TexFieldProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  required: boolean;
-  error: boolean;
+  isRequired: boolean;
+  hasError: boolean;
 }

@@ -13,3 +13,4 @@ export const getSharedPageTitleConfig = (
 
 export const TABLE_ACTIONS_COLUMN_HEADER = "Actions";
 export const LOCAL_STORAGE_USER_KEY = "userData";
+export const NO_RECORDS_MESSAGE = "No records to display";

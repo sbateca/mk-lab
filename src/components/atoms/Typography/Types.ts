@@ -23,8 +23,8 @@ interface ITypographyProps {
   size?: string;
   padding?: string;
   variant: TypographyVariant;
-  paragraph?: boolean;
-  gutterBottom?: boolean;
+  isParagraph?: boolean;
+  hasButterBottom?: boolean;
   align?: "inherit" | "left" | "right" | "center" | "justify";
   color?: TypographyColor;
 }

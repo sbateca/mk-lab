@@ -16,12 +16,8 @@ import Table from "../Table/Table";
 import ActionButtons from "../../Molecules/ActionButtons/ActionButtons";
 
 function Reports(): React.ReactElement {
-  const {reports, getReports, loading, error} = useReports();
+  const {reports, isLoading, error} = useReports();
   const [rows, setRows] = useState<TableRowProps[]>([]);
-
-  useEffect(() => {
-    getReports();
-  }, [getReports]);
 
   useEffect(() => {
     if (reports) {
@@ -29,7 +25,7 @@ function Reports(): React.ReactElement {
     }
   }, [reports]);
 
-  if (loading) return <Spinner />;
+  if (isLoading) return <Spinner />;
   if (error) return <Typography text={error} variant="h6" />;
 
   return (

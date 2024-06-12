@@ -39,7 +39,7 @@ describe("LoginForm component", () => {
     render(
       <LoginForm
         fields={[
-          {name: "username", label: "Username", type: "text", required: true},
+          {name: "username", label: "Username", type: "text", isRequired: true},
         ]}
       />,
     );
@@ -52,7 +52,7 @@ describe("LoginForm component", () => {
     render(
       <LoginForm
         fields={[
-          {name: "username", label: "Username", type: "text", required: true},
+          {name: "username", label: "Username", type: "text", isRequired: true},
         ]}
       />,
     );
@@ -76,7 +76,7 @@ describe("LoginForm component", () => {
   it("displays required error if fields are empty and blur event has been dispatched", () => {
     const loginFormProps: LoginFormProps = {
       fields: [
-        {name: "username", label: "Username", type: "text", required: true},
+        {name: "username", label: "Username", type: "text", isRequired: true},
       ],
     };
     render(<LoginForm fields={loginFormProps.fields} />);

@@ -54,17 +54,13 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
     }
   };
 
-  const getFieldRequiredValue = (field: string): boolean | undefined => {
-    return fields.find((item) => item.name === field)?.required;
+  const isFieldRequired = (field: string): boolean | undefined => {
+    return fields.find((item) => item.name === field)?.isRequired;
   };
 
   const handleBlur = (field: string) => {
     if (!field) return;
-    if (
-      !errors[field] &&
-      !fieldsValues[field] &&
-      getFieldRequiredValue(field)
-    ) {
+    if (!errors[field] && !fieldsValues[field] && isFieldRequired(field)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [field]: requiredField(field),
@@ -87,7 +83,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
           <Box sx={LoginFormStyles.form}>
             {fields.map((fieldItem) => (
               <FormControl
-                required={fieldItem.required}
+                required={fieldItem.isRequired}
                 error={!!errors[fieldItem.name]}
                 key={fieldItem.name}
               >
@@ -99,8 +95,8 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
                   value={fieldsValues[fieldItem.name]?.trim() || ""}
                   onChange={handleFieldChange}
                   onBlur={() => handleBlur(fieldItem.name)}
-                  required={fieldItem.required}
-                  error={!!errors[fieldItem.name]}
+                  isRequired={fieldItem.isRequired}
+                  hasError={!!errors[fieldItem.name]}
                 />
                 {errors[fieldItem.name] && (
                   <FormHelperText>{errors[fieldItem.name]}</FormHelperText>

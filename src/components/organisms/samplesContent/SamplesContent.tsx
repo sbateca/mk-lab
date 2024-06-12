@@ -16,12 +16,8 @@ import Spinner from "../../Atoms/Spinner/Spinner";
 import Table from "../Table/Table";
 
 function SamplesContent(): React.ReactElement {
-  const {samples, getSamples, loading, error} = useSample();
+  const {samples, isLoading, error} = useSample();
   const [rows, setRows] = useState<TableRowProps[]>([]);
-
-  useEffect(() => {
-    getSamples();
-  }, [getSamples]);
 
   useEffect(() => {
     if (samples) {
@@ -29,7 +25,7 @@ function SamplesContent(): React.ReactElement {
     }
   }, [samples]);
 
-  if (loading) return <Spinner />;
+  if (isLoading) return <Spinner />;
   if (error) return <Typography text="Error" variant="h6" />;
   return (
     <Box>

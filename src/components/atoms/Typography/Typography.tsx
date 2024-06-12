@@ -8,8 +8,8 @@ function Typography({
   size,
   padding,
   variant,
-  paragraph = false,
-  gutterBottom = false,
+  isParagraph = false,
+  hasButterBottom = false,
   align = "left",
   color = "black",
 }: ITypographyProps): React.ReactElement {
@@ -19,8 +19,8 @@ function Typography({
       fontSize={size}
       padding={padding}
       variant={variant}
-      paragraph={paragraph}
-      gutterBottom={gutterBottom}
+      paragraph={isParagraph}
+      gutterBottom={hasButterBottom}
       align={align}
       color={textColor}
     >
