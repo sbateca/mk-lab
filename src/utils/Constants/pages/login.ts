@@ -4,7 +4,7 @@ export const LOGIN_FORM_FIELDS = [
     name: "username",
     label: "Username",
     type: "text" as const,
-    required: true,
+    isRequired: true,
   },
 ];
 export const LOGIN_ERROR_ACCESS_DENIED_MESSAGE =

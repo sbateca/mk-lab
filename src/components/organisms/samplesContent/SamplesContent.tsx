@@ -26,7 +26,7 @@ function SamplesContent(): React.ReactElement {
   }, [samples]);
 
   if (isLoading) return <Spinner />;
-  if (error) return <Typography text="Error" variant="h6" />;
+  if (error) return <Typography text={error} variant="h6" />;
   return (
     <Box>
       <Box sx={{display: "flex", flexDirection: "row"}}>

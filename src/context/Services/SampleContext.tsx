@@ -6,7 +6,7 @@ import {getSamplesService} from "../../Services/sampleService";
 const SampleContext = createContext<{
   samples: Sample[] | null;
   isLoading: boolean;
-  error: string | unknown;
+  error: string | null;
 }>({
   samples: [],
   isLoading: true,
@@ -20,7 +20,7 @@ interface IProviderProps {
 function SampleProvider({children}: IProviderProps) {
   const [samples, setSamples] = useState<Sample[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | unknown>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const getSamples = async () => {
     try {
