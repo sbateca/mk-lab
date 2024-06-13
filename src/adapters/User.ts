@@ -1,13 +1,31 @@
-import {Cookie} from "universal-cookie";
-
+import {AxiosResponse} from "axios";
 import {User} from "../Model/User";
+import {getInvalidDataErrorMessage} from "../Utils/Constants/adapters";
 
-export const cookiesToUser = (cookies: Cookie): User | null => {
-  const cookieData = cookies.get("userData");
-  let user = null;
-  if (cookieData) {
-    user = cookieData[0];
+export const localStorageToUser = (userData: string | null): User | null => {
+  if (userData !== null) {
+    const user: User = JSON.parse(userData);
     return user;
   }
-  return user;
+  return null;
+};
+
+export const axiosResponseToUser = (response: AxiosResponse<unknown>): User => {
+  if (isValidUser(response.data)) {
+    return response.data as User;
+  } else {
+    throw new Error(getInvalidDataErrorMessage("user"));
+  }
+};
+
+const isValidUser = (user: unknown): user is User => {
+  if (typeof user === "object" && user !== null) {
+    const userObj = user as Record<string, unknown>;
+    return (
+      typeof userObj.id === "string" &&
+      typeof userObj.name === "string" &&
+      typeof userObj.username === "string"
+    );
+  }
+  return false;
 };

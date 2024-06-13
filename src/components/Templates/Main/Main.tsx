@@ -3,19 +3,18 @@ import {Navigate} from "react-router";
 
 import {mainContentContainer, mainTemplayeStyle} from "./MainTemplateStyle";
 import {MenuProvider} from "../../../Context/Menu/MenuContext";
-import {checkFieldInCookies} from "../../../Utils/cookieData";
-import {useCookies} from "../../../Utils/Hooks/useCookies";
+import {localStorageContainsField} from "../../../Utils/localStorage";
 import {MainTemplateProps} from "./Type";
+import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
 
 function Main({
   header,
   menu,
   mainContent,
 }: MainTemplateProps): React.ReactElement {
-  const cookies = useCookies();
-  const existsUserData = checkFieldInCookies(cookies, "userData");
+  const hasUserData = localStorageContainsField(LOCAL_STORAGE_USER_KEY);
 
-  return !existsUserData ? (
+  return !hasUserData ? (
     <Navigate to="/" />
   ) : (
     <MenuProvider>

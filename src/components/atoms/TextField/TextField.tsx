@@ -10,8 +10,8 @@ function TextField({
   value,
   onChange,
   onBlur,
-  required,
-  error,
+  isRequired,
+  hasError,
 }: TexFieldProps): React.ReactElement {
   return (
     <MuiTextField
@@ -22,8 +22,8 @@ function TextField({
       value={value}
       onChange={onChange}
       onBlur={onBlur}
-      error={error}
-      required={required}
+      error={hasError}
+      required={isRequired}
     />
   );
 }

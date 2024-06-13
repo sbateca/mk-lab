@@ -1,17 +1,16 @@
 import {useState} from "react";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
-import {Cookie} from "universal-cookie";
 
 import {UserMenuStyle} from "./UserMenuStyle";
 import {USER_MENU_LOGOUT} from "../../../Utils/Constants/pages/admin";
+import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
 
 interface UserMenuProps {
   username: string;
-  cookies: Cookie;
 }
 
-function UserMenu({username, cookies}: UserMenuProps): React.ReactElement {
+function UserMenu({username}: UserMenuProps): React.ReactElement {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -23,7 +22,7 @@ function UserMenu({username, cookies}: UserMenuProps): React.ReactElement {
   };
 
   const handleLogout = () => {
-    cookies.remove("userData");
+    localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
     window.location.reload();
   };
 

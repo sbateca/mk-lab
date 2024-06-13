@@ -4,14 +4,8 @@ export const LOGIN_FORM_FIELDS = [
     name: "username",
     label: "Username",
     type: "text" as const,
-    required: true,
-  },
-  {
-    name: "password",
-    label: "Password",
-    type: "password" as const,
-    required: true,
+    isRequired: true,
   },
 ];
-export const LOGIN_FORM_REQUIRED_FIELD_ERROR =
-  "Email or password incorrect, please try again.";
+export const LOGIN_ERROR_ACCESS_DENIED_MESSAGE =
+  "Access to this resource is denied. Please contact the administrator.";

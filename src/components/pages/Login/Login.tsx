@@ -1,17 +1,16 @@
 import {useEffect, useState} from "react";
 import {Navigate} from "react-router";
 
-import {checkFieldInCookies} from "../../../Utils/cookieData";
-import {useCookies} from "../../../Utils/Hooks/useCookies";
+import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
+import {localStorageContainsField} from "../../../Utils/localStorage";
 import LoginTemplate from "../../Templates/Login/Login";
 
 function Login(): React.ReactElement {
-  const cookies = useCookies();
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    const userData = checkFieldInCookies(cookies, "userData");
-    if (userData) {
+    const hasUserData = localStorageContainsField(LOCAL_STORAGE_USER_KEY);
+    if (hasUserData) {
       setRedirect(true);
     }
   }, []);

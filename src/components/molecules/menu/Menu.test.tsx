@@ -1,6 +1,5 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 
-import {CookiesProvider} from "../../../Context/Cookie/CookieContext";
 import {MenuProvider} from "../../../Context/Menu/MenuContext";
 import Header from "../Header/Header";
 import {MenuProps} from "./Types";
@@ -14,12 +13,10 @@ describe("Menu component", () => {
     const companyName = "Company Name test";
 
     render(
-      <CookiesProvider>
-        <MenuProvider>
-          <Header companyName={companyName} />
-          <Menu menuItems={mockMenuProps.menuItems} />
-        </MenuProvider>
-      </CookiesProvider>,
+      <MenuProvider>
+        <Header companyName={companyName} />
+        <Menu menuItems={mockMenuProps.menuItems} />
+      </MenuProvider>,
     );
     const menu = screen.getByLabelText("menu");
     fireEvent.click(menu);
@@ -36,11 +33,9 @@ describe("Menu component", () => {
     };
 
     render(
-      <CookiesProvider>
-        <MenuProvider>
-          <Menu menuItems={mockMenuProps.menuItems} />
-        </MenuProvider>
-      </CookiesProvider>,
+      <MenuProvider>
+        <Menu menuItems={mockMenuProps.menuItems} />
+      </MenuProvider>,
     );
 
     const menuItems = screen.queryByRole("presentation");

@@ -1,18 +1,16 @@
-import React, {createContext, useState, useEffect, useCallback} from "react";
+import React, {createContext, useState, useEffect} from "react";
 
 import {Sample} from "../../Model/Sample";
 import {getSamplesService} from "../../Services/sampleService";
 
 const SampleContext = createContext<{
   samples: Sample[] | null;
-  loading: boolean;
-  error: string | unknown;
-  getSamples: () => void;
+  isLoading: boolean;
+  error: string | null;
 }>({
   samples: [],
-  loading: true,
+  isLoading: true,
   error: null,
-  getSamples: () => {},
 });
 
 interface IProviderProps {
@@ -21,12 +19,12 @@ interface IProviderProps {
 
 function SampleProvider({children}: IProviderProps) {
   const [samples, setSamples] = useState<Sample[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | unknown>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const getSamples = useCallback(async () => {
+  const getSamples = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       const samples = await getSamplesService();
       if (samples !== null) {
         setSamples(samples);
@@ -34,21 +32,20 @@ function SampleProvider({children}: IProviderProps) {
     } catch (error) {
       setError((error as Error).message);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     getSamples();
-  }, [getSamples]);
+  }, []);
 
   return (
     <SampleContext.Provider
       value={{
         samples,
-        loading,
+        isLoading,
         error,
-        getSamples,
       }}
     >
       {children}

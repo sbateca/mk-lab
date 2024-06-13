@@ -2,9 +2,9 @@ export interface LoginFormProps {
   fields: FieldProps[];
 }
 
-interface FieldProps {
+export interface FieldProps {
   name: string;
   label: string;
   type: "text" | "password";
-  required: boolean;
+  isRequired: boolean;
 }

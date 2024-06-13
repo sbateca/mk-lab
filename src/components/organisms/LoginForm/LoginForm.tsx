@@ -2,14 +2,14 @@ import {ChangeEvent, useState} from "react";
 import {Navigate} from "react-router-dom";
 import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 
-import {getUserByUserNameAndPassword} from "../../../Services/userService";
+import {getUserByUserName} from "../../../Services/userService";
 import TextField from "../../Atoms/TextField/TextField";
-import {useCookies} from "../../../Utils/Hooks/useCookies";
 import {requiredField} from "../../../Utils/Constants/form/validations";
 import {
-  LOGIN_FORM_REQUIRED_FIELD_ERROR,
+  LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
 } from "../../../Utils/Constants/pages/login";
+import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
 import {LoginFormProps} from "./Types";
 import {LoginFormStyles} from "./LoginFormStyles";
 
@@ -17,7 +17,6 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
   const [fieldsValues, setFieldsValues] = useState<{[key: string]: string}>({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
-  const cookies = useCookies();
 
   const handleFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
     const field = event.target.name;
@@ -40,29 +39,28 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
     event.preventDefault();
     try {
       const requestParameters = buildParametersObject(fieldsValues);
-      const response = await getUserByUserNameAndPassword(requestParameters);
+      const response = await getUserByUserName(requestParameters);
       if (response.length > 0) {
-        cookies?.set("userData", response, {path: "/"});
+        localStorage.setItem(
+          LOCAL_STORAGE_USER_KEY,
+          JSON.stringify(response[0]),
+        );
         setIsLoggedIn(true);
       } else {
-        setErrors({form: LOGIN_FORM_REQUIRED_FIELD_ERROR});
+        setErrors({form: LOGIN_ERROR_ACCESS_DENIED_MESSAGE});
       }
     } catch (error) {
       setErrors({form: (error as unknown as Error).message});
     }
   };
 
-  const getFieldRequiredValue = (field: string): boolean | undefined => {
-    return fields.find((item) => item.name === field)?.required;
+  const isFieldRequired = (field: string): boolean | undefined => {
+    return fields.find((item) => item.name === field)?.isRequired;
   };
 
   const handleBlur = (field: string) => {
     if (!field) return;
-    if (
-      !errors[field] &&
-      !fieldsValues[field] &&
-      getFieldRequiredValue(field)
-    ) {
+    if (!errors[field] && !fieldsValues[field] && isFieldRequired(field)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [field]: requiredField(field),
@@ -85,7 +83,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
           <Box sx={LoginFormStyles.form}>
             {fields.map((fieldItem) => (
               <FormControl
-                required={fieldItem.required}
+                required={fieldItem.isRequired}
                 error={!!errors[fieldItem.name]}
                 key={fieldItem.name}
               >
@@ -97,8 +95,8 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
                   value={fieldsValues[fieldItem.name]?.trim() || ""}
                   onChange={handleFieldChange}
                   onBlur={() => handleBlur(fieldItem.name)}
-                  required={fieldItem.required}
-                  error={!!errors[fieldItem.name]}
+                  isRequired={fieldItem.isRequired}
+                  hasError={!!errors[fieldItem.name]}
                 />
                 {errors[fieldItem.name] && (
                   <FormHelperText>{errors[fieldItem.name]}</FormHelperText>
