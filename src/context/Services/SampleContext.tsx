@@ -1,7 +1,7 @@
 import React, {createContext, useState, useEffect} from "react";
 
-import {Sample} from "../../Model/Sample";
-import {getSamplesService} from "../../Services/sampleService";
+import {Sample} from "../../model/Sample";
+import {getSamplesService} from "../../services/sampleService";
 
 const SampleContext = createContext<{
   samples: Sample[] | null;

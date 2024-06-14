@@ -1,9 +1,9 @@
 import {AxiosResponse} from "axios";
-import {Report} from "../Model/Report";
+import {Report} from "../model/Report";
 import {
   RESPONSE_DATA_NOT_ARRAY_ERROR,
   getInvalidDataErrorMessage,
-} from "../Utils/Constants/adapters";
+} from "../utils/constants/adapters";
 
 export const axiosResponseToReports = (
   response: AxiosResponse<unknown>,

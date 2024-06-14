@@ -3,8 +3,8 @@ import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
 
 import {UserMenuStyle} from "./UserMenuStyle";
-import {USER_MENU_LOGOUT} from "../../../Utils/Constants/pages/admin";
-import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
+import {USER_MENU_LOGOUT} from "../../../utils/constants/pages/admin";
+import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
 
 interface UserMenuProps {
   username: string;

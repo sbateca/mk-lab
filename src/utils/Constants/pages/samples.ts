@@ -1,5 +1,5 @@
-import ITypographyProps from "../../../Components/Atoms/Typography/Types";
-import {ButtonConfigs} from "../../../Components/Molecules/ActionButtons/Types";
+import ITypographyProps from "../../../components/atoms/Typography/Types";
+import {ButtonConfigs} from "../../../components/molecules/ActionButtons/Types";
 import {getSharedPageTitleConfig} from "./shared";
 
 export const SAMPLES_PAGE_NAME = "Samples";

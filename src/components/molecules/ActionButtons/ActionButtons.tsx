@@ -1,7 +1,7 @@
 import {Button} from "@mui/material";
 
 import {ButtonConfigs, ButtonConfig} from "./Types";
-import {getIcon} from "../../../Utils/icons";
+import {getIcon} from "../../../utils/icons";
 
 function ActionButtons({
   buttonConfigs,

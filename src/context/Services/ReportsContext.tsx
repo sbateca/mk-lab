@@ -1,7 +1,7 @@
 import React, {createContext, useState, useEffect} from "react";
 
-import {Report} from "../../Model/Report";
-import {getReportsService} from "../../Services/reportsService";
+import {Report} from "../../model/Report";
+import {getReportsService} from "../../services/reportsService";
 
 const ReportsContext = createContext<{
   reports: Report[] | null;

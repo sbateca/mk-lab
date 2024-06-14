@@ -1,7 +1,7 @@
 import {Box} from "@mui/material";
 
 import SamplesContent from "../SamplesContent/SamplesContent";
-import {useMenu} from "../../../Utils/Hooks/useMenu";
+import {useMenu} from "../../../utils/hooks/useMenu";
 import {ContentStyle} from "./ContentStyle";
 import Reports from "../Reports/Reports";
 

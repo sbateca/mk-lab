@@ -2,11 +2,11 @@ import {useEffect, useState} from "react";
 import {AppBar, Toolbar, IconButton, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import {useMenu} from "../../../Utils/Hooks/useMenu";
+import {useMenu} from "../../../utils/hooks/useMenu";
 import UserMenu from "../UserMenu/UserMenu";
 import {HeaderProps} from "./Type";
-import {localStorageToUser} from "../../../Adapters/user";
-import {LOCAL_STORAGE_USER_KEY} from "../../../Utils/Constants/pages/shared";
+import {localStorageToUser} from "../../../adapters/user";
+import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
 
 function Header({companyName}: HeaderProps): React.ReactElement {
   const {toggleMenu} = useMenu();

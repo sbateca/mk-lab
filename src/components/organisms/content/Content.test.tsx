@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 
-import {MenuContext, MenuProvider} from "../../../Context/Menu/MenuContext";
+import {MenuContext, MenuProvider} from "../../../context/Menu/MenuContext";
 import Content from "./Content";
 
 jest.mock("../../../Config/envManager", () => ({

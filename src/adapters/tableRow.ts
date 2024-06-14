@@ -1,6 +1,6 @@
-import {TableRowProps} from "../Components/Molecules/TableRow/Types";
-import {Report} from "../Model/Report";
-import {Sample} from "../Model/Sample";
+import {TableRowProps} from "../components/molecules/TableRow/Types";
+import {Report} from "../model/Report";
+import {Sample} from "../model/Sample";
 
 export const samplesToTableRows = (samples: Sample[]): TableRowProps[] => {
   return samples.map((sample) => {

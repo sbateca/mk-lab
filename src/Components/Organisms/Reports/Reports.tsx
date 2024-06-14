@@ -6,14 +6,14 @@ import {
   REPORTS_BUTTON_CONFIGS,
   REPORTS_TABLE_HEADER_LABELS,
   REPORTS_TABLE_BUTTON_CONFIGS,
-} from "../../../Utils/Constants/pages/reports";
-import {reportsToTableRows} from "../../../Adapters/tableRow";
-import {TableRowProps} from "../../Molecules/TableRow/Types";
-import {useReports} from "../../../Utils/Hooks/useReports";
-import Typography from "../../Atoms/Typography/Typography";
-import Spinner from "../../Atoms/Spinner/Spinner";
+} from "../../../utils/constants/pages/reports";
+import {reportsToTableRows} from "../../../adapters/tableRow";
+import {TableRowProps} from "../../molecules/TableRow/Types";
+import {useReports} from "../../../utils/hooks/useReports";
+import Typography from "../../atoms/Typography/Typography";
+import Spinner from "../../atoms/Spinner/Spinner";
 import Table from "../Table/Table";
-import ActionButtons from "../../Molecules/ActionButtons/ActionButtons";
+import ActionButtons from "../../molecules/ActionButtons/ActionButtons";
 
 function Reports(): React.ReactElement {
   const {reports, isLoading, error} = useReports();

@@ -1,5 +1,5 @@
-import {ButtonConfigs} from "../../Molecules/ActionButtons/Types";
-import {TableRowProps} from "../../Molecules/TableRow/Types";
+import {ButtonConfigs} from "../../molecules/ActionButtons/Types";
+import {TableRowProps} from "../../molecules/TableRow/Types";
 
 export interface TableProps {
   headerLabels: string[];

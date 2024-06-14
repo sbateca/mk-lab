@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
-import {User} from "../Model/User";
-import {getInvalidDataErrorMessage} from "../Utils/Constants/adapters";
+
+import {User} from "../model/User";
+import {getInvalidDataErrorMessage} from "../utils/constants/adapters";
 
 export const localStorageToUser = (userData: string | null): User | null => {
   if (userData !== null) {

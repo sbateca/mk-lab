@@ -1,12 +1,12 @@
 import {render, screen, fireEvent, waitFor} from "@testing-library/react";
-import {getUserByUserName} from "../../../Services/userService";
 import LoginForm from "./LoginForm";
 import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
-} from "../../../Utils/Constants/pages/login";
-import {requiredField} from "../../../Utils/Constants/form/validations";
+} from "../../../utils/constants/pages/login";
+import {requiredField} from "../../../utils/constants/form/validations";
 import {LoginFormProps} from "./Types";
+import {getUserByUserName} from "../../../services/userService";
 
 jest.mock("../../../Config/EnvManager", () => ({
   __esModule: true,

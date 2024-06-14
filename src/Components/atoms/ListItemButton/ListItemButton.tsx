@@ -1,6 +1,6 @@
 import {ListItemButton as MuiListItemButton, ListItemText} from "@mui/material";
 
-import {useMenu} from "../../../Utils/Hooks/useMenu";
+import {useMenu} from "../../../utils/hooks/useMenu";
 import {LisItemButtonProps} from "./Types";
 import React from "react";
 

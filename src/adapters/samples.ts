@@ -1,9 +1,9 @@
 import {AxiosResponse} from "axios";
-import {Sample} from "../Model/Sample";
+import {Sample} from "../model/Sample";
 import {
   RESPONSE_DATA_NOT_ARRAY_ERROR,
   getInvalidDataErrorMessage,
-} from "../Utils/Constants/adapters";
+} from "../utils/constants/adapters";
 
 export const axiosResponseToSamples = (
   response: AxiosResponse<unknown>,

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import {Sample} from "../Model/Sample";
-import EnvManager from "../Config/envManager";
-import {axiosResponseToSamples} from "../Adapters/samples";
+import {Sample} from "../model/Sample";
+import EnvManager from "../config/EnvManager";
+import {axiosResponseToSamples} from "../adapters/samples";
 
 export const getSamplesService = async (): Promise<Sample[]> => {
   try {

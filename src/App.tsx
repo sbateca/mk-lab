@@ -1,7 +1,7 @@
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
 
-import Admin from "./Components/Pages/Admin/Admin";
-import LoginPage from "./Components/Pages/Login/Login";
+import Admin from "./components/pages/Admin/Admin";
+import LoginPage from "./components/pages/Login/Login";
 import "./App.css";
 
 function App() {

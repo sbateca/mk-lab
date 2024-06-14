@@ -1,9 +1,9 @@
 import {Box} from "@mui/material";
 
-import LoginForm from "../../Organisms/LoginForm/LoginForm";
+import LoginForm from "../../organisms/LoginForm/LoginForm";
 import {LoginTemplateStyles} from "./LoginTemplateStyles";
-import {COMPANY_NAME} from "../../../Utils/Constants/pages/admin";
-import {LOGIN_FORM_FIELDS} from "../../../Utils/Constants/pages/login";
+import {COMPANY_NAME} from "../../../utils/constants/pages/admin";
+import {LOGIN_FORM_FIELDS} from "../../../utils/constants/pages/login";
 
 function LoginTemplate(): React.ReactElement {
   return (

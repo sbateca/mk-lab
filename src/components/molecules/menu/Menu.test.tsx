@@ -1,6 +1,6 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 
-import {MenuProvider} from "../../../Context/Menu/MenuContext";
+import {MenuProvider} from "../../../context/Menu/MenuContext";
 import Header from "../Header/Header";
 import {MenuProps} from "./Types";
 import Menu from "./Menu";

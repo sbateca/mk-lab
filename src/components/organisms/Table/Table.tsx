@@ -7,12 +7,12 @@ import {
   TableContainer,
 } from "@mui/material";
 
-import TableHead from "../../Molecules/TableHead/TableHead";
-import TableRow from "../../Molecules/TableRow/TableRow";
+import TableHead from "../../molecules/TableHead/TableHead";
+import TableRow from "../../molecules/TableRow/TableRow";
 import {
   NO_RECORDS_MESSAGE,
   TABLE_ACTIONS_COLUMN_HEADER,
-} from "../../../Utils/Constants/pages/shared";
+} from "../../../utils/constants/pages/shared";
 import {TableProps} from "./Types";
 import {TableStyles} from "./TableStyles";
 

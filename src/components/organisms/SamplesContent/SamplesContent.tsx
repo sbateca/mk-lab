@@ -1,18 +1,18 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
-import ActionButtons from "../../Molecules/ActionButtons/ActionButtons";
+import ActionButtons from "../../molecules/ActionButtons/ActionButtons";
 import {
   SAMPLES_BUTTON_CONFIGS,
   SAMPLES_TABLE_HEADER_LABELS,
   SAMPLES_TABLE_BUTTON_CONFIGS,
   SAMPLES_TITLE_CONFIG,
-} from "../../../Utils/Constants/pages/samples";
-import {samplesToTableRows} from "../../../Adapters/tableRow";
-import {TableRowProps} from "../../Molecules/TableRow/Types";
-import {useSample} from "../../../Utils/Hooks/useSample";
-import Typography from "../../Atoms/Typography/Typography";
-import Spinner from "../../Atoms/Spinner/Spinner";
+} from "../../../utils/constants/pages/samples";
+import {samplesToTableRows} from "../../../adapters/tableRow";
+import {TableRowProps} from "../../molecules/TableRow/Types";
+import {useSample} from "../../../utils/hooks/useSample";
+import Typography from "../../atoms/Typography/Typography";
+import Spinner from "../../atoms/Spinner/Spinner";
 import Table from "../Table/Table";
 
 function SamplesContent(): React.ReactElement {
