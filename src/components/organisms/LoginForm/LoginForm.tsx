@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 
 import TextField from "../../atoms/TextField/TextField";
-import {requiredField} from "../../../utils/constants/form/validations";
+import {getRequiredFieldText} from "../../../utils/constants/form/validations";
 import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
@@ -63,7 +63,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
     if (!errors[field] && !fieldsValues[field] && isFieldRequired(field)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [field]: requiredField(field),
+        [field]: getRequiredFieldText(field),
       }));
     }
   };

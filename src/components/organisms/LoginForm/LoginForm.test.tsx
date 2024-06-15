@@ -4,7 +4,7 @@ import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
 } from "../../../utils/constants/pages/login";
-import {requiredField} from "../../../utils/constants/form/validations";
+import {getRequiredFieldText} from "../../../utils/constants/form/validations";
 import {LoginFormProps} from "./Types";
 import {getUserByUserName} from "../../../services/userService";
 
@@ -85,7 +85,7 @@ describe("LoginForm component", () => {
     const usernameInput = document.querySelector('input[name="username"]');
     if (usernameInput) {
       fireEvent.blur(usernameInput);
-      const errorMessage = requiredField(loginFormProps.fields[0].name);
+      const errorMessage = getRequiredFieldText(loginFormProps.fields[0].name);
       expect(screen.getByText(errorMessage)).toBeInTheDocument();
     }
   });

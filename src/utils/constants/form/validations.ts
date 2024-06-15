@@ -1,3 +1,3 @@
-export const requiredField = (field: string) => {
+export const getRequiredFieldText = (field: string) => {
   return `${field} is required.`;
 };
