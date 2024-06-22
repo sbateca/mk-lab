@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import {
   Paper,
   Typography,
@@ -9,26 +8,11 @@ import {
 
 import TableHead from "../../molecules/TableHead/TableHead";
 import TableRow from "../../molecules/TableRow/TableRow";
-import {
-  NO_RECORDS_MESSAGE,
-  TABLE_ACTIONS_COLUMN_HEADER,
-} from "../../../utils/constants/pages/shared";
+import {NO_RECORDS_MESSAGE} from "../../../utils/constants/pages/shared";
 import {TableProps} from "./Types";
 import {TableStyles} from "./TableStyles";
 
-function Table({
-  headerLabels,
-  rows,
-  buttonConfigs,
-}: TableProps): React.ReactElement {
-  const [newHeaderLabels, setNewHeaderLabels] = useState(headerLabels);
-
-  useEffect(() => {
-    if (buttonConfigs) {
-      setNewHeaderLabels([TABLE_ACTIONS_COLUMN_HEADER, ...headerLabels]);
-    }
-  }, [buttonConfigs, headerLabels]);
-
+function Table({headerLabels, rows}: TableProps): React.ReactElement {
   return (
     <TableContainer component={Paper}>
       {rows.length === 0 ? (
@@ -37,14 +21,10 @@ function Table({
         </Typography>
       ) : (
         <MuiTable sx={{minWidth: 650}} aria-label="sample table">
-          <TableHead headerLabels={newHeaderLabels} />
+          <TableHead headerLabels={headerLabels} />
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow
-                key={index}
-                cells={row.cells}
-                buttonConfigs={buttonConfigs}
-              />
+              <TableRow key={index} cells={row.cells} />
             ))}
           </TableBody>
         </MuiTable>
