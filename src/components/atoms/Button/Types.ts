@@ -1,9 +1,7 @@
-export interface ButtonConfigs {
-  buttonConfigs: ButtonConfig[];
-}
-
 export interface ButtonConfig {
   label: string;
+  variant: "text" | "outlined" | "contained";
+  size: "small" | "medium" | "large";
   color:
     | "primary"
     | "secondary"
@@ -14,4 +12,5 @@ export interface ButtonConfig {
     | "inherit"
     | "default";
   icon?: "view" | "edit" | "create" | "delete";
+  onClick?: () => void;
 }
