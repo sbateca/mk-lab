@@ -22,11 +22,15 @@ import {
   SharedButtonVariants,
 } from "../../../utils/enums";
 import {useModal} from "../../../utils/hooks/useModal";
+import SampleForm from "../SampleForm/SampleForm";
+import {FormProps} from "../../../utils/constants/form/formType";
 
 function SamplesContent(): React.ReactElement {
   const {samples, isLoading, error} = useSample();
   const [rows, setRows] = useState<TableRowProps[]>([]);
   const {isOpen, openModal, closeModal} = useModal();
+  const [isNotValidForm, setIsNotValidForm] = useState<boolean>(true);
+  const [sampleForm, setSampleForm] = useState<FormProps>({});
 
   useEffect(() => {
     if (samples) {
@@ -62,6 +66,7 @@ function SamplesContent(): React.ReactElement {
       />
       <Button
         label="Save"
+        disabled={isNotValidForm}
         variant="contained"
         size="small"
         color="primary"
@@ -85,7 +90,13 @@ function SamplesContent(): React.ReactElement {
         onClose={closeModal}
         dialogActions={dialogActions}
       >
-        <Box>hola</Box>
+        <Box>
+          <SampleForm
+            setIsNotValidForm={setIsNotValidForm}
+            sampleForm={sampleForm}
+            setSampleForm={setSampleForm}
+          />
+        </Box>
       </Dialog>
     </Box>
   );

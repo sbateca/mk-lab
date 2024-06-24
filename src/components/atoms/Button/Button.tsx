@@ -4,10 +4,11 @@ import {ButtonConfig} from "./Types";
 import {getIcon} from "../../../utils/icons";
 
 function Button(buttonConfig: ButtonConfig): React.ReactElement | null {
-  const {label, color, icon, variant, size, onClick} = buttonConfig;
+  const {label, disabled, color, icon, variant, size, onClick} = buttonConfig;
   return (
     <MuiButton
       variant={variant}
+      disabled={disabled}
       size={size}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       color={color as any}

@@ -1,5 +1,6 @@
 export interface ButtonConfig {
   label: string;
+  disabled?: boolean;
   variant: "text" | "outlined" | "contained";
   size: "small" | "medium" | "large";
   color:

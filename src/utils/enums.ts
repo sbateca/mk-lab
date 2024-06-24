@@ -25,3 +25,13 @@ export enum SharedButtonVariants {
   Outlined = "outlined",
   Contained = "contained",
 }
+
+export enum SamplesFormFields {
+  SampleCode = "sampleCode",
+  Client = "client",
+  GetSampleDate = "getSampleDate",
+  ReceptionDate = "receptionDate",
+  AnalysisDate = "analysisDate",
+  SampleLocation = "sampleLocation",
+  Responsable = "responsable",
+}
