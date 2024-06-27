@@ -18,3 +18,19 @@ export const getSamplesService = async (): Promise<Sample[]> => {
     }
   }
 };
+
+export const createSampleService = async (sample: Sample): Promise<Sample> => {
+  try {
+    const response = await axios.post(
+      `${EnvManager.BACKEND_URL}/samples`,
+      sample,
+    );
+    return axiosResponseToSamples(response)[0];
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Error creating sample: ${error.message}`);
+    } else {
+      throw new Error("An unknown error occurred creating sample.");
+    }
+  }
+};

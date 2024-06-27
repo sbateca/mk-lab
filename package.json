@@ -19,12 +19,15 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
+    "@mui/x-date-pickers": "^7.7.1",
     "axios": "^1.6.7",
+    "dayjs": "^1.11.11",
     "json-server": "^1.0.0-alpha.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.22.2",
-    "react-router-dom": "^6.22.2"
+    "react-router-dom": "^6.22.2",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
@@ -36,6 +39,7 @@
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@types/testing-library__jest-dom": "^6.0.0",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.2.1",

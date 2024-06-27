@@ -1,9 +1,13 @@
+import {ChangeEvent} from "react";
 import {FormProps} from "../../../utils/constants/form/formType";
+import {Dayjs} from "dayjs";
 
 export interface SampleFormProps {
-  sampleForm: FormProps;
-  setSampleForm: React.Dispatch<React.SetStateAction<FormProps>>;
-  setIsNotValidForm: React.Dispatch<React.SetStateAction<boolean>>;
+  form: FormProps;
+  formFieldsErrors: FormError;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleDateChange: (value: Dayjs | null, fieldName: string) => void;
+  getTextFieldHelperText: (fieldName: string) => string;
 }
 
 export interface FormError {
@@ -11,5 +15,5 @@ export interface FormError {
 }
 
 export interface FieldValidations {
-  [key: string]: Array<(fieldName?: string, fieldValue?: string) => string>;
+  [key: string]: Array<(fieldValue?: string) => string>;
 }

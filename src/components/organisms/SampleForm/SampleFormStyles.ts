@@ -8,5 +8,9 @@ export const SampleFormStyles = {
   texfield: {
     width: "100%",
   },
+  datePicker: {
+    height: "0.5em",
+    paddingBottom: "0",
+  },
   progressBox: {},
 };

@@ -1,4 +1,4 @@
-export const RESPONSE_DATA_NOT_ARRAY_ERROR = "Response data is not an array.";
+export const RESPONSE_DATA_NOT_VALID_ERROR = "Response data is not valid.";
 export const getInvalidDataErrorMessage = (dataTypeName: string): string => {
-  return `Invalid ${dataTypeName} data in response.`;
+  return `Invalid ${dataTypeName} data structure in response.`;
 };

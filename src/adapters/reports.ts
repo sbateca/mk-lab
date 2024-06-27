@@ -1,7 +1,7 @@
 import {AxiosResponse} from "axios";
 import {Report} from "../model/Report";
 import {
-  RESPONSE_DATA_NOT_ARRAY_ERROR,
+  RESPONSE_DATA_NOT_VALID_ERROR,
   getInvalidDataErrorMessage,
 } from "../utils/constants/adapters";
 
@@ -19,7 +19,7 @@ export const axiosResponseToReports = (
       })
       .filter((report): report is Report => report !== null);
   } else {
-    throw new Error(RESPONSE_DATA_NOT_ARRAY_ERROR);
+    throw new Error(RESPONSE_DATA_NOT_VALID_ERROR);
   }
 };
 

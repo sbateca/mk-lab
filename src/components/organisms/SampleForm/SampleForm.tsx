@@ -1,13 +1,16 @@
 import {Box, FormControl, Grid, TextField} from "@mui/material";
-import React, {ChangeEvent, useEffect, useState} from "react";
-import {FormProps} from "../../../utils/constants/form/formType";
+import React from "react";
+
+import dayjs from "dayjs";
+import {DatePicker} from "@mui/x-date-pickers/DatePicker";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+
 import {SampleFormStyles} from "./SampleFormStyles";
 import {
-  isEmpty,
-  isNotValidEmailFormat,
-} from "../../../utils/constants/form/validations";
-import {FieldValidations, FormError, SampleFormProps} from "./Types";
-import {SamplesFormFields} from "../../../utils/enums";
+  SamplesFormFields,
+  SharedButtonColors,
+  SharedButtonSizes,
+} from "../../../utils/enums";
 import {
   ANALYSIS_DATE_LABEL_TEXT,
   CLIENT_LABEL_TEXT,
@@ -15,78 +18,19 @@ import {
   RECEPTION_DATE_LABEL_TEXT,
   RESPONSABLE_LABEL_TEXT,
   SAMPLE_CODE_LABEL_TEXT,
+  SAMPLE_LOCATION_LABEL_TEXT,
 } from "../../../utils/constants/form/sample";
+import {SampleFormProps} from "./Types";
+import {LocalizationProvider} from "@mui/x-date-pickers";
 
 function SampleForm({
-  sampleForm,
-  setSampleForm,
-  setIsNotValidForm,
+  form,
+  formFieldsErrors,
+  handleChange,
+  handleDateChange,
+  getTextFieldHelperText,
 }: SampleFormProps): React.ReactElement {
-  const [formFieldsErrors, setFormFieldsErrors] = useState<FormError>({});
-
-  const fieldsValidationFunctions: FieldValidations = {
-    sampleCode: [isEmpty, isNotValidEmailFormat],
-    client: [isEmpty],
-    getSampleDate: [isEmpty],
-    receptionDate: [isEmpty],
-    analysisDate: [isEmpty],
-    sampleLocation: [isEmpty],
-    responsable: [isEmpty],
-  };
-
-  useEffect(() => {
-    setIsNotValidForm(checkNotValidForm(formFieldsErrors));
-  }, [formFieldsErrors, setIsNotValidForm]);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
-    setSampleForm((prevForm: FormProps) => {
-      const updatedForm = {
-        ...prevForm,
-        [name]: value,
-      };
-      updateErrorsObject(name, value);
-      return updatedForm;
-    });
-  };
-
-  const updateErrorsObject = (
-    fieldName: string,
-    fieldValue: string | undefined,
-  ) => {
-    setFormFieldsErrors((prevErrors) => {
-      const updatedErrors = {...prevErrors};
-      const fieldValidationFunctions = fieldsValidationFunctions[fieldName];
-      if (fieldValidationFunctions) {
-        const fieldErrors = fieldValidationFunctions.map(
-          (fieldValidationFunction) =>
-            fieldValidationFunction(fieldName, fieldValue),
-        );
-        const filteredErrors = fieldErrors.filter((error) => error);
-        if (filteredErrors.length > 0) {
-          updatedErrors[fieldName] = filteredErrors;
-        } else {
-          delete updatedErrors[fieldName];
-        }
-      }
-      return updatedErrors;
-    });
-  };
-
-  const checkNotValidForm = (fieldErrors: FormError): boolean => {
-    const emptyFields = Object.keys(fieldsValidationFunctions).filter(
-      (fieldName) => !sampleForm[fieldName],
-    );
-    return Object.keys(fieldErrors).length > 0 || emptyFields.length > 0;
-  };
-
-  const textFieldHelperText = (fieldName: string): string => {
-    if (formFieldsErrors[fieldName]) {
-      return formFieldsErrors[fieldName].join(" / ");
-    }
-    return "";
-  };
-
+  const today = dayjs();
   return (
     <Box component="form" autoComplete="off" sx={SampleFormStyles.mainBox}>
       <Grid container spacing={2}>
@@ -97,13 +41,13 @@ function SampleForm({
               error={!!formFieldsErrors[SamplesFormFields.SampleCode]}
               label={SAMPLE_CODE_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
-              type="text"
-              color="primary"
-              size="small"
+              type="string"
+              color={SharedButtonColors.Primary}
+              size={SharedButtonSizes.Small}
               name={SamplesFormFields.SampleCode}
               onChange={handleChange}
-              helperText={textFieldHelperText(SamplesFormFields.SampleCode)}
-              value={sampleForm?.sampleCode ?? ""}
+              helperText={getTextFieldHelperText(SamplesFormFields.SampleCode)}
+              value={form?.sampleCode ?? ""}
             />
           </FormControl>
           <FormControl>
@@ -113,74 +57,106 @@ function SampleForm({
               label={CLIENT_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color="primary"
-              size="small"
+              color={SharedButtonColors.Primary}
+              size={SharedButtonSizes.Small}
               onChange={handleChange}
               name={SamplesFormFields.Client}
-              helperText={textFieldHelperText(SamplesFormFields.Client)}
-              value={sampleForm.client ?? ""}
+              helperText={getTextFieldHelperText(SamplesFormFields.Client)}
+              value={form.client ?? ""}
             />
           </FormControl>
           <FormControl>
-            <TextField
-              required
-              error={!!formFieldsErrors[SamplesFormFields.GetSampleDate]}
-              label={GET_SAMPLE_DATE_LABEL_TEXT}
-              sx={SampleFormStyles.texfield}
-              type="string"
-              color="primary"
-              size="small"
-              name={SamplesFormFields.GetSampleDate}
-              onChange={handleChange}
-              helperText={textFieldHelperText(SamplesFormFields.GetSampleDate)}
-              value={sampleForm.getSampleDate ?? ""}
-            />
+            <Box>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  disableFuture
+                  defaultValue={today}
+                  views={["year", "month", "day"]}
+                  label={GET_SAMPLE_DATE_LABEL_TEXT}
+                  name={SamplesFormFields.GetSampleDate}
+                  onChange={(value) =>
+                    handleDateChange(value, SamplesFormFields.GetSampleDate)
+                  }
+                  slotProps={{
+                    textField: {
+                      error:
+                        !!formFieldsErrors[SamplesFormFields.GetSampleDate],
+                      helperText: getTextFieldHelperText(
+                        SamplesFormFields.GetSampleDate,
+                      ),
+                    },
+                  }}
+                />
+              </LocalizationProvider>
+            </Box>
           </FormControl>
           <FormControl>
-            <TextField
-              required
-              error={!!formFieldsErrors[SamplesFormFields.ReceptionDate]}
-              label={RECEPTION_DATE_LABEL_TEXT}
-              sx={SampleFormStyles.texfield}
-              type="string"
-              color="primary"
-              size="small"
-              name={SamplesFormFields.ReceptionDate}
-              onChange={handleChange}
-              helperText={textFieldHelperText(SamplesFormFields.ReceptionDate)}
-              value={sampleForm.receptionDate ?? ""}
-            />
+            <Box>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  disableFuture
+                  defaultValue={today}
+                  views={["year", "month", "day"]}
+                  label={RECEPTION_DATE_LABEL_TEXT}
+                  name={SamplesFormFields.ReceptionDate}
+                  onChange={(value) =>
+                    handleDateChange(value, SamplesFormFields.ReceptionDate)
+                  }
+                  slotProps={{
+                    textField: {
+                      error:
+                        !!formFieldsErrors[SamplesFormFields.ReceptionDate],
+                      helperText: getTextFieldHelperText(
+                        SamplesFormFields.ReceptionDate,
+                      ),
+                    },
+                  }}
+                  value={dayjs(form.receptionDate) ?? null}
+                />
+              </LocalizationProvider>
+            </Box>
           </FormControl>
         </Grid>
         <Grid item xs={12} md={6}>
           <FormControl>
-            <TextField
-              required
-              error={!!formFieldsErrors[SamplesFormFields.AnalysisDate]}
-              label={ANALYSIS_DATE_LABEL_TEXT}
-              sx={SampleFormStyles.texfield}
-              type="string"
-              color="primary"
-              size="small"
-              name={SamplesFormFields.AnalysisDate}
-              onChange={handleChange}
-              helperText={textFieldHelperText(SamplesFormFields.AnalysisDate)}
-              value={sampleForm.analysisDate ?? ""}
-            />
+            <Box>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  disableFuture
+                  defaultValue={today}
+                  views={["year", "month", "day"]}
+                  label={ANALYSIS_DATE_LABEL_TEXT}
+                  name={SamplesFormFields.AnalysisDate}
+                  onChange={(value) =>
+                    handleDateChange(value, SamplesFormFields.AnalysisDate)
+                  }
+                  slotProps={{
+                    textField: {
+                      error: !!formFieldsErrors[SamplesFormFields.AnalysisDate],
+                      helperText: getTextFieldHelperText(
+                        SamplesFormFields.AnalysisDate,
+                      ),
+                    },
+                  }}
+                />
+              </LocalizationProvider>
+            </Box>
           </FormControl>
           <FormControl>
             <TextField
               required
               error={!!formFieldsErrors[SamplesFormFields.SampleLocation]}
-              label={ANALYSIS_DATE_LABEL_TEXT}
+              label={SAMPLE_LOCATION_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color="primary"
-              size="small"
+              color={SharedButtonColors.Primary}
+              size={SharedButtonSizes.Small}
               name={SamplesFormFields.SampleLocation}
               onChange={handleChange}
-              helperText={textFieldHelperText(SamplesFormFields.SampleLocation)}
-              value={sampleForm.sampleLocation ?? ""}
+              helperText={getTextFieldHelperText(
+                SamplesFormFields.SampleLocation,
+              )}
+              value={form.sampleLocation ?? ""}
             />
           </FormControl>
           <FormControl>
@@ -190,12 +166,12 @@ function SampleForm({
               label={RESPONSABLE_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color="primary"
-              size="small"
+              color={SharedButtonColors.Primary}
+              size={SharedButtonSizes.Small}
               name={SamplesFormFields.Responsable}
               onChange={handleChange}
-              helperText={textFieldHelperText(SamplesFormFields.Responsable)}
-              value={sampleForm.responsable ?? ""}
+              helperText={getTextFieldHelperText(SamplesFormFields.Responsable)}
+              value={form.responsable ?? ""}
             />
           </FormControl>
         </Grid>

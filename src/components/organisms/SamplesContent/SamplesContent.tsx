@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
-
+import dayjs from "dayjs";
 import {
   SAMPLES_PAGE_DIALOG_TITLE,
   SAMPLES_TABLE_HEADER_LABELS,
@@ -23,14 +23,58 @@ import {
 } from "../../../utils/enums";
 import {useModal} from "../../../utils/hooks/useModal";
 import SampleForm from "../SampleForm/SampleForm";
+import {useForm} from "../../../utils/hooks/useForm";
+import {
+  isEmpty,
+  isNotValidDate,
+} from "../../../utils/constants/form/validations";
+import {sampleFormToSample} from "../../../adapters/samples";
+import Snackbar from "../../molecules/SnackBar/SnackBar";
 import {FormProps} from "../../../utils/constants/form/formType";
 
 function SamplesContent(): React.ReactElement {
-  const {samples, isLoading, error} = useSample();
+  const {samples, getSamples, createSample, isLoading, error} = useSample();
   const [rows, setRows] = useState<TableRowProps[]>([]);
   const {isOpen, openModal, closeModal} = useModal();
-  const [isNotValidForm, setIsNotValidForm] = useState<boolean>(true);
-  const [sampleForm, setSampleForm] = useState<FormProps>({});
+  const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
+  const [snackBarText, setSnackBarText] = useState<string>("");
+  const [snackBarSeverity, setSnackBarSeverity] = useState<
+    "error" | "success" | "info" | "warning"
+  >("success");
+  const today = dayjs().format("YYYY-MM-DD");
+  const defaultFormValue: FormProps = {
+    sampleCode: "",
+    client: "",
+    getSampleDate: today,
+    receptionDate: today,
+    analysisDate: today,
+    sampleLocation: "",
+    responsable: "",
+  };
+
+  const {
+    isNotValidForm,
+    form,
+    formFieldsErrors,
+    handleChange,
+    handleDateChange,
+    getTextFieldHelperText,
+    setFormFieldsValidationFunctions,
+    cleanForm,
+  } = useForm();
+
+  useEffect(() => {
+    setFormFieldsValidationFunctions({
+      sampleCode: [isEmpty],
+      client: [isEmpty],
+      getSampleDate: [isEmpty, isNotValidDate],
+      receptionDate: [isEmpty, isNotValidDate],
+      analysisDate: [isEmpty, isNotValidDate],
+      sampleLocation: [isEmpty],
+      responsable: [isEmpty],
+    });
+    cleanForm(defaultFormValue);
+  }, []);
 
   useEffect(() => {
     if (samples) {
@@ -38,13 +82,38 @@ function SamplesContent(): React.ReactElement {
     }
   }, [samples]);
 
+  useEffect(() => {
+    if (error) {
+      setSnackBarSeverity("error");
+      setSnackBarText(`Error: ${error}`);
+      setIsSnackBarOpen(true);
+      return () => {
+        setIsSnackBarOpen(false);
+      };
+    }
+  }, [error]);
+
   const handleCreateReport = () => {
-    // eslint-disable-next-line no-console
-    console.log("Create report");
+    createSample(sampleFormToSample(form)).then((newSample) => {
+      if (newSample) {
+        setIsSnackBarOpen(true);
+        setSnackBarText(`Sample ${newSample?.sampleCode} created successfully`);
+        handleCloseModal();
+        getSamples();
+      } else if (error) {
+        setSnackBarSeverity("error");
+        setIsSnackBarOpen(true);
+        setSnackBarText(`Error: ${error}`);
+      }
+    });
+  };
+
+  const handleCloseModal = () => {
+    closeModal();
+    cleanForm(defaultFormValue);
   };
 
   if (isLoading) return <Spinner />;
-  if (error) return <Typography text={error} variant="h6" />;
 
   const buttonPageConfig: ButtonConfig = {
     label: "Create sample",
@@ -62,7 +131,7 @@ function SamplesContent(): React.ReactElement {
         variant="outlined"
         size="small"
         color="error"
-        onClick={closeModal}
+        onClick={handleCloseModal}
       />
       <Button
         label="Save"
@@ -87,17 +156,24 @@ function SamplesContent(): React.ReactElement {
       <Dialog
         isOpen={isOpen}
         dialogTitle={SAMPLES_PAGE_DIALOG_TITLE}
-        onClose={closeModal}
+        onClose={handleCloseModal}
         dialogActions={dialogActions}
       >
         <Box>
           <SampleForm
-            setIsNotValidForm={setIsNotValidForm}
-            sampleForm={sampleForm}
-            setSampleForm={setSampleForm}
+            form={form}
+            formFieldsErrors={formFieldsErrors}
+            handleChange={handleChange}
+            handleDateChange={handleDateChange}
+            getTextFieldHelperText={getTextFieldHelperText}
           />
         </Box>
       </Dialog>
+      <Snackbar
+        isOpen={isSnackBarOpen}
+        snackBarText={snackBarText}
+        severity={snackBarSeverity}
+      />
     </Box>
   );
 }
