@@ -22,6 +22,7 @@ import {
 } from "../../../utils/constants/form/sample";
 import {SampleFormProps} from "./Types";
 import {LocalizationProvider} from "@mui/x-date-pickers";
+import {DATEPICKER_VIEWS} from "../../../utils/constants/pages/shared";
 
 function SampleForm({
   form,
@@ -71,7 +72,7 @@ function SampleForm({
                 <DatePicker
                   disableFuture
                   defaultValue={today}
-                  views={["year", "month", "day"]}
+                  views={DATEPICKER_VIEWS}
                   label={GET_SAMPLE_DATE_LABEL_TEXT}
                   name={SamplesFormFields.GetSampleDate}
                   onChange={(value) =>
@@ -96,7 +97,7 @@ function SampleForm({
                 <DatePicker
                   disableFuture
                   defaultValue={today}
-                  views={["year", "month", "day"]}
+                  views={DATEPICKER_VIEWS}
                   label={RECEPTION_DATE_LABEL_TEXT}
                   name={SamplesFormFields.ReceptionDate}
                   onChange={(value) =>
@@ -124,7 +125,7 @@ function SampleForm({
                 <DatePicker
                   disableFuture
                   defaultValue={today}
-                  views={["year", "month", "day"]}
+                  views={DATEPICKER_VIEWS}
                   label={ANALYSIS_DATE_LABEL_TEXT}
                   name={SamplesFormFields.AnalysisDate}
                   onChange={(value) =>

@@ -1,3 +1,4 @@
+import {DateView} from "@mui/x-date-pickers";
 import ITypographyProps from "../../../components/atoms/Typography/Types";
 
 export const getSharedPageTitleConfig = (
@@ -21,3 +22,6 @@ export const DETAIL_BUTTON_TEXT = "Detail";
 
 export const MODAL_SAVE_BUTTON_TEXT = "Save";
 export const MODAL_CANCEL_BUTTON_TEXT = "Cancel";
+
+export const DATEPICKER_VIEWS: DateView[] = ["year", "month", "day"];
+export const DATEPICKER_FORMAT = "YYYY-MM-DD";

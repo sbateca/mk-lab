@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 import dayjs from "dayjs";
 import {
+  SAMPLES_CREATE_BUTTON_LABEL,
   SAMPLES_PAGE_DIALOG_TITLE,
   SAMPLES_TABLE_HEADER_LABELS,
   SAMPLES_TITLE_CONFIG,
@@ -17,9 +18,11 @@ import {ButtonConfig} from "../../atoms/Button/Types";
 import Dialog from "../../molecules/Dialog/Dialog";
 import {
   SharedButtonColors,
+  SharedButtonCommonLabels,
   SharedButtonIcons,
   SharedButtonSizes,
   SharedButtonVariants,
+  SnackBarSeverity,
 } from "../../../utils/enums";
 import {useModal} from "../../../utils/hooks/useModal";
 import SampleForm from "../SampleForm/SampleForm";
@@ -31,50 +34,39 @@ import {
 import {sampleFormToSample} from "../../../adapters/samples";
 import Snackbar from "../../molecules/SnackBar/SnackBar";
 import {FormProps} from "../../../utils/constants/form/formType";
+import {DATEPICKER_FORMAT} from "../../../utils/constants/pages/shared";
+import {FormError} from "../SampleForm/Types";
+import {SampleContentStyles} from "./SamplesContentStyles";
 
-function SamplesContent(): React.ReactElement {
+interface SamplesContentProps {
+  form: FormProps;
+  isNotValidForm: boolean;
+  formFieldsErrors: FormError;
+  defaultFormValue: FormProps;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDateChange: (value: dayjs.Dayjs | null, fieldName: string) => void;
+  getTextFieldHelperText: (fieldName: string) => string;
+  cleanForm: (form: FormProps) => void;
+}
+
+function SamplesContent({
+  form,
+  defaultFormValue,
+  isNotValidForm,
+  formFieldsErrors,
+  handleChange,
+  handleDateChange,
+  getTextFieldHelperText,
+  cleanForm,
+}: SamplesContentProps): React.ReactElement {
   const {samples, getSamples, createSample, isLoading, error} = useSample();
   const [rows, setRows] = useState<TableRowProps[]>([]);
   const {isOpen, openModal, closeModal} = useModal();
   const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
   const [snackBarText, setSnackBarText] = useState<string>("");
-  const [snackBarSeverity, setSnackBarSeverity] = useState<
-    "error" | "success" | "info" | "warning"
-  >("success");
-  const today = dayjs().format("YYYY-MM-DD");
-  const defaultFormValue: FormProps = {
-    sampleCode: "",
-    client: "",
-    getSampleDate: today,
-    receptionDate: today,
-    analysisDate: today,
-    sampleLocation: "",
-    responsable: "",
-  };
-
-  const {
-    isNotValidForm,
-    form,
-    formFieldsErrors,
-    handleChange,
-    handleDateChange,
-    getTextFieldHelperText,
-    setFormFieldsValidationFunctions,
-    cleanForm,
-  } = useForm();
-
-  useEffect(() => {
-    setFormFieldsValidationFunctions({
-      sampleCode: [isEmpty],
-      client: [isEmpty],
-      getSampleDate: [isEmpty, isNotValidDate],
-      receptionDate: [isEmpty, isNotValidDate],
-      analysisDate: [isEmpty, isNotValidDate],
-      sampleLocation: [isEmpty],
-      responsable: [isEmpty],
-    });
-    cleanForm(defaultFormValue);
-  }, []);
+  const [snackBarSeverity, setSnackBarSeverity] = useState<SnackBarSeverity>(
+    SnackBarSeverity.Success,
+  );
 
   useEffect(() => {
     if (samples) {
@@ -84,7 +76,7 @@ function SamplesContent(): React.ReactElement {
 
   useEffect(() => {
     if (error) {
-      setSnackBarSeverity("error");
+      setSnackBarSeverity(SnackBarSeverity.Error);
       setSnackBarText(`Error: ${error}`);
       setIsSnackBarOpen(true);
       return () => {
@@ -100,10 +92,6 @@ function SamplesContent(): React.ReactElement {
         setSnackBarText(`Sample ${newSample?.sampleCode} created successfully`);
         handleCloseModal();
         getSamples();
-      } else if (error) {
-        setSnackBarSeverity("error");
-        setIsSnackBarOpen(true);
-        setSnackBarText(`Error: ${error}`);
       }
     });
   };
@@ -113,10 +101,8 @@ function SamplesContent(): React.ReactElement {
     cleanForm(defaultFormValue);
   };
 
-  if (isLoading) return <Spinner />;
-
   const buttonPageConfig: ButtonConfig = {
-    label: "Create sample",
+    label: SAMPLES_CREATE_BUTTON_LABEL,
     variant: SharedButtonVariants.Outlined,
     size: SharedButtonSizes.Small,
     color: SharedButtonColors.Primary,
@@ -127,28 +113,30 @@ function SamplesContent(): React.ReactElement {
   const dialogActions = (
     <Box>
       <Button
-        label="Cancel"
-        variant="outlined"
-        size="small"
-        color="error"
+        label={SharedButtonCommonLabels.Cancel}
+        variant={SharedButtonVariants.Outlined}
+        size={SharedButtonSizes.Small}
+        color={SharedButtonColors.Error}
         onClick={handleCloseModal}
       />
       <Button
-        label="Save"
+        label={SharedButtonCommonLabels.Save}
         disabled={isNotValidForm}
-        variant="contained"
-        size="small"
-        color="primary"
+        variant={SharedButtonVariants.Outlined}
+        size={SharedButtonSizes.Small}
+        color={SharedButtonColors.Primary}
         onClick={handleCreateReport}
       />
     </Box>
   );
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <Box>
-      <Box sx={{display: "flex", flexDirection: "row"}}>
+      <Box sx={SampleContentStyles.titleContentContainer}>
         <Typography {...SAMPLES_TITLE_CONFIG} />
-        <Box sx={{marginLeft: "auto"}}>
+        <Box sx={SampleContentStyles.titleContentActions}>
           <Button {...buttonPageConfig} />
         </Box>
       </Box>
@@ -178,4 +166,53 @@ function SamplesContent(): React.ReactElement {
   );
 }
 
-export default SamplesContent;
+export const SamplesContentContainer = (): React.ReactElement => {
+  const {
+    isNotValidForm,
+    form,
+    formFieldsErrors,
+    handleChange,
+    handleDateChange,
+    getTextFieldHelperText,
+    setFormFieldsValidationFunctions,
+    cleanForm,
+  } = useForm();
+  const today = dayjs().format(DATEPICKER_FORMAT);
+  const defaultFormValue: FormProps = {
+    sampleCode: "",
+    client: "",
+    getSampleDate: today,
+    receptionDate: today,
+    analysisDate: today,
+    sampleLocation: "",
+    responsable: "",
+  };
+
+  useEffect(() => {
+    setFormFieldsValidationFunctions({
+      sampleCode: [isEmpty],
+      client: [isEmpty],
+      getSampleDate: [isEmpty, isNotValidDate],
+      receptionDate: [isEmpty, isNotValidDate],
+      analysisDate: [isEmpty, isNotValidDate],
+      sampleLocation: [isEmpty],
+      responsable: [isEmpty],
+    });
+    cleanForm(defaultFormValue);
+  }, []);
+
+  return (
+    <SamplesContent
+      form={form}
+      defaultFormValue={defaultFormValue}
+      isNotValidForm={isNotValidForm}
+      formFieldsErrors={formFieldsErrors}
+      handleChange={handleChange}
+      handleDateChange={handleDateChange}
+      getTextFieldHelperText={getTextFieldHelperText}
+      cleanForm={cleanForm}
+    />
+  );
+};
+
+export default SamplesContentContainer;

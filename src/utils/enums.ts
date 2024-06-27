@@ -26,6 +26,11 @@ export enum SharedButtonVariants {
   Contained = "contained",
 }
 
+export enum SharedButtonCommonLabels {
+  Cancel = "Cancel",
+  Save = "Save",
+}
+
 export enum SamplesFormFields {
   SampleCode = "sampleCode",
   Client = "client",
@@ -34,4 +39,11 @@ export enum SamplesFormFields {
   AnalysisDate = "analysisDate",
   SampleLocation = "sampleLocation",
   Responsable = "responsable",
+}
+
+export enum SnackBarSeverity {
+  Error = "error",
+  Success = "success",
+  Info = "info",
+  Warning = "warning",
 }
