@@ -70,6 +70,7 @@ function SampleForm({
             <Box>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                  sx={SampleFormStyles.datePicker}
                   disableFuture
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
@@ -95,6 +96,7 @@ function SampleForm({
             <Box>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                  sx={SampleFormStyles.datePicker}
                   disableFuture
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
@@ -123,6 +125,7 @@ function SampleForm({
             <Box>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                  sx={SampleFormStyles.datePicker}
                   disableFuture
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}

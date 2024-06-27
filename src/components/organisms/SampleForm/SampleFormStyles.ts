@@ -9,8 +9,8 @@ export const SampleFormStyles = {
     width: "100%",
   },
   datePicker: {
-    height: "0.5em",
-    paddingBottom: "0",
+    "& .MuiInputBase-root.MuiOutlinedInput-root": {
+      height: "2.5em",
+    },
   },
-  progressBox: {},
 };
