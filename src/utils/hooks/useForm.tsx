@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {ChangeEvent, useEffect, useState} from "react";
 import {
   FieldValidations,
@@ -6,6 +5,7 @@ import {
 } from "../../components/organisms/SampleForm/Types";
 import {FormProps} from "../constants/form/formType";
 import {Dayjs} from "dayjs";
+import {DATEPICKER_FORMAT} from "../constants/pages/shared";
 
 export const useForm = () => {
   const [formFieldsErrors, setFormFieldsErrors] = useState<FormError>({});
@@ -23,7 +23,6 @@ export const useForm = () => {
       };
       updateErrorsObject(name, value);
       checkNotValidForm(formFieldsErrors);
-      console.log("form", updatedForm);
       return updatedForm;
     });
   };
@@ -36,7 +35,6 @@ export const useForm = () => {
       };
       updateErrorsObject(fieldName, getDateValue(value));
       checkNotValidForm(formFieldsErrors);
-      console.log("form", updatedForm);
       return updatedForm;
     });
   };
@@ -44,7 +42,7 @@ export const useForm = () => {
   const getDateValue = (value: Dayjs | null): string => {
     if (value) {
       if (value?.isValid()) {
-        return value.format("YYYY-MM-DD");
+        return value.format(DATEPICKER_FORMAT);
       } else return value.toString();
     } else return "";
   };

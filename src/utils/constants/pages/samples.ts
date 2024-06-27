@@ -15,3 +15,4 @@ export const SAMPLES_TABLE_HEADER_LABELS = [
   "Responsable",
 ];
 export const SAMPLES_PAGE_DIALOG_TITLE = "Create sample";
+export const SAMPLES_CREATE_BUTTON_LABEL = "Create sample";
