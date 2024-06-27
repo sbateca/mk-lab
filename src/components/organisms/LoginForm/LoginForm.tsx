@@ -3,7 +3,6 @@ import {Navigate} from "react-router-dom";
 import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 
 import TextField from "../../atoms/TextField/TextField";
-import {getRequiredFieldText} from "../../../utils/constants/form/validations";
 import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
@@ -12,6 +11,7 @@ import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
 import {LoginFormProps} from "./Types";
 import {LoginFormStyles} from "./LoginFormStyles";
 import {getUserByUserName} from "../../../services/userService";
+import {REQUIRED_FIELD_ERROR_TEXT} from "../../../utils/constants/form/validations";
 
 function LoginForm({fields}: LoginFormProps): React.ReactElement {
   const [fieldsValues, setFieldsValues] = useState<{[key: string]: string}>({});
@@ -63,7 +63,7 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
     if (!errors[field] && !fieldsValues[field] && isFieldRequired(field)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [field]: getRequiredFieldText(field),
+        [field]: REQUIRED_FIELD_ERROR_TEXT,
       }));
     }
   };

@@ -14,4 +14,4 @@ export const SAMPLES_TABLE_HEADER_LABELS = [
   "Location",
   "Responsable",
 ];
-export const SAMPLES_PAGE_DIALOG_TITLE = "Create sample form";
+export const SAMPLES_PAGE_DIALOG_TITLE = "Create sample";
