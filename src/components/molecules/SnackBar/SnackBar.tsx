@@ -14,25 +14,10 @@ function Snackbar({isOpen, snackBarText, severity}: SnackbarProps) {
     setOpen(isOpen);
   }, [isOpen]);
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
   return (
     <div>
-      <MuiSnackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={severity}
-          variant="filled"
-          sx={{width: "100%"}}
-        >
+      <MuiSnackbar open={open} autoHideDuration={3000}>
+        <Alert severity={severity} variant="filled" sx={{width: "100%"}}>
           {snackBarText}
         </Alert>
       </MuiSnackbar>

@@ -5,14 +5,15 @@ import {Sample} from "../model/Sample";
 export const samplesToTableRows = (samples: Sample[]): TableRowProps[] => {
   return samples.map((sample) => {
     return {
+      id: sample.id,
       cells: [
-        {text: sample.sampleCode, align: "left"},
-        {text: sample.client, align: "left"},
-        {text: sample.getSampleDate, align: "left"},
-        {text: sample.receptionDate, align: "left"},
-        {text: sample.analysisDate, align: "left"},
-        {text: sample.sampleLocation, align: "left"},
-        {text: sample.responsable, align: "left"},
+        {children: sample.sampleCode, align: "left"},
+        {children: sample.client, align: "left"},
+        {children: sample.getSampleDate, align: "left"},
+        {children: sample.receptionDate, align: "left"},
+        {children: sample.analysisDate, align: "left"},
+        {children: sample.sampleLocation, align: "left"},
+        {children: sample.responsable, align: "left"},
       ],
     };
   });
@@ -21,16 +22,17 @@ export const samplesToTableRows = (samples: Sample[]): TableRowProps[] => {
 export const reportsToTableRows = (reports: Report[]): TableRowProps[] => {
   return reports.map((report) => {
     return {
+      id: report.id,
       cells: [
-        {text: report.reportDate, align: "left"},
+        {children: report.reportDate, align: "left"},
         {
-          text: `${report.sample.sampleCode} - ${report.sample.client}`,
+          children: `${report.sample.sampleCode} - ${report.sample.client}`,
           align: "left",
         },
-        {text: report.analyte, align: "left"},
-        {text: report.analysisMethod, align: "left"},
-        {text: report.criteria, align: "left"},
-        {text: report.result, align: "left"},
+        {children: report.analyte, align: "left"},
+        {children: report.analysisMethod, align: "left"},
+        {children: report.criteria, align: "left"},
+        {children: report.result, align: "left"},
       ],
     };
   });

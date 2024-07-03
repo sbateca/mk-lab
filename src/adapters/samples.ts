@@ -59,3 +59,15 @@ export const sampleFormToSample = (form: Record<string, unknown>): Sample => {
     responsable: form.responsable as string,
   };
 };
+
+export const sampleToSampleForm = (sample: Sample): Record<string, string> => {
+  return {
+    sampleCode: sample.sampleCode,
+    client: sample.client,
+    getSampleDate: sample.getSampleDate,
+    receptionDate: sample.receptionDate,
+    analysisDate: sample.analysisDate,
+    sampleLocation: sample.sampleLocation,
+    responsable: sample.responsable,
+  };
+};

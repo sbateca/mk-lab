@@ -1,5 +1,6 @@
 import {TableCellProps} from "../TableCell/Types";
 export interface TableRowProps {
-  key?: number;
+  id?: string;
+  key?: string;
   cells: TableCellProps[];
 }

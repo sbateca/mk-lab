@@ -24,7 +24,11 @@ function Table({headerLabels, rows}: TableProps): React.ReactElement {
           <TableHead headerLabels={headerLabels} />
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow key={index} cells={row.cells} />
+              <TableRow
+                id={row.id}
+                key={`tablew-row-${index.toString()}`}
+                cells={row.cells}
+              />
             ))}
           </TableBody>
         </MuiTable>

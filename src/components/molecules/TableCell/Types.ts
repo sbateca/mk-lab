@@ -1,6 +1,5 @@
 export interface TableCellProps {
-  key?: number;
-  text: string;
+  key?: string;
+  children: string | React.ReactElement;
   align: "center" | "inherit" | "justify" | "left" | "right";
-  index?: number;
 }

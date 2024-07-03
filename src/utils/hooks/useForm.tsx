@@ -105,6 +105,7 @@ export const useForm = () => {
 
   return {
     form,
+    setForm,
     cleanForm,
     formFieldsErrors,
     handleChange,

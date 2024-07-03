@@ -15,4 +15,8 @@ export const SAMPLES_TABLE_HEADER_LABELS = [
   "Responsable",
 ];
 export const SAMPLES_PAGE_DIALOG_TITLE = "Create sample";
+export const SAMPLES_PAGE_DIALOG_EDIT_TITLE = "Edit sample";
 export const SAMPLES_CREATE_BUTTON_LABEL = "Create sample";
+export const SAMPLE_SUCCESSFULLY_CREATED_TEXT = "Sample created successfully";
+export const SAMPLE_SUCCESSFULLY_UPDATED_TEXT =
+  "The sample was updated successfully";
