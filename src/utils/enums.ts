@@ -29,6 +29,7 @@ export enum SharedButtonVariants {
 export enum SharedButtonCommonLabels {
   Cancel = "Cancel",
   Save = "Save",
+  Edit = "Edit",
 }
 
 export enum SamplesFormFields {

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 import dayjs from "dayjs";
 import {
+  SAMPLE_SUCCESSFULLY_CREATED_TEXT,
   SAMPLES_CREATE_BUTTON_LABEL,
   SAMPLES_PAGE_DIALOG_TITLE,
   SAMPLES_TABLE_HEADER_LABELS,
@@ -37,6 +38,7 @@ import {FormProps} from "../../../utils/constants/form/formType";
 import {DATEPICKER_FORMAT} from "../../../utils/constants/pages/shared";
 import {FormError} from "../SampleForm/Types";
 import {SampleContentStyles} from "./SamplesContentStyles";
+import {useSnackBar} from "../../../utils/hooks/useSnackBar";
 
 interface SamplesContentProps {
   form: FormProps;
@@ -59,14 +61,11 @@ function SamplesContent({
   getTextFieldHelperText,
   cleanForm,
 }: SamplesContentProps): React.ReactElement {
-  const {samples, getSamples, createSample, isLoading, error} = useSample();
   const [rows, setRows] = useState<TableRowProps[]>([]);
+  const {samples, getSamples, createSample, isLoading, error} = useSample();
+  const {isSnackBarOpen, snackBarText, snackBarSeverity, showSnackBarMessage} =
+    useSnackBar();
   const {isOpen, openModal, closeModal} = useModal();
-  const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
-  const [snackBarText, setSnackBarText] = useState<string>("");
-  const [snackBarSeverity, setSnackBarSeverity] = useState<SnackBarSeverity>(
-    SnackBarSeverity.Success,
-  );
 
   useEffect(() => {
     if (samples) {
@@ -76,22 +75,19 @@ function SamplesContent({
 
   useEffect(() => {
     if (error) {
-      setSnackBarSeverity(SnackBarSeverity.Error);
-      setSnackBarText(`Error: ${error}`);
-      setIsSnackBarOpen(true);
-      return () => {
-        setIsSnackBarOpen(false);
-      };
+      showSnackBarMessage(error, SnackBarSeverity.Error);
     }
   }, [error]);
 
   const handleCreateReport = () => {
     createSample(sampleFormToSample(form)).then((newSample) => {
       if (newSample) {
-        setIsSnackBarOpen(true);
-        setSnackBarText(`Sample ${newSample?.sampleCode} created successfully`);
+        showSnackBarMessage(
+          SAMPLE_SUCCESSFULLY_CREATED_TEXT,
+          SnackBarSeverity.Success,
+          getSamples,
+        );
         handleCloseModal();
-        getSamples();
       }
     });
   };

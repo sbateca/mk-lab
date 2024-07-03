@@ -8,7 +8,9 @@ function TableHead({headerLabels}: TableHeadProps): React.ReactElement {
     <MuiTableHead>
       <TableRow>
         {headerLabels.map((label: string, index: number) => (
-          <TableCell key={index} align="left" text={label} />
+          <TableCell key={`header-cell-${index.toString()}`} align="left">
+            {label}
+          </TableCell>
         ))}
       </TableRow>
     </MuiTableHead>
