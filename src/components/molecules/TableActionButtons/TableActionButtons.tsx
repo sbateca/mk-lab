@@ -1,4 +1,5 @@
 import {Box} from "@mui/material";
+import Swal from "sweetalert2";
 import Button from "../../atoms/Button/Button";
 import {ButtonConfig} from "../../atoms/Button/Types";
 import {useModal} from "../../../utils/hooks/useModal";
@@ -19,6 +20,7 @@ import {useForm} from "../../../utils/hooks/useForm";
 import Dialog from "../Dialog/Dialog";
 import SampleForm from "../../organisms/SampleForm/SampleForm";
 import {
+  SAMPLE_SUCCESSFULLY_DELETED_TEXT,
   SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
   SAMPLES_PAGE_DIALOG_EDIT_TITLE,
 } from "../../../utils/constants/pages/samples";
@@ -37,7 +39,14 @@ import Spinner from "../../atoms/Spinner/Spinner";
 import {useSnackBar} from "../../../utils/hooks/useSnackBar";
 
 function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
-  const {getSamples, getSampleById, editSample, isLoading, error} = useSample();
+  const {
+    getSamples,
+    getSampleById,
+    editSample,
+    deleteSample,
+    isLoading,
+    error,
+  } = useSample();
   const {isOpen, openModal, closeModal} = useModal();
   const {isSnackBarOpen, snackBarText, snackBarSeverity, showSnackBarMessage} =
     useSnackBar();
@@ -80,9 +89,27 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
     }
   };
 
-  const handleDelete = () => {
-    // eslint-disable-next-line no-console
-    console.log("Delete button clicked: ", id);
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "You want to delete this sample?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#1976d2",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const result = deleteSample(id);
+        if (result !== null) {
+          showSnackBarMessage(
+            SAMPLE_SUCCESSFULLY_DELETED_TEXT,
+            SnackBarSeverity.Success,
+            getSamples,
+          );
+        }
+      }
+    });
   };
 
   const handleCloseModal = () => {
