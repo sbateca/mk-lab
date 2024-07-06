@@ -70,3 +70,20 @@ export const editSampleService = async (
     }
   }
 };
+
+export const deleteSampleService = async (
+  sampleId: string,
+): Promise<Sample> => {
+  try {
+    const response = await axios.delete(
+      `${EnvManager.BACKEND_URL}/samples/${sampleId}`,
+    );
+    return axiosResponseToSamples(response)[0];
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Error deleting sample: ${error.message}`);
+    } else {
+      throw new Error("An unknown error occurred deleting sample.");
+    }
+  }
+};

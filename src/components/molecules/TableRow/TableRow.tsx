@@ -7,9 +7,6 @@ import TableActionButtons from "../TableActionButtons/TableActionButtons";
 function TableRow({id, cells}: TableRowProps): React.ReactElement {
   return (
     <MuiTableRow>
-      <TableCell align={"center"}>
-        <TableActionButtons id={id ?? ""} />
-      </TableCell>
       {cells.map((cell, index) => {
         return (
           <TableCell key={`table-cell-${index.toString()}`} align={cell.align}>
@@ -17,6 +14,9 @@ function TableRow({id, cells}: TableRowProps): React.ReactElement {
           </TableCell>
         );
       })}
+      <TableCell align={"center"}>
+        <TableActionButtons id={id ?? ""} />
+      </TableCell>
     </MuiTableRow>
   );
 }
