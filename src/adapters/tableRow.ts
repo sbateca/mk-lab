@@ -11,9 +11,6 @@ export const samplesToTableRows = (samples: Sample[]): TableRowProps[] => {
         {children: sample.client, align: "left"},
         {children: sample.getSampleDate, align: "left"},
         {children: sample.receptionDate, align: "left"},
-        {children: sample.analysisDate, align: "left"},
-        {children: sample.sampleLocation, align: "left"},
-        {children: sample.responsable, align: "left"},
       ],
     };
   });

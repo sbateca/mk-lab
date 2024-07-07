@@ -9,9 +9,6 @@ export const SAMPLES_TABLE_HEADER_LABELS = [
   "Client",
   "Get Date",
   "Reception Date",
-  "Analysis Date",
-  "Location",
-  "Responsable",
   "Actions",
 ];
 export const SAMPLES_PAGE_DIALOG_TITLE = "Create sample";
@@ -25,3 +22,4 @@ export const SAMPLE_SUCCESSFULLY_DELETED_TEXT =
 export const SAMPLE_ID_OR_SAMPLE_MISSING_TEXT =
   "Sample Id or Sample is missing";
 export const SAMPLE_ID_MISSING_TEXT = "Sample Id is missing";
+export const SAMPLES_PAGE_DETAIL_TITLE = "Sample details";

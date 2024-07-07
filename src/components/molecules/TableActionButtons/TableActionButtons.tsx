@@ -28,7 +28,7 @@ import {
   isEmpty,
   isNotValidDate,
 } from "../../../utils/constants/form/validations";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useSample} from "../../../utils/hooks/useSample";
 import {
   sampleToSampleForm,
@@ -37,8 +37,23 @@ import {
 import Snackbar from "../SnackBar/SnackBar";
 import Spinner from "../../atoms/Spinner/Spinner";
 import {useSnackBar} from "../../../utils/hooks/useSnackBar";
+import Detail from "../../organisms/Detail/Detail";
+import SampleDetail from "../../organisms/SampleDetail/SampleDetail";
+import {Sample} from "../../../model/Sample";
 
 function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
+  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
+  const [selectedSample, setSelectedSample] = useState<Sample>({
+    id: "",
+    sampleCode: "",
+    client: "",
+    getSampleDate: "",
+    receptionDate: "",
+    analysisDate: "",
+    sampleLocation: "",
+    responsable: "",
+  });
+
   const {
     getSamples,
     getSampleById,
@@ -50,7 +65,6 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
   const {isOpen, openModal, closeModal} = useModal();
   const {isSnackBarOpen, snackBarText, snackBarSeverity, showSnackBarMessage} =
     useSnackBar();
-
   const {
     isNotValidForm,
     form,
@@ -63,9 +77,12 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
     cleanForm,
   } = useForm();
 
-  const handleDetail = () => {
-    // eslint-disable-next-line no-console
-    console.log("Detail button clicked: ", id);
+  const handleDetail = async () => {
+    const sample = await getSampleById(id);
+    if (sample) {
+      setSelectedSample(sample);
+    }
+    setIsDetailOpen(true);
   };
 
   const handleOpenEdit = async () => {
@@ -83,7 +100,7 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
       handleCloseModal();
       showSnackBarMessage(
         SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
-        SnackBarSeverity.Success,
+        SnackBarSeverity.SUCCESS,
         getSamples,
       );
     }
@@ -104,7 +121,7 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
         if (result !== null) {
           showSnackBarMessage(
             SAMPLE_SUCCESSFULLY_DELETED_TEXT,
-            SnackBarSeverity.Success,
+            SnackBarSeverity.SUCCESS,
             getSamples,
           );
         }
@@ -135,47 +152,47 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
 
   useEffect(() => {
     if (error) {
-      showSnackBarMessage(`Error: ${error}`, SnackBarSeverity.Error);
+      showSnackBarMessage(`Error: ${error}`, SnackBarSeverity.ERROR);
     }
   }, [error]);
 
   const detailButtonConfig: ButtonConfig = {
     label: DETAIL_BUTTON_TEXT,
-    variant: SharedButtonVariants.Outlined,
-    size: SharedButtonSizes.Small,
-    color: SharedButtonColors.Primary,
+    variant: SharedButtonVariants.OUTLINED,
+    size: SharedButtonSizes.SMALL,
+    color: SharedButtonColors.PRIMARY,
     onClick: handleDetail,
   };
   const editButtonConfig: ButtonConfig = {
     label: EDIT_BUTTON_TEXT,
-    variant: SharedButtonVariants.Outlined,
-    size: SharedButtonSizes.Small,
-    color: SharedButtonColors.Primary,
+    variant: SharedButtonVariants.OUTLINED,
+    size: SharedButtonSizes.SMALL,
+    color: SharedButtonColors.PRIMARY,
     onClick: handleOpenEdit,
   };
   const deleteButtonConfig: ButtonConfig = {
     label: DELETE_BUTTON_TEXT,
-    variant: SharedButtonVariants.Outlined,
-    size: SharedButtonSizes.Small,
-    color: SharedButtonColors.Error,
+    variant: SharedButtonVariants.OUTLINED,
+    size: SharedButtonSizes.SMALL,
+    color: SharedButtonColors.ERROR,
     onClick: handleDelete,
   };
 
   const dialogActions = (
     <Box>
       <Button
-        label={SharedButtonCommonLabels.Cancel}
-        variant={SharedButtonVariants.Outlined}
-        size={SharedButtonSizes.Small}
-        color={SharedButtonColors.Error}
+        label={SharedButtonCommonLabels.CANCEL}
+        variant={SharedButtonVariants.OUTLINED}
+        size={SharedButtonSizes.SMALL}
+        color={SharedButtonColors.ERROR}
         onClick={handleCloseModal}
       />
       <Button
-        label={SharedButtonCommonLabels.Edit}
+        label={SharedButtonCommonLabels.EDIT}
         disabled={isNotValidForm}
-        variant={SharedButtonVariants.Outlined}
-        size={SharedButtonSizes.Small}
-        color={SharedButtonColors.Primary}
+        variant={SharedButtonVariants.OUTLINED}
+        size={SharedButtonSizes.SMALL}
+        color={SharedButtonColors.PRIMARY}
         onClick={handleEdit}
       />
     </Box>
@@ -208,6 +225,9 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
           )}
         </Box>
       </Dialog>
+      <Detail isOpen={isDetailOpen} setIsOpen={setIsDetailOpen}>
+        <SampleDetail sample={selectedSample} />
+      </Detail>
       <Snackbar
         isOpen={isSnackBarOpen}
         snackBarText={snackBarText}

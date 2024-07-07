@@ -1,50 +1,88 @@
 export enum SharedButtonColors {
-  Primary = "primary",
-  Secondary = "secondary",
-  Error = "error",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  ERROR = "error",
+  INFO = "info",
+  SUCCESS = "success",
+  WARNING = "warning",
 }
 
 export enum SharedButtonIcons {
-  View = "view",
-  Edit = "edit",
-  Create = "create",
-  Delete = "delete",
+  VIEW = "view",
+  EDIT = "edit",
+  CREATE = "create",
+  DELETE = "delete",
 }
 
 export enum SharedButtonSizes {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
 }
 
 export enum SharedButtonVariants {
-  Text = "text",
-  Outlined = "outlined",
-  Contained = "contained",
+  TEXT = "text",
+  OUTLINED = "outlined",
+  CONTAINED = "contained",
 }
 
 export enum SharedButtonCommonLabels {
-  Cancel = "Cancel",
-  Save = "Save",
-  Edit = "Edit",
+  CANCEL = "Cancel",
+  SAVE = "Save",
+  EDIT = "Edit",
+}
+
+export enum SharedTypographyVariants {
+  H1 = "h1",
+  H2 = "h2",
+  H3 = "h3",
+  H4 = "h4",
+  H5 = "h5",
+  H6 = "h6",
+  SUBTITLE1 = "subtitle1",
+  SUBTITLE2 = "subtitle2",
+  BODY1 = "body1",
+  BODY2 = "body2",
+  CAPTION = "caption",
+}
+
+export enum SharedTypographyColors {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  TEXT_PRIMARY = "textPrimary",
+  TEXT_SECONDARY = "textSecondary",
+}
+
+export enum SharedTypographyAlign {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center",
+  JUSTIFY = "justify",
 }
 
 export enum SamplesFormFields {
-  SampleCode = "sampleCode",
-  Client = "client",
-  GetSampleDate = "getSampleDate",
-  ReceptionDate = "receptionDate",
-  AnalysisDate = "analysisDate",
-  SampleLocation = "sampleLocation",
-  Responsable = "responsable",
+  SAMPLE_CODE = "sampleCode",
+  CLIENT = "client",
+  GET_SAMPLE_DATE = "getSampleDate",
+  RECEPTION_DATE = "receptionDate",
+  ANALYSIS_DATE = "analysisDate",
+  SAMPLE_LOCATION = "sampleLocation",
+  RESPONSABLE = "responsable",
 }
 
 export enum SnackBarSeverity {
-  Error = "error",
-  Success = "success",
-  Info = "info",
-  Warning = "warning",
+  ERROR = "error",
+  SUCCESS = "success",
+  INFO = "info",
+  WARNING = "warning",
+}
+
+export enum SampleDetailsFields {
+  SAMPLE_CODE = "Sample Code",
+  CLIENT = "Client",
+  GET_SAMPLE_DATE = "Get sample date",
+  RECEPTION_DATE = "Reception date",
+  ANALYSIS_DATE = "Analysis date",
+  SAMPLE_LOCATION = "Location",
+  RESPONSABLE = "Responsable",
 }
