@@ -39,30 +39,30 @@ function SampleForm({
           <FormControl>
             <TextField
               required
-              error={!!formFieldsErrors[SamplesFormFields.SampleCode]}
+              error={!!formFieldsErrors[SamplesFormFields.SAMPLE_CODE]}
               label={SAMPLE_CODE_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color={SharedButtonColors.Primary}
-              size={SharedButtonSizes.Small}
-              name={SamplesFormFields.SampleCode}
+              color={SharedButtonColors.PRIMARY}
+              size={SharedButtonSizes.SMALL}
+              name={SamplesFormFields.SAMPLE_CODE}
               onChange={handleChange}
-              helperText={getTextFieldHelperText(SamplesFormFields.SampleCode)}
+              helperText={getTextFieldHelperText(SamplesFormFields.SAMPLE_CODE)}
               value={form?.sampleCode ?? ""}
             />
           </FormControl>
           <FormControl>
             <TextField
               required
-              error={!!formFieldsErrors[SamplesFormFields.Client]}
+              error={!!formFieldsErrors[SamplesFormFields.CLIENT]}
               label={CLIENT_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color={SharedButtonColors.Primary}
-              size={SharedButtonSizes.Small}
+              color={SharedButtonColors.PRIMARY}
+              size={SharedButtonSizes.SMALL}
               onChange={handleChange}
-              name={SamplesFormFields.Client}
-              helperText={getTextFieldHelperText(SamplesFormFields.Client)}
+              name={SamplesFormFields.CLIENT}
+              helperText={getTextFieldHelperText(SamplesFormFields.CLIENT)}
               value={form.client ?? ""}
             />
           </FormControl>
@@ -75,16 +75,16 @@ function SampleForm({
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
                   label={GET_SAMPLE_DATE_LABEL_TEXT}
-                  name={SamplesFormFields.GetSampleDate}
+                  name={SamplesFormFields.GET_SAMPLE_DATE}
                   onChange={(value) =>
-                    handleDateChange(value, SamplesFormFields.GetSampleDate)
+                    handleDateChange(value, SamplesFormFields.GET_SAMPLE_DATE)
                   }
                   slotProps={{
                     textField: {
                       error:
-                        !!formFieldsErrors[SamplesFormFields.GetSampleDate],
+                        !!formFieldsErrors[SamplesFormFields.GET_SAMPLE_DATE],
                       helperText: getTextFieldHelperText(
-                        SamplesFormFields.GetSampleDate,
+                        SamplesFormFields.GET_SAMPLE_DATE,
                       ),
                     },
                   }}
@@ -101,16 +101,16 @@ function SampleForm({
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
                   label={RECEPTION_DATE_LABEL_TEXT}
-                  name={SamplesFormFields.ReceptionDate}
+                  name={SamplesFormFields.RECEPTION_DATE}
                   onChange={(value) =>
-                    handleDateChange(value, SamplesFormFields.ReceptionDate)
+                    handleDateChange(value, SamplesFormFields.RECEPTION_DATE)
                   }
                   slotProps={{
                     textField: {
                       error:
-                        !!formFieldsErrors[SamplesFormFields.ReceptionDate],
+                        !!formFieldsErrors[SamplesFormFields.RECEPTION_DATE],
                       helperText: getTextFieldHelperText(
-                        SamplesFormFields.ReceptionDate,
+                        SamplesFormFields.RECEPTION_DATE,
                       ),
                     },
                   }}
@@ -130,15 +130,16 @@ function SampleForm({
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
                   label={ANALYSIS_DATE_LABEL_TEXT}
-                  name={SamplesFormFields.AnalysisDate}
+                  name={SamplesFormFields.ANALYSIS_DATE}
                   onChange={(value) =>
-                    handleDateChange(value, SamplesFormFields.AnalysisDate)
+                    handleDateChange(value, SamplesFormFields.ANALYSIS_DATE)
                   }
                   slotProps={{
                     textField: {
-                      error: !!formFieldsErrors[SamplesFormFields.AnalysisDate],
+                      error:
+                        !!formFieldsErrors[SamplesFormFields.ANALYSIS_DATE],
                       helperText: getTextFieldHelperText(
-                        SamplesFormFields.AnalysisDate,
+                        SamplesFormFields.ANALYSIS_DATE,
                       ),
                     },
                   }}
@@ -149,16 +150,16 @@ function SampleForm({
           <FormControl>
             <TextField
               required
-              error={!!formFieldsErrors[SamplesFormFields.SampleLocation]}
+              error={!!formFieldsErrors[SamplesFormFields.SAMPLE_LOCATION]}
               label={SAMPLE_LOCATION_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color={SharedButtonColors.Primary}
-              size={SharedButtonSizes.Small}
-              name={SamplesFormFields.SampleLocation}
+              color={SharedButtonColors.PRIMARY}
+              size={SharedButtonSizes.SMALL}
+              name={SamplesFormFields.SAMPLE_LOCATION}
               onChange={handleChange}
               helperText={getTextFieldHelperText(
-                SamplesFormFields.SampleLocation,
+                SamplesFormFields.SAMPLE_LOCATION,
               )}
               value={form.sampleLocation ?? ""}
             />
@@ -166,15 +167,15 @@ function SampleForm({
           <FormControl>
             <TextField
               required
-              error={!!formFieldsErrors[SamplesFormFields.Responsable]}
+              error={!!formFieldsErrors[SamplesFormFields.RESPONSABLE]}
               label={RESPONSABLE_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
-              color={SharedButtonColors.Primary}
-              size={SharedButtonSizes.Small}
-              name={SamplesFormFields.Responsable}
+              color={SharedButtonColors.PRIMARY}
+              size={SharedButtonSizes.SMALL}
+              name={SamplesFormFields.RESPONSABLE}
               onChange={handleChange}
-              helperText={getTextFieldHelperText(SamplesFormFields.Responsable)}
+              helperText={getTextFieldHelperText(SamplesFormFields.RESPONSABLE)}
               value={form.responsable ?? ""}
             />
           </FormControl>

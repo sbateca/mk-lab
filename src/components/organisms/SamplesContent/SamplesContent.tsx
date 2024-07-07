@@ -75,7 +75,7 @@ function SamplesContent({
 
   useEffect(() => {
     if (error) {
-      showSnackBarMessage(error, SnackBarSeverity.Error);
+      showSnackBarMessage(error, SnackBarSeverity.ERROR);
     }
   }, [error]);
 
@@ -84,7 +84,7 @@ function SamplesContent({
       if (newSample) {
         showSnackBarMessage(
           SAMPLE_SUCCESSFULLY_CREATED_TEXT,
-          SnackBarSeverity.Success,
+          SnackBarSeverity.SUCCESS,
           getSamples,
         );
         handleCloseModal();
@@ -99,28 +99,28 @@ function SamplesContent({
 
   const buttonPageConfig: ButtonConfig = {
     label: SAMPLES_CREATE_BUTTON_LABEL,
-    variant: SharedButtonVariants.Outlined,
-    size: SharedButtonSizes.Small,
-    color: SharedButtonColors.Primary,
-    icon: SharedButtonIcons.Create,
+    variant: SharedButtonVariants.OUTLINED,
+    size: SharedButtonSizes.SMALL,
+    color: SharedButtonColors.PRIMARY,
+    icon: SharedButtonIcons.CREATE,
     onClick: openModal,
   };
 
   const dialogActions = (
     <Box>
       <Button
-        label={SharedButtonCommonLabels.Cancel}
-        variant={SharedButtonVariants.Outlined}
-        size={SharedButtonSizes.Small}
-        color={SharedButtonColors.Error}
+        label={SharedButtonCommonLabels.CANCEL}
+        variant={SharedButtonVariants.OUTLINED}
+        size={SharedButtonSizes.SMALL}
+        color={SharedButtonColors.ERROR}
         onClick={handleCloseModal}
       />
       <Button
-        label={SharedButtonCommonLabels.Save}
+        label={SharedButtonCommonLabels.SAVE}
         disabled={isNotValidForm}
-        variant={SharedButtonVariants.Outlined}
-        size={SharedButtonSizes.Small}
-        color={SharedButtonColors.Primary}
+        variant={SharedButtonVariants.OUTLINED}
+        size={SharedButtonSizes.SMALL}
+        color={SharedButtonColors.PRIMARY}
         onClick={handleCreateReport}
       />
     </Box>

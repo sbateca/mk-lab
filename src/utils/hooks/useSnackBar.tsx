@@ -5,7 +5,7 @@ export const useSnackBar = () => {
   const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
   const [snackBarText, setSnackBarText] = useState<string>("");
   const [snackBarSeverity, setSnackBarSeverity] = useState<SnackBarSeverity>(
-    SnackBarSeverity.Success,
+    SnackBarSeverity.SUCCESS,
   );
   const [snackbarCallback, setSnackBarCallback] = useState<() => void>(
     () => {},
