@@ -1,4 +1,12 @@
-import {Box, Divider, Stack, TextField} from "@mui/material";
+import {
+  Box,
+  Divider,
+  Stack,
+  TextField,
+  Theme,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import {SampleDetailStyles} from "./SampleDetailStyles";
 import Typography from "../../atoms/Typography/Typography";
 import {CommonTextFieldProps, SampleDetailProps} from "./Types";
@@ -18,8 +26,16 @@ function SampleDetail({sample}: SampleDetailProps) {
       readOnly: true,
     },
   };
+  const theme = useTheme<Theme>();
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Box sx={SampleDetailStyles.container}>
+    <Box
+      sx={{
+        ...SampleDetailStyles.container,
+        width: isMediumScreen ? "80vw" : "50vw",
+      }}
+    >
       <Typography
         text={SAMPLES_PAGE_DETAIL_TITLE}
         variant={SharedTypographyVariants.H6}
@@ -28,8 +44,15 @@ function SampleDetail({sample}: SampleDetailProps) {
         padding="0 0 5px 0"
       />
       <Divider />
-      <Stack {...SampleDetailStyles.stackContainer}>
-        <Stack {...SampleDetailStyles.stackRow}>
+      <Stack
+        {...SampleDetailStyles.stackContainer}
+        padding={isMediumScreen ? "5px" : "20px"}
+      >
+        <Stack
+          {...SampleDetailStyles.stackRow}
+          direction={isMediumScreen ? "column" : "row"}
+          spacing={isMediumScreen ? 2 : 0}
+        >
           <TextField
             label={SampleDetailsFields.SAMPLE_CODE}
             value={sample?.sampleCode}
@@ -41,7 +64,11 @@ function SampleDetail({sample}: SampleDetailProps) {
             {...commonTextFieldProps}
           />
         </Stack>
-        <Stack {...SampleDetailStyles.stackRow}>
+        <Stack
+          {...SampleDetailStyles.stackRow}
+          direction={isMediumScreen ? "column" : "row"}
+          spacing={isMediumScreen ? 2 : 0}
+        >
           <TextField
             label={SampleDetailsFields.GET_SAMPLE_DATE}
             value={sample?.getSampleDate}
@@ -53,7 +80,11 @@ function SampleDetail({sample}: SampleDetailProps) {
             {...commonTextFieldProps}
           />
         </Stack>
-        <Stack {...SampleDetailStyles.stackRow}>
+        <Stack
+          {...SampleDetailStyles.stackRow}
+          direction={isMediumScreen ? "column" : "row"}
+          spacing={isMediumScreen ? 2 : 0}
+        >
           <TextField
             label={SampleDetailsFields.ANALYSIS_DATE}
             value={sample?.analysisDate}
@@ -65,7 +96,11 @@ function SampleDetail({sample}: SampleDetailProps) {
             {...commonTextFieldProps}
           />
         </Stack>
-        <Stack {...SampleDetailStyles.stackRow}>
+        <Stack
+          {...SampleDetailStyles.stackRow}
+          direction={isMediumScreen ? "column" : "row"}
+          spacing={isMediumScreen ? 2 : 0}
+        >
           <TextField
             label={SampleDetailsFields.RESPONSABLE}
             value={sample?.responsable}
