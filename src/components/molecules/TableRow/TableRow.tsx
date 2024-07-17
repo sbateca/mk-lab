@@ -15,7 +15,7 @@ function TableRow({id, cells}: TableRowProps): React.ReactElement {
         );
       })}
       <TableCell align={"left"}>
-        <TableActionButtons id={id ?? ""} />
+        <TableActionButtons sampleId={id ?? ""} />
       </TableCell>
     </MuiTableRow>
   );

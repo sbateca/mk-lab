@@ -11,6 +11,7 @@ export const SampleFormStyles = {
   datePicker: {
     "& .MuiInputBase-root.MuiOutlinedInput-root": {
       height: "2.5em",
+      width: "100%",
     },
   },
 };

@@ -1,25 +1,31 @@
 import {Box} from "@mui/material";
 
-import {SamplesContentContainer} from "../SamplesContent/SamplesContent";
 import {useMenu} from "../../../utils/hooks/useMenu";
 import {ContentStyle} from "./ContentStyle";
 import Reports from "../Reports/Reports";
+import SnackBarContainer from "../../molecules/SnackBarContainer/SnackBarContainer";
+import SamplesContent from "../SamplesContent/SamplesContent";
 
 function Content(): React.ReactElement {
-  const {selectedMenuItem: selectedMenuItem} = useMenu();
+  const {selectedMenuItem} = useMenu();
 
   let contentComponent;
   switch (selectedMenuItem) {
     case "Samples":
-      contentComponent = <SamplesContentContainer />;
+      contentComponent = <SamplesContent />;
       break;
     case "Reports":
       contentComponent = <Reports />;
       break;
     default:
-      contentComponent = <SamplesContentContainer />;
+      contentComponent = <SamplesContent />;
   }
-  return <Box sx={ContentStyle}>{contentComponent}</Box>;
+  return (
+    <Box>
+      <Box sx={ContentStyle}>{contentComponent}</Box>
+      <SnackBarContainer />
+    </Box>
+  );
 }
 
 export default Content;

@@ -1,123 +1,62 @@
+import {useEffect} from "react";
 import {Box} from "@mui/material";
 import Swal from "sweetalert2";
+import {useSample} from "../../../utils/hooks/useSample";
+import Spinner from "../../atoms/Spinner/Spinner";
+import {useSnackBar} from "../../../utils/hooks/useSnackBar";
 import Button from "../../atoms/Button/Button";
-import {ButtonConfig} from "../../atoms/Button/Types";
-import {useModal} from "../../../utils/hooks/useModal";
 import {
+  IconNames,
   SharedButtonColors,
   SharedButtonCommonLabels,
   SharedButtonSizes,
   SharedButtonVariants,
   SnackBarSeverity,
+  SweetAlertIcon,
 } from "../../../utils/enums";
-import {
-  DELETE_BUTTON_TEXT,
-  DETAIL_BUTTON_TEXT,
-  EDIT_BUTTON_TEXT,
-} from "../../../utils/constants/pages/shared";
 import {TableActionButtonsProps} from "./Types";
-import {useForm} from "../../../utils/hooks/useForm";
-import Dialog from "../Dialog/Dialog";
-import SampleForm from "../../organisms/SampleForm/SampleForm";
 import {
+  SAMPLE_DELETE_CONFIRMATION_SUBTITLE,
+  SAMPLE_DELETE_CONFIRMATION_TEXT,
   SAMPLE_SUCCESSFULLY_DELETED_TEXT,
-  SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
-  SAMPLES_PAGE_DIALOG_EDIT_TITLE,
+  SAMPLE_DELETE_CONFIRMATION_TITLE,
 } from "../../../utils/constants/pages/samples";
-import {
-  isEmpty,
-  isNotValidDate,
-} from "../../../utils/constants/form/validations";
-import {useEffect, useState} from "react";
-import {useSample} from "../../../utils/hooks/useSample";
-import {
-  sampleToSampleForm,
-  sampleFormToSample,
-} from "../../../adapters/samples";
-import Snackbar from "../SnackBar/SnackBar";
-import Spinner from "../../atoms/Spinner/Spinner";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import Detail from "../../organisms/Detail/Detail";
-import SampleDetail from "../../organisms/SampleDetail/SampleDetail";
-import {Sample} from "../../../model/Sample";
+import {useSideSection} from "../../../utils/hooks/useSideSection";
 
-function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
-  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
-  const [selectedSample, setSelectedSample] = useState<Sample>({
-    id: "",
-    sampleCode: "",
-    client: "",
-    getSampleDate: "",
-    receptionDate: "",
-    analysisDate: "",
-    sampleLocation: "",
-    responsable: "",
-  });
-
+function TableActionButtons({
+  sampleId,
+}: TableActionButtonsProps): React.ReactElement {
   const {
-    getSamples,
     getSampleById,
-    editSample,
     deleteSample,
+    getSamples,
+    setSelectedSample,
     isLoading,
     error,
   } = useSample();
-  const {isOpen, openModal, closeModal} = useModal();
-  const {isSnackBarOpen, snackBarText, snackBarSeverity, showSnackBarMessage} =
-    useSnackBar();
-  const {
-    isNotValidForm,
-    form,
-    setForm,
-    formFieldsErrors,
-    handleChange,
-    handleDateChange,
-    getTextFieldHelperText,
-    setFormFieldsValidationFunctions,
-    cleanForm,
-  } = useForm();
+  const {showSnackBarMessage} = useSnackBar();
+  const {setIsSideSectionOpen} = useSideSection();
 
-  const handleDetail = async () => {
-    const sample = await getSampleById(id);
+  const handleOpenSideSection = async (sampleId: string) => {
+    const sample = await getSampleById(sampleId);
     if (sample) {
       setSelectedSample(sample);
-    }
-    setIsDetailOpen(true);
-  };
-
-  const handleOpenEdit = async () => {
-    const sample = await getSampleById(id);
-    if (sample) {
-      setForm(sampleToSampleForm(sample));
-    }
-    openModal();
-  };
-
-  const handleEdit = async () => {
-    const sample = sampleFormToSample(form);
-    const updatedSample = await editSample(id, sample);
-    if (updatedSample !== null) {
-      handleCloseModal();
-      showSnackBarMessage(
-        SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
-        SnackBarSeverity.SUCCESS,
-        getSamples,
-      );
+      setIsSideSectionOpen(true);
     }
   };
 
   const handleDelete = async () => {
     Swal.fire({
-      title: "You want to delete this sample?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: SAMPLE_DELETE_CONFIRMATION_TITLE,
+      text: SAMPLE_DELETE_CONFIRMATION_SUBTITLE,
+      icon: SweetAlertIcon.WARNING,
       showCancelButton: true,
       confirmButtonColor: "#1976d2",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: SAMPLE_DELETE_CONFIRMATION_TEXT,
     }).then((result) => {
       if (result.isConfirmed) {
-        const result = deleteSample(id);
+        const result = deleteSample(sampleId);
         if (result !== null) {
           showSnackBarMessage(
             SAMPLE_SUCCESSFULLY_DELETED_TEXT,
@@ -129,111 +68,37 @@ function TableActionButtons({id}: TableActionButtonsProps): React.ReactElement {
     });
   };
 
-  const handleCloseModal = () => {
-    closeModal();
-    cleanForm(form);
-  };
-
-  const setFormValidationFunctions = () => {
-    setFormFieldsValidationFunctions({
-      sampleCode: [isEmpty],
-      client: [isEmpty],
-      getSampleDate: [isEmpty, isNotValidDate],
-      receptionDate: [isEmpty, isNotValidDate],
-      analysisDate: [isEmpty, isNotValidDate],
-      sampleLocation: [isEmpty],
-      responsable: [isEmpty],
-    });
-  };
-
-  useEffect(() => {
-    setFormValidationFunctions();
-  }, []);
-
   useEffect(() => {
     if (error) {
-      showSnackBarMessage(`Error: ${error}`, SnackBarSeverity.ERROR);
+      showSnackBarMessage(error, SnackBarSeverity.ERROR);
     }
   }, [error]);
 
-  const detailButtonConfig: ButtonConfig = {
-    label: DETAIL_BUTTON_TEXT,
-    variant: SharedButtonVariants.OUTLINED,
-    size: SharedButtonSizes.SMALL,
-    color: SharedButtonColors.PRIMARY,
-    onClick: handleDetail,
-  };
-  const editButtonConfig: ButtonConfig = {
-    label: EDIT_BUTTON_TEXT,
-    variant: SharedButtonVariants.OUTLINED,
-    size: SharedButtonSizes.SMALL,
-    color: SharedButtonColors.PRIMARY,
-    onClick: handleOpenEdit,
-  };
-  const deleteButtonConfig: ButtonConfig = {
-    label: DELETE_BUTTON_TEXT,
-    variant: SharedButtonVariants.OUTLINED,
-    size: SharedButtonSizes.SMALL,
-    color: SharedButtonColors.ERROR,
-    onClick: handleDelete,
-  };
-
-  const dialogActions = (
-    <Box>
-      <Button
-        label={SharedButtonCommonLabels.CANCEL}
-        variant={SharedButtonVariants.OUTLINED}
-        size={SharedButtonSizes.SMALL}
-        color={SharedButtonColors.ERROR}
-        onClick={handleCloseModal}
-      />
-      <Button
-        label={SharedButtonCommonLabels.EDIT}
-        disabled={isNotValidForm}
-        variant={SharedButtonVariants.OUTLINED}
-        size={SharedButtonSizes.SMALL}
-        color={SharedButtonColors.PRIMARY}
-        onClick={handleEdit}
-      />
-    </Box>
-  );
-
   return (
-    <>
-      <Box>
-        <Button {...detailButtonConfig} />
-        <Button {...editButtonConfig} />
-        <Button {...deleteButtonConfig} />
-      </Box>
-      <Dialog
-        isOpen={isOpen}
-        dialogTitle={SAMPLES_PAGE_DIALOG_EDIT_TITLE}
-        onClose={handleCloseModal}
-        dialogActions={dialogActions}
-      >
-        <Box>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <SampleForm
-              form={form}
-              formFieldsErrors={formFieldsErrors}
-              handleChange={handleChange}
-              handleDateChange={handleDateChange}
-              getTextFieldHelperText={getTextFieldHelperText}
-            />
-          )}
-        </Box>
-      </Dialog>
-      <Detail isOpen={isDetailOpen} setIsOpen={setIsDetailOpen}>
-        <SampleDetail sample={selectedSample} />
-      </Detail>
-      <Snackbar
-        isOpen={isSnackBarOpen}
-        snackBarText={snackBarText}
-        severity={snackBarSeverity}
-      />
-    </>
+    <Box>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Button
+            icon={IconNames.SEARCH}
+            label={SharedButtonCommonLabels.VIEW}
+            variant={SharedButtonVariants.OUTLINED}
+            size={SharedButtonSizes.SMALL}
+            color={SharedButtonColors.PRIMARY}
+            onClick={() => handleOpenSideSection(sampleId)}
+          />
+          <Button
+            icon={IconNames.DELETE}
+            label={SharedButtonCommonLabels.DELETE}
+            variant={SharedButtonVariants.OUTLINED}
+            size={SharedButtonSizes.SMALL}
+            color={SharedButtonColors.ERROR}
+            onClick={handleDelete}
+          />
+        </>
+      )}
+    </Box>
   );
 }
 

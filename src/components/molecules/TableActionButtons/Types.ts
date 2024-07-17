@@ -1,3 +1,3 @@
 export interface TableActionButtonsProps {
-  id: string;
+  sampleId: string;
 }
