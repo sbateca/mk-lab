@@ -5,7 +5,7 @@ import {SampleContext} from "../../context/Services/SampleContext";
 export const useSample = () => {
   const context = useContext(SampleContext);
   if (!context) {
-    throw new Error("useMenu should be used inside the MenuContext provider.");
+    throw new Error("useSample should be used inside the MenuSample provider.");
   }
   return context;
 };

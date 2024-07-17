@@ -1,18 +1,20 @@
-import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import {Search, Close, Edit, Add, Save, Delete} from "@mui/icons-material";
+import {IconNames} from "./enums";
 
 export const getIcon = (icon: string) => {
   switch (icon) {
-    case "view":
-      return <SearchIcon />;
-    case "edit":
-      return <EditIcon />;
-    case "create":
-      return <AddIcon />;
-    case "delete":
-      return <DeleteIcon />;
+    case IconNames.SEARCH:
+      return <Search />;
+    case IconNames.EDIT:
+      return <Edit />;
+    case IconNames.CREATE:
+      return <Add />;
+    case IconNames.SAVE:
+      return <Save />;
+    case IconNames.DELETE:
+      return <Delete />;
+    case IconNames.CLOSE:
+      return <Close />;
     default:
       return "";
   }

@@ -8,20 +8,26 @@ import {COMPANY_NAME, MENU_ITEMS} from "../../../utils/constants/pages/admin";
 import {SampleProvider} from "../../../context/Services/SampleContext";
 import {ReportsProvider} from "../../../context/Services/ReportsContext";
 import {AdminStyle} from "./AdminStyle";
+import {SnackBarProvider} from "../../../context/SnackBar/SnackBarContext";
+import {SideSectionProvider} from "../../../context/SideSection/SideSectionContext";
 
 function Admin(): React.ReactElement {
   return (
-    <SampleProvider>
-      <ReportsProvider>
-        <Box sx={AdminStyle}>
-          <MainTemplate
-            header={<Header companyName={COMPANY_NAME} />}
-            menu={<Menu menuItems={MENU_ITEMS} />}
-            mainContent={<Content />}
-          />
-        </Box>
-      </ReportsProvider>
-    </SampleProvider>
+    <SideSectionProvider>
+      <SnackBarProvider>
+        <SampleProvider>
+          <ReportsProvider>
+            <Box sx={AdminStyle}>
+              <MainTemplate
+                header={<Header companyName={COMPANY_NAME} />}
+                menu={<Menu menuItems={MENU_ITEMS} />}
+                mainContent={<Content />}
+              />
+            </Box>
+          </ReportsProvider>
+        </SampleProvider>
+      </SnackBarProvider>
+    </SideSectionProvider>
   );
 }
 

@@ -15,6 +15,8 @@ import {
 
 const SampleContext = createContext<{
   samples: Sample[] | null;
+  selectedSample: Sample | null;
+  setSelectedSample: React.Dispatch<React.SetStateAction<Sample | null>>;
   getSamples: () => Promise<void>;
   getSampleById: (sampleId: string) => Promise<Sample | null>;
   createSample: (sample: Sample) => Promise<Sample | null>;
@@ -24,6 +26,8 @@ const SampleContext = createContext<{
   error: string | null;
 }>({
   samples: [],
+  selectedSample: null,
+  setSelectedSample: () => {},
   getSamples: async () => {},
   getSampleById: async () => ({}) as Sample,
   createSample: async () => ({}) as Sample,
@@ -39,6 +43,7 @@ interface IProviderProps {
 
 function SampleProvider({children}: IProviderProps) {
   const [samples, setSamples] = useState<Sample[] | null>(null);
+  const [selectedSample, setSelectedSample] = useState<Sample | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -115,9 +120,15 @@ function SampleProvider({children}: IProviderProps) {
     getSamples();
   }, []);
 
+  useEffect(() => {
+    setSelectedSample(selectedSample);
+  }, [selectedSample]);
+
   const value = useMemo(
     () => ({
       samples,
+      selectedSample,
+      setSelectedSample,
       getSamples,
       getSampleById,
       createSample,
@@ -126,7 +137,7 @@ function SampleProvider({children}: IProviderProps) {
       isLoading,
       error,
     }),
-    [samples, isLoading, error],
+    [samples, selectedSample, isLoading, error],
   );
 
   return (

@@ -1,5 +1,3 @@
-import {StackOwnProps} from "@mui/material";
-
 export const SampleDetailStyles = {
   container: {
     width: "50vw",
@@ -10,8 +8,12 @@ export const SampleDetailStyles = {
     marginTop: "20px",
     padding: "20px",
   },
-  stackRow: {
-    spacing: 2,
-    direction: "row" as StackOwnProps["direction"],
+  stackField: {
+    width: "100%",
+  },
+  closeButton: {
+    marginLeft: "auto",
+    alignSelf: "start",
+    fontSize: "9px",
   },
 };

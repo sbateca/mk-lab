@@ -47,9 +47,12 @@ const isValidSample = (sample: unknown): sample is Sample => {
   return false;
 };
 
-export const sampleFormToSample = (form: Record<string, unknown>): Sample => {
+export const sampleFormToSample = (
+  form: Record<string, unknown>,
+  sampleId: string,
+): Sample => {
   return {
-    id: uuidv4() as string,
+    id: sampleId || uuidv4(),
     sampleCode: form.sampleCode as string,
     client: form.client as string,
     getSampleDate: form.getSampleDate as string,

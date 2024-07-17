@@ -1,4 +1,5 @@
 export interface ButtonConfig {
+  sx?: Record<string, unknown>;
   label: string;
   disabled?: boolean;
   variant: "text" | "outlined" | "contained";
@@ -12,6 +13,6 @@ export interface ButtonConfig {
     | "warning"
     | "inherit"
     | "default";
-  icon?: "view" | "edit" | "create" | "delete";
+  icon?: string;
   onClick?: () => void;
 }

@@ -30,6 +30,9 @@ export enum SharedButtonCommonLabels {
   CANCEL = "Cancel",
   SAVE = "Save",
   EDIT = "Edit",
+  DELETE = "Delete",
+  CLOSE = "Close",
+  VIEW = "View",
 }
 
 export enum SharedTypographyVariants {
@@ -77,6 +80,13 @@ export enum SnackBarSeverity {
   WARNING = "warning",
 }
 
+export enum SweetAlertIcon {
+  ERROR = "error",
+  SUCCESS = "success",
+  INFO = "info",
+  WARNING = "warning",
+}
+
 export enum SampleDetailsFields {
   SAMPLE_CODE = "Sample Code",
   CLIENT = "Client",
@@ -85,4 +95,20 @@ export enum SampleDetailsFields {
   ANALYSIS_DATE = "Analysis date",
   SAMPLE_LOCATION = "Location",
   RESPONSABLE = "Responsable",
+}
+
+export enum SharedTextFieldVariants {
+  STANDARD = "standard",
+  FILLED = "filled",
+  OUTLINED = "outlined",
+}
+
+export enum IconNames {
+  VIEW = "view",
+  EDIT = "edit",
+  CREATE = "create",
+  DELETE = "delete",
+  CLOSE = "close",
+  SAVE = "save",
+  SEARCH = "search",
 }

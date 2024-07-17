@@ -1,10 +1,7 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
-import dayjs from "dayjs";
 import {
-  SAMPLE_SUCCESSFULLY_CREATED_TEXT,
   SAMPLES_CREATE_BUTTON_LABEL,
-  SAMPLES_PAGE_DIALOG_TITLE,
   SAMPLES_TABLE_HEADER_LABELS,
   SAMPLES_TITLE_CONFIG,
 } from "../../../utils/constants/pages/samples";
@@ -15,57 +12,33 @@ import Typography from "../../atoms/Typography/Typography";
 import Spinner from "../../atoms/Spinner/Spinner";
 import Table from "../Table/Table";
 import Button from "../../atoms/Button/Button";
-import {ButtonConfig} from "../../atoms/Button/Types";
-import Dialog from "../../molecules/Dialog/Dialog";
 import {
   SharedButtonColors,
-  SharedButtonCommonLabels,
   SharedButtonIcons,
   SharedButtonSizes,
   SharedButtonVariants,
   SnackBarSeverity,
 } from "../../../utils/enums";
-import {useModal} from "../../../utils/hooks/useModal";
-import SampleForm from "../SampleForm/SampleForm";
-import {useForm} from "../../../utils/hooks/useForm";
-import {
-  isEmpty,
-  isNotValidDate,
-} from "../../../utils/constants/form/validations";
-import {sampleFormToSample} from "../../../adapters/samples";
-import Snackbar from "../../molecules/SnackBar/SnackBar";
-import {FormProps} from "../../../utils/constants/form/formType";
-import {DATEPICKER_FORMAT} from "../../../utils/constants/pages/shared";
-import {FormError} from "../SampleForm/Types";
 import {SampleContentStyles} from "./SamplesContentStyles";
 import {useSnackBar} from "../../../utils/hooks/useSnackBar";
+import {useSideSection} from "../../../utils/hooks/useSideSection";
+import SideSection from "../SideSection/SideSection";
+import SampleDetail from "../SampleDetail/SampleDetail";
 
-interface SamplesContentProps {
-  form: FormProps;
-  isNotValidForm: boolean;
-  formFieldsErrors: FormError;
-  defaultFormValue: FormProps;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleDateChange: (value: dayjs.Dayjs | null, fieldName: string) => void;
-  getTextFieldHelperText: (fieldName: string) => string;
-  cleanForm: (form: FormProps) => void;
-}
-
-function SamplesContent({
-  form,
-  defaultFormValue,
-  isNotValidForm,
-  formFieldsErrors,
-  handleChange,
-  handleDateChange,
-  getTextFieldHelperText,
-  cleanForm,
-}: SamplesContentProps): React.ReactElement {
+function SamplesContent(): React.ReactElement {
   const [rows, setRows] = useState<TableRowProps[]>([]);
-  const {samples, getSamples, createSample, isLoading, error} = useSample();
-  const {isSnackBarOpen, snackBarText, snackBarSeverity, showSnackBarMessage} =
-    useSnackBar();
-  const {isOpen, openModal, closeModal} = useModal();
+  const [isReadOnlyMode, setIsReadOnlyMode] = useState(true);
+
+  const {samples, isLoading, error, getSamples, setSelectedSample} =
+    useSample();
+  const {showSnackBarMessage} = useSnackBar();
+  const {isSideSectionOpen, setIsSideSectionOpen} = useSideSection();
+
+  const handleOpenSideSection = () => {
+    setSelectedSample(null);
+    setIsReadOnlyMode(false);
+    setIsSideSectionOpen(true);
+  };
 
   useEffect(() => {
     if (samples) {
@@ -75,56 +48,9 @@ function SamplesContent({
 
   useEffect(() => {
     if (error) {
-      showSnackBarMessage(error, SnackBarSeverity.ERROR);
+      showSnackBarMessage(error, SnackBarSeverity.ERROR, getSamples);
     }
   }, [error]);
-
-  const handleCreateReport = () => {
-    createSample(sampleFormToSample(form)).then((newSample) => {
-      if (newSample) {
-        showSnackBarMessage(
-          SAMPLE_SUCCESSFULLY_CREATED_TEXT,
-          SnackBarSeverity.SUCCESS,
-          getSamples,
-        );
-        handleCloseModal();
-      }
-    });
-  };
-
-  const handleCloseModal = () => {
-    closeModal();
-    cleanForm(defaultFormValue);
-  };
-
-  const buttonPageConfig: ButtonConfig = {
-    label: SAMPLES_CREATE_BUTTON_LABEL,
-    variant: SharedButtonVariants.OUTLINED,
-    size: SharedButtonSizes.SMALL,
-    color: SharedButtonColors.PRIMARY,
-    icon: SharedButtonIcons.CREATE,
-    onClick: openModal,
-  };
-
-  const dialogActions = (
-    <Box>
-      <Button
-        label={SharedButtonCommonLabels.CANCEL}
-        variant={SharedButtonVariants.OUTLINED}
-        size={SharedButtonSizes.SMALL}
-        color={SharedButtonColors.ERROR}
-        onClick={handleCloseModal}
-      />
-      <Button
-        label={SharedButtonCommonLabels.SAVE}
-        disabled={isNotValidForm}
-        variant={SharedButtonVariants.OUTLINED}
-        size={SharedButtonSizes.SMALL}
-        color={SharedButtonColors.PRIMARY}
-        onClick={handleCreateReport}
-      />
-    </Box>
-  );
 
   return isLoading ? (
     <Spinner />
@@ -133,82 +59,25 @@ function SamplesContent({
       <Box sx={SampleContentStyles.titleContentContainer}>
         <Typography {...SAMPLES_TITLE_CONFIG} />
         <Box sx={SampleContentStyles.titleContentActions}>
-          <Button {...buttonPageConfig} />
+          <Button
+            label={SAMPLES_CREATE_BUTTON_LABEL}
+            variant={SharedButtonVariants.OUTLINED}
+            size={SharedButtonSizes.SMALL}
+            color={SharedButtonColors.PRIMARY}
+            icon={SharedButtonIcons.CREATE}
+            onClick={handleOpenSideSection}
+          />
         </Box>
       </Box>
       <Table headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rows} />
-      <Dialog
-        isOpen={isOpen}
-        dialogTitle={SAMPLES_PAGE_DIALOG_TITLE}
-        onClose={handleCloseModal}
-        dialogActions={dialogActions}
-      >
-        <Box>
-          <SampleForm
-            form={form}
-            formFieldsErrors={formFieldsErrors}
-            handleChange={handleChange}
-            handleDateChange={handleDateChange}
-            getTextFieldHelperText={getTextFieldHelperText}
-          />
-        </Box>
-      </Dialog>
-      <Snackbar
-        isOpen={isSnackBarOpen}
-        snackBarText={snackBarText}
-        severity={snackBarSeverity}
-      />
+      <SideSection isOpen={isSideSectionOpen}>
+        <SampleDetail
+          isReadOnlyMode={isReadOnlyMode}
+          setIsReadOnlyMode={setIsReadOnlyMode}
+        />
+      </SideSection>
     </Box>
   );
 }
 
-export const SamplesContentContainer = (): React.ReactElement => {
-  const {
-    isNotValidForm,
-    form,
-    formFieldsErrors,
-    handleChange,
-    handleDateChange,
-    getTextFieldHelperText,
-    setFormFieldsValidationFunctions,
-    cleanForm,
-  } = useForm();
-  const today = dayjs().format(DATEPICKER_FORMAT);
-  const defaultFormValue: FormProps = {
-    sampleCode: "",
-    client: "",
-    getSampleDate: today,
-    receptionDate: today,
-    analysisDate: today,
-    sampleLocation: "",
-    responsable: "",
-  };
-
-  useEffect(() => {
-    setFormFieldsValidationFunctions({
-      sampleCode: [isEmpty],
-      client: [isEmpty],
-      getSampleDate: [isEmpty, isNotValidDate],
-      receptionDate: [isEmpty, isNotValidDate],
-      analysisDate: [isEmpty, isNotValidDate],
-      sampleLocation: [isEmpty],
-      responsable: [isEmpty],
-    });
-    cleanForm(defaultFormValue);
-  }, []);
-
-  return (
-    <SamplesContent
-      form={form}
-      defaultFormValue={defaultFormValue}
-      isNotValidForm={isNotValidForm}
-      formFieldsErrors={formFieldsErrors}
-      handleChange={handleChange}
-      handleDateChange={handleDateChange}
-      getTextFieldHelperText={getTextFieldHelperText}
-      cleanForm={cleanForm}
-    />
-  );
-};
-
-export default SamplesContentContainer;
+export default SamplesContent;
