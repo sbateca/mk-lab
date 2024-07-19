@@ -20,6 +20,7 @@ import {
   SAMPLE_DELETE_CONFIRMATION_TEXT,
   SAMPLE_SUCCESSFULLY_DELETED_TEXT,
   SAMPLE_DELETE_CONFIRMATION_TITLE,
+  SAMPLE_DETAILS_TITLE_TEXT,
 } from "../../../utils/constants/pages/samples";
 import {useSideSection} from "../../../utils/hooks/useSideSection";
 
@@ -35,12 +36,13 @@ function TableActionButtons({
     error,
   } = useSample();
   const {showSnackBarMessage} = useSnackBar();
-  const {setIsSideSectionOpen} = useSideSection();
+  const {setIsSideSectionOpen, setSideSectionTitle} = useSideSection();
 
   const handleOpenSideSection = async (sampleId: string) => {
     const sample = await getSampleById(sampleId);
     if (sample) {
       setSelectedSample(sample);
+      setSideSectionTitle(SAMPLE_DETAILS_TITLE_TEXT);
       setIsSideSectionOpen(true);
     }
   };

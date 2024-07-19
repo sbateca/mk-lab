@@ -27,6 +27,7 @@ interface ITypographyProps {
   hasButterBottom?: boolean;
   align?: "inherit" | "left" | "right" | "center" | "justify";
   color?: TypographyColor;
+  sx?: Record<string, unknown>;
 }
 
 export default ITypographyProps;

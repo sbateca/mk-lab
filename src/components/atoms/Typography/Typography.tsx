@@ -12,6 +12,7 @@ function Typography({
   hasButterBottom = false,
   align = "left",
   color = "black",
+  sx = {},
 }: ITypographyProps): React.ReactElement {
   const textColor = typographyStyle[color];
   return (
@@ -23,6 +24,7 @@ function Typography({
       gutterBottom={hasButterBottom}
       align={align}
       color={textColor}
+      sx={{...sx}}
     >
       {text}
     </MuiTypography>

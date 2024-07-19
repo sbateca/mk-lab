@@ -1,6 +1,7 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {
   Box,
+  Chip,
   Divider,
   Stack,
   TextField,
@@ -24,6 +25,8 @@ import {
   SharedButtonCommonLabels,
   SharedButtonSizes,
   SharedButtonVariants,
+  SharedChipColors,
+  SharedChipSizes,
   SharedTextFieldVariants,
   SharedTypographyAlign,
   SharedTypographyColors,
@@ -33,7 +36,6 @@ import {
 import {
   SAMPLE_SUCCESSFULLY_CREATED_TEXT,
   SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
-  SAMPLES_PAGE_DETAIL_TITLE,
 } from "../../../utils/constants/pages/samples";
 import {
   ANALYSIS_DATE_LABEL_TEXT,
@@ -94,7 +96,7 @@ function SampleDetail({
     isLoading,
     error,
   } = useSample();
-  const {setIsSideSectionOpen} = useSideSection();
+  const {setIsSideSectionOpen, sideSectionTitle} = useSideSection();
   const {
     isNotValidForm,
     form,
@@ -181,6 +183,37 @@ function SampleDetail({
     };
   };
 
+  const getEditModeChip = (): React.ReactNode => {
+    if (selectedSample) {
+      return (
+        <Stack direction={"row"} spacing={1} sx={{marginLeft: "10px"}}>
+          <Typography
+            text={"Edit mode"}
+            variant={SharedTypographyVariants.CAPTION}
+            align={SharedTypographyAlign.LEFT}
+            color={SharedTypographyColors.TEXT_SECONDARY}
+            padding="0 0 5px 0"
+            sx={{alignSelf: "center"}}
+          />
+          {isReadOnlyMode ? (
+            <Chip
+              label="OFF"
+              size={SharedChipSizes.SMALL}
+              color={SharedChipColors.DEFAULT}
+            />
+          ) : (
+            <Chip
+              label="ON"
+              size={SharedChipSizes.SMALL}
+              color={SharedChipColors.SUCCESS}
+            />
+          )}
+        </Stack>
+      );
+    }
+    return null;
+  };
+
   useEffect(() => {
     setFormFieldsValidationFunctions({
       sampleCode: [isEmpty],
@@ -209,13 +242,16 @@ function SampleDetail({
   return (
     <Box sx={getBoxContainerProps(isLessThanMediumScreen) as SxProps}>
       <Stack direction="row">
-        <Typography
-          text={SAMPLES_PAGE_DETAIL_TITLE}
-          variant={SharedTypographyVariants.H6}
-          align={SharedTypographyAlign.LEFT}
-          color={SharedTypographyColors.PRIMARY}
-          padding="0 0 5px 0"
-        />
+        <Stack direction={"row"}>
+          <Typography
+            text={sideSectionTitle}
+            variant={SharedTypographyVariants.H6}
+            align={SharedTypographyAlign.LEFT}
+            color={SharedTypographyColors.PRIMARY}
+            padding="0 0 5px 0"
+          />
+          {getEditModeChip()}
+        </Stack>
         <Button
           disabled={isLoading}
           label={SharedButtonCommonLabels.CLOSE}

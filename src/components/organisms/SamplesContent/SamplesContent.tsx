@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 import {
+  CREATE_SAMPLE_TITLE_TEXT,
   SAMPLES_CREATE_BUTTON_LABEL,
   SAMPLES_TABLE_HEADER_LABELS,
   SAMPLES_TITLE_CONFIG,
@@ -32,11 +33,13 @@ function SamplesContent(): React.ReactElement {
   const {samples, isLoading, error, getSamples, setSelectedSample} =
     useSample();
   const {showSnackBarMessage} = useSnackBar();
-  const {isSideSectionOpen, setIsSideSectionOpen} = useSideSection();
+  const {isSideSectionOpen, setIsSideSectionOpen, setSideSectionTitle} =
+    useSideSection();
 
   const handleOpenSideSection = () => {
     setSelectedSample(null);
     setIsReadOnlyMode(false);
+    setSideSectionTitle(CREATE_SAMPLE_TITLE_TEXT);
     setIsSideSectionOpen(true);
   };
 

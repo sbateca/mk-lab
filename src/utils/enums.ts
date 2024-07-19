@@ -5,6 +5,17 @@ export enum SharedButtonColors {
   INFO = "info",
   SUCCESS = "success",
   WARNING = "warning",
+  DEFAULT = "default",
+}
+
+export enum SharedChipColors {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  ERROR = "error",
+  INFO = "info",
+  SUCCESS = "success",
+  WARNING = "warning",
+  DEFAULT = "default",
 }
 
 export enum SharedButtonIcons {
@@ -15,6 +26,12 @@ export enum SharedButtonIcons {
 }
 
 export enum SharedButtonSizes {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
+
+export enum SharedChipSizes {
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",
