@@ -1,18 +1,20 @@
 import {useEffect, useState} from "react";
 import {Box} from "@mui/material";
+
 import {
-  CREATE_SAMPLE_TITLE_TEXT,
-  SAMPLES_CREATE_BUTTON_LABEL,
-  SAMPLES_TABLE_HEADER_LABELS,
-  SAMPLES_TITLE_CONFIG,
-} from "../../../utils/constants/pages/samples";
-import {samplesToTableRows} from "../../../adapters/tableRow";
+  REPORTS_TITLE_CONFIG,
+  REPORTS_TABLE_HEADER_LABELS,
+  REPORT_CREATE_BUTTON_LABEL,
+  CREATE_REPORT_TITLE_TEXT,
+} from "../../../utils/constants/pages/reports";
+import {reportsToTableRows} from "../../../adapters/tableRow";
 import {TableRowProps} from "../../molecules/TableRow/Types";
-import {useSample} from "../../../utils/hooks/useSample";
+import {useReports} from "../../../utils/hooks/useReports";
 import Typography from "../../atoms/Typography/Typography";
 import Spinner from "../../atoms/Spinner/Spinner";
 import Table from "../Table/Table";
 import Button from "../../atoms/Button/Button";
+import {ReportsContentStyles} from "./ReportsContentStyles";
 import {
   SharedButtonColors,
   SharedButtonIcons,
@@ -20,54 +22,56 @@ import {
   SharedButtonVariants,
   SnackBarSeverity,
 } from "../../../utils/enums";
-import {SampleContentStyles} from "./SamplesContentStyles";
 import {useSnackBar} from "../../../utils/hooks/useSnackBar";
 import {useSideSection} from "../../../utils/hooks/useSideSection";
 import SideSection from "../SideSection/SideSection";
-import SampleDetail from "../SampleDetail/SampleDetail";
+import ReportsDetail from "../ReportsDetail/ReportsDetail";
+import {useSample} from "../../../utils/hooks/useSample";
 import {useSampleType} from "../../../utils/hooks/useSampleType";
-import {useClient} from "../../../utils/hooks/useClient";
 
-function SamplesContent(): React.ReactElement {
+function ReportsContent(): React.ReactElement {
   const [rows, setRows] = useState<TableRowProps[]>([]);
   const [isReadOnlyMode, setIsReadOnlyMode] = useState(true);
 
-  const {samples, isLoading, error, getSamples, setSelectedSample} =
-    useSample();
-  const {clients} = useClient();
+  const {reports, getReports, setSelectedReport, isLoading, error} =
+    useReports();
   const {sampleTypes} = useSampleType();
+  const {samples} = useSample();
   const {showSnackBarMessage} = useSnackBar();
   const {isSideSectionOpen, setIsSideSectionOpen, setSideSectionTitle} =
     useSideSection();
 
   const handleOpenSideSection = () => {
-    setSelectedSample(null);
+    setSelectedReport(null);
     setIsReadOnlyMode(false);
-    setSideSectionTitle(CREATE_SAMPLE_TITLE_TEXT);
+    setSideSectionTitle(CREATE_REPORT_TITLE_TEXT);
     setIsSideSectionOpen(true);
   };
 
   useEffect(() => {
-    if (samples) {
-      setRows(samplesToTableRows(samples, sampleTypes, clients));
+    if (reports) {
+      setRows(reportsToTableRows(reports, samples, sampleTypes));
     }
-  }, [samples]);
+  }, [reports]);
 
   useEffect(() => {
     if (error) {
-      showSnackBarMessage(error, SnackBarSeverity.ERROR, getSamples);
+      showSnackBarMessage(error, SnackBarSeverity.ERROR, getReports);
     }
   }, [error]);
+
+  if (isLoading) return <Spinner />;
+  if (error) return <Typography text={error} variant="h6" />;
 
   return isLoading ? (
     <Spinner />
   ) : (
     <Box>
-      <Box sx={SampleContentStyles.titleContentContainer}>
-        <Typography {...SAMPLES_TITLE_CONFIG} />
-        <Box sx={SampleContentStyles.titleContentActions}>
+      <Box sx={ReportsContentStyles.titleContentContainer}>
+        <Typography {...REPORTS_TITLE_CONFIG} />
+        <Box sx={ReportsContentStyles.titleContentActions}>
           <Button
-            label={SAMPLES_CREATE_BUTTON_LABEL}
+            label={REPORT_CREATE_BUTTON_LABEL}
             variant={SharedButtonVariants.OUTLINED}
             size={SharedButtonSizes.SMALL}
             color={SharedButtonColors.PRIMARY}
@@ -76,9 +80,9 @@ function SamplesContent(): React.ReactElement {
           />
         </Box>
       </Box>
-      <Table headerLabels={SAMPLES_TABLE_HEADER_LABELS} rows={rows} />
+      <Table headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rows} />
       <SideSection isOpen={isSideSectionOpen}>
-        <SampleDetail
+        <ReportsDetail
           isReadOnlyMode={isReadOnlyMode}
           setIsReadOnlyMode={setIsReadOnlyMode}
         />
@@ -87,4 +91,4 @@ function SamplesContent(): React.ReactElement {
   );
 }
 
-export default SamplesContent;
+export default ReportsContent;

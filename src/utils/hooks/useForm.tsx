@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, SyntheticEvent, useEffect, useState} from "react";
 import {
   FieldValidations,
   FormError,
@@ -6,6 +6,8 @@ import {
 import {FormProps} from "../constants/form/formType";
 import {Dayjs} from "dayjs";
 import {DATEPICKER_FORMAT} from "../constants/pages/shared";
+import {SelectChangeEvent} from "@mui/material";
+import {AutoCompleteOption} from "../../components/molecules/AutoComplete/types";
 
 export const useForm = () => {
   const [formFieldsErrors, setFormFieldsErrors] = useState<FormError>({});
@@ -15,6 +17,19 @@ export const useForm = () => {
     useState<FieldValidations>({});
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+    setForm((prevForm: FormProps) => {
+      const updatedForm = {
+        ...prevForm,
+        [name]: value,
+      };
+      updateErrorsObject(name, value);
+      checkNotValidForm(formFieldsErrors);
+      return updatedForm;
+    });
+  };
+
+  const handleSelectChange = (event: SelectChangeEvent<string>) => {
     const {name, value} = event.target;
     setForm((prevForm: FormProps) => {
       const updatedForm = {
@@ -45,6 +60,22 @@ export const useForm = () => {
         return value.format(DATEPICKER_FORMAT);
       } else return value.toString();
     } else return "";
+  };
+
+  const handleAutoCompleteChange = (
+    _: SyntheticEvent,
+    newValue: AutoCompleteOption | null,
+    name: string,
+  ) => {
+    setForm((prevForm: FormProps) => {
+      const updatedForm = {
+        ...prevForm,
+        [name]: newValue?.id || "",
+      };
+      updateErrorsObject(name, newValue?.optionLabel || "");
+      checkNotValidForm(formFieldsErrors);
+      return updatedForm;
+    });
   };
 
   const updateErrorsObject = (fieldName: string, fieldValue: string) => {
@@ -110,6 +141,8 @@ export const useForm = () => {
     formFieldsErrors,
     handleChange,
     handleDateChange,
+    handleSelectChange,
+    handleAutoCompleteChange,
     getTextFieldHelperText,
     setFormFieldsValidationFunctions,
     setDefaultFormFieldsValues,

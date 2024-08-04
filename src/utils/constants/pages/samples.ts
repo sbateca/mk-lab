@@ -5,7 +5,7 @@ export const SAMPLES_PAGE_NAME = "Samples";
 export const SAMPLES_TITLE_CONFIG: ITypographyProps =
   getSharedPageTitleConfig(SAMPLES_PAGE_NAME);
 export const SAMPLES_TABLE_HEADER_LABELS = [
-  "Sample Code",
+  "Sample Name",
   "Client",
   "Get Date",
   "Reception Date",

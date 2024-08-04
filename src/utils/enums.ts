@@ -1,3 +1,7 @@
+export enum SharedMenuItems {
+  SAMPLES = "Samples",
+  REPORTS = "Reports",
+}
 export enum SharedButtonColors {
   PRIMARY = "primary",
   SECONDARY = "secondary",
@@ -82,6 +86,7 @@ export enum SharedTypographyAlign {
 
 export enum SamplesFormFields {
   SAMPLE_CODE = "sampleCode",
+  SAMPLE_NAME = "sampleName",
   CLIENT = "client",
   GET_SAMPLE_DATE = "getSampleDate",
   RECEPTION_DATE = "receptionDate",
@@ -120,6 +125,12 @@ export enum SharedTextFieldVariants {
   OUTLINED = "outlined",
 }
 
+export enum SelectVariants {
+  STANDARD = "standard",
+  FILLED = "filled",
+  OUTLINED = "outlined",
+}
+
 export enum IconNames {
   VIEW = "view",
   EDIT = "edit",
@@ -128,4 +139,14 @@ export enum IconNames {
   CLOSE = "close",
   SAVE = "save",
   SEARCH = "search",
+}
+
+export enum ReportFormFields {
+  REPORT_DATE = "reportDate",
+  SAMPLE_ID = "sampleId",
+  SAMPLE_TYPE = "sampleType",
+  ANALYTE = "analyte",
+  ANALYSIS_METHOD = "analysisMethod",
+  CRITERIA = "criteria",
+  RESULT = "result",
 }

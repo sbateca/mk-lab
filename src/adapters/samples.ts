@@ -9,10 +9,10 @@ import {
 export const axiosResponseToSamples = (
   response: AxiosResponse<unknown>,
 ): Sample[] => {
-  return getSamplesArrayFromData(response.data);
+  return getSamplesFromData(response.data);
 };
 
-const getSamplesArrayFromData = (data: unknown): Sample[] => {
+const getSamplesFromData = (data: unknown): Sample[] => {
   if (data instanceof Array) {
     return data
       .map((sample: unknown) => {
@@ -36,7 +36,7 @@ const isValidSample = (sample: unknown): sample is Sample => {
     return (
       typeof sampleObj.id === "string" &&
       typeof sampleObj.sampleCode === "string" &&
-      typeof sampleObj.client === "string" &&
+      typeof sampleObj.clientId === "string" &&
       typeof sampleObj.getSampleDate === "string" &&
       typeof sampleObj.receptionDate === "string" &&
       typeof sampleObj.analysisDate === "string" &&
@@ -54,7 +54,8 @@ export const sampleFormToSample = (
   return {
     id: sampleId || uuidv4(),
     sampleCode: form.sampleCode as string,
-    client: form.client as string,
+    sampleTypeId: form.sampleType as string,
+    clientId: form.client as string,
     getSampleDate: form.getSampleDate as string,
     receptionDate: form.receptionDate as string,
     analysisDate: form.analysisDate as string,
@@ -66,7 +67,8 @@ export const sampleFormToSample = (
 export const sampleToSampleForm = (sample: Sample): Record<string, string> => {
   return {
     sampleCode: sample.sampleCode,
-    client: sample.client,
+    sampleType: sample.sampleTypeId,
+    client: sample.clientId,
     getSampleDate: sample.getSampleDate,
     receptionDate: sample.receptionDate,
     analysisDate: sample.analysisDate,

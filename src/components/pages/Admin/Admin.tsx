@@ -10,22 +10,28 @@ import {ReportsProvider} from "../../../context/Services/ReportsContext";
 import {AdminStyle} from "./AdminStyle";
 import {SnackBarProvider} from "../../../context/SnackBar/SnackBarContext";
 import {SideSectionProvider} from "../../../context/SideSection/SideSectionContext";
+import {SampleTypeProvider} from "../../../context/Services/SampleType";
+import {ClientProvider} from "../../../context/Services/ClientContext";
 
 function Admin(): React.ReactElement {
   return (
     <SideSectionProvider>
       <SnackBarProvider>
-        <SampleProvider>
-          <ReportsProvider>
-            <Box sx={AdminStyle}>
-              <MainTemplate
-                header={<Header companyName={COMPANY_NAME} />}
-                menu={<Menu menuItems={MENU_ITEMS} />}
-                mainContent={<Content />}
-              />
-            </Box>
-          </ReportsProvider>
-        </SampleProvider>
+        <ClientProvider>
+          <SampleTypeProvider>
+            <SampleProvider>
+              <ReportsProvider>
+                <Box sx={AdminStyle}>
+                  <MainTemplate
+                    header={<Header companyName={COMPANY_NAME} />}
+                    menu={<Menu menuItems={MENU_ITEMS} />}
+                    mainContent={<Content />}
+                  />
+                </Box>
+              </ReportsProvider>
+            </SampleProvider>
+          </SampleTypeProvider>
+        </ClientProvider>
       </SnackBarProvider>
     </SideSectionProvider>
   );

@@ -3,16 +3,13 @@ import {ListItemButton as MuiListItemButton, ListItemText} from "@mui/material";
 import {useMenu} from "../../../utils/hooks/useMenu";
 import {LisItemButtonProps} from "./Types";
 import React from "react";
+import {SharedMenuItems} from "../../../utils/enums";
 
 function ListItemButton({label}: LisItemButtonProps): React.ReactElement {
-  const {
-    selectedMenuItem: selectedMenuItem,
-    setSelectedMenuItem: setSelectedItem,
-    toggleMenu,
-  } = useMenu();
+  const {selectedMenuItem, setSelectedMenuItem, toggleMenu} = useMenu();
 
-  const handleClick = (item: string) => {
-    setSelectedItem(item);
+  const handleClick = (item: SharedMenuItems) => {
+    setSelectedMenuItem(item);
     toggleMenu();
   };
 

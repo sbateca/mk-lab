@@ -2,9 +2,24 @@ import {TableRow as MuiTableRow} from "@mui/material";
 
 import TableCell from "../TableCell/TableCell";
 import {TableRowProps} from "./Types";
-import TableActionButtons from "../TableActionButtons/TableActionButtons";
+import SampleTableActionButtons from "../TableActionButtons/SampleTableActionButtons";
+import {useMenu} from "../../../utils/hooks/useMenu";
+import ReportTableActionButtons from "../TableActionButtons/ReportTableActionButtons";
+import {SharedMenuItems} from "../../../utils/enums";
 
 function TableRow({id, cells}: TableRowProps): React.ReactElement {
+  const {selectedMenuItem} = useMenu();
+
+  const getActionButtons = (): React.ReactElement => {
+    switch (selectedMenuItem) {
+      case SharedMenuItems.SAMPLES:
+        return <SampleTableActionButtons sampleId={id ?? ""} />;
+      case SharedMenuItems.REPORTS:
+        return <ReportTableActionButtons reportId={id ?? ""} />;
+      default:
+        return <></>;
+    }
+  };
   return (
     <MuiTableRow>
       {cells.map((cell, index) => {
@@ -14,9 +29,7 @@ function TableRow({id, cells}: TableRowProps): React.ReactElement {
           </TableCell>
         );
       })}
-      <TableCell align={"left"}>
-        <TableActionButtons sampleId={id ?? ""} />
-      </TableCell>
+      <TableCell align={"left"}>{getActionButtons()}</TableCell>
     </MuiTableRow>
   );
 }

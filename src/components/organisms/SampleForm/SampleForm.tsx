@@ -12,14 +12,14 @@ import {
   SharedButtonSizes,
 } from "../../../utils/enums";
 import {
-  ANALYSIS_DATE_LABEL_TEXT,
-  CLIENT_LABEL_TEXT,
-  GET_SAMPLE_DATE_LABEL_TEXT,
-  RECEPTION_DATE_LABEL_TEXT,
-  RESPONSABLE_LABEL_TEXT,
+  SAMPLE_ANALYSIS_DATE_LABEL_TEXT,
+  SAMPLE_CLIENT_LABEL_TEXT,
+  SAMPLE_GET_SAMPLE_DATE_LABEL_TEXT,
+  SAMPLE_RECEPTION_DATE_LABEL_TEXT,
+  SAMPLE_RESPONSABLE_LABEL_TEXT,
   SAMPLE_CODE_LABEL_TEXT,
   SAMPLE_LOCATION_LABEL_TEXT,
-} from "../../../utils/constants/form/sample";
+} from "../../../utils/constants/form/formLabel";
 import {SampleFormProps} from "./Types";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {DATEPICKER_VIEWS} from "../../../utils/constants/pages/shared";
@@ -55,7 +55,7 @@ function SampleForm({
             <TextField
               required
               error={!!formFieldsErrors[SamplesFormFields.CLIENT]}
-              label={CLIENT_LABEL_TEXT}
+              label={SAMPLE_CLIENT_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
               color={SharedButtonColors.PRIMARY}
@@ -74,7 +74,7 @@ function SampleForm({
                   disableFuture
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
-                  label={GET_SAMPLE_DATE_LABEL_TEXT}
+                  label={SAMPLE_GET_SAMPLE_DATE_LABEL_TEXT}
                   name={SamplesFormFields.GET_SAMPLE_DATE}
                   onChange={(value) =>
                     handleDateChange(value, SamplesFormFields.GET_SAMPLE_DATE)
@@ -100,7 +100,7 @@ function SampleForm({
                   disableFuture
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
-                  label={RECEPTION_DATE_LABEL_TEXT}
+                  label={SAMPLE_RECEPTION_DATE_LABEL_TEXT}
                   name={SamplesFormFields.RECEPTION_DATE}
                   onChange={(value) =>
                     handleDateChange(value, SamplesFormFields.RECEPTION_DATE)
@@ -129,7 +129,7 @@ function SampleForm({
                   disableFuture
                   defaultValue={today}
                   views={DATEPICKER_VIEWS}
-                  label={ANALYSIS_DATE_LABEL_TEXT}
+                  label={SAMPLE_ANALYSIS_DATE_LABEL_TEXT}
                   name={SamplesFormFields.ANALYSIS_DATE}
                   onChange={(value) =>
                     handleDateChange(value, SamplesFormFields.ANALYSIS_DATE)
@@ -168,7 +168,7 @@ function SampleForm({
             <TextField
               required
               error={!!formFieldsErrors[SamplesFormFields.RESPONSABLE]}
-              label={RESPONSABLE_LABEL_TEXT}
+              label={SAMPLE_RESPONSABLE_LABEL_TEXT}
               sx={SampleFormStyles.texfield}
               type="string"
               color={SharedButtonColors.PRIMARY}
