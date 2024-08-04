@@ -1,9 +1,7 @@
-import {Sample} from "./Sample";
-
 export interface Report {
   id: string;
   reportDate: string;
-  sample: Sample;
+  sampleId: string;
   analyte: string;
   analysisMethod: string;
   criteria: string;

@@ -1,5 +1,7 @@
+import {SharedMenuItems} from "../../../utils/enums";
+
 export interface MenuItemProps {
-  label: string;
+  label: SharedMenuItems;
 }
 
 export interface MenuProps {

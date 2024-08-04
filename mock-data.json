@@ -1,9 +1,54 @@
 {
+  "clients": [
+    {
+      "id": "b078281c-ccee-4f44-a4f4-a05745aa70f3",
+      "name": "Hotel Casino Internacional"
+    },
+    {
+      "id": "4bf96c94-f131-4d1a-aa90-6467600675f9",
+      "name": "Pasabocas D'Chic"
+    },
+    {
+      "id": "ad2fcefb-ba2f-466f-9dff-331be532946b",
+      "name": "Monterres"
+    },
+    {
+      "id": "e950af36-1c5a-4b83-a3a0-a927ebe02459",
+      "name": "Fábrica de Galletas La Moderna"
+    },
+    {
+      "id": "1981945c-826a-4e65-9110-eed433da0313",
+      "name": "Cervecería Artesanal La Buena Espuma"
+    }
+  ],
+  "sampleTypes": [
+    {
+      "id": "d52f2988-24a1-4e61-976a-cffe1838025b",
+      "name": "Bottled water"
+    },
+    {
+      "id": "1f32d26e-2573-43cd-9aa0-fc7e76872541",
+      "name": "Environmental"
+    },
+    {
+      "id": "76cf9fea-7d2c-4ac2-89ee-a353a1c10a7c",
+      "name": "Surface"
+    },
+    {
+      "id": "f1b3b3b4-1b3b-4b3b-8b3b-1b3b3b3b3b3b",
+      "name": "Pool water"
+    },
+    {
+      "id": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "name": "Drinking water"
+    }
+  ],
   "samples": [
     {
       "id": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
       "sampleCode": "1001",
-      "client": "Hotel Casino Internacional",
+      "sampleTypeId": "d52f2988-24a1-4e61-976a-cffe1838025b",
+      "clientId": "b078281c-ccee-4f44-a4f4-a05745aa70f3",
       "getSampleDate": "2024-07-02",
       "receptionDate": "2023-10-01",
       "analysisDate": "2023-10-02",
@@ -13,7 +58,8 @@
     {
       "id": "bbd4a1e1-2340-431a-8055-e7dc33bbd81d",
       "sampleCode": "1002",
-      "client": "Pasabocas D'Chic",
+      "sampleTypeId": "1f32d26e-2573-43cd-9aa0-fc7e76872541",
+      "clientId": "4bf96c94-f131-4d1a-aa90-6467600675f9",
       "getSampleDate": "2024-02-12",
       "receptionDate": "2024-02-12",
       "analysisDate": "2024-02-12",
@@ -23,7 +69,8 @@
     {
       "id": "ce59c2ba-c7f2-4df5-a8db-7dd74b7381a9",
       "sampleCode": "1003",
-      "client": "Monterres",
+      "sampleTypeId": "76cf9fea-7d2c-4ac2-89ee-a353a1c10a7c",
+      "clientId": "ad2fcefb-ba2f-466f-9dff-331be532946b",
       "getSampleDate": "2024-02-13",
       "receptionDate": "2024-02-13",
       "analysisDate": "2024-02-14",
@@ -33,7 +80,8 @@
     {
       "id": "8f129b91-08cf-4cbf-9d89-28545a1b1023",
       "sampleCode": "1004",
-      "client": "Fábrica de Galletas La Moderna",
+      "sampleTypeId": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "clientId": "e950af36-1c5a-4b83-a3a0-a927ebe02459",
       "getSampleDate": "2023-09-20",
       "receptionDate": "2023-09-21",
       "analysisDate": "2023-09-22",
@@ -43,7 +91,8 @@
     {
       "id": "e3d05cb2-343d-4ad5-a617-c7dbba54f4b5",
       "sampleCode": "1005",
-      "client": "Cervecería Artesanal La Buena Espuma",
+      "sampleTypeId": "1f32d26e-2573-43cd-9aa0-fc7e76872541",
+      "clientId": "ad2fcefb-ba2f-466f-9dff-331be532946b",
       "getSampleDate": "2023-08-10",
       "receptionDate": "2023-08-11",
       "analysisDate": "2023-08-12",
@@ -54,17 +103,8 @@
   "reports": [
     {
       "id": "79f23d64-dabb-4cb8-80a9-d004ce55f25c",
-      "reportDate": "2023-10-10",
-      "sample": {
-        "id": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
-        "sampleCode": "1001",
-        "client": "Hotel Casino Internacional",
-        "getSampleDate": "2023-10-01",
-        "receptionDate": "2023-10-02",
-        "analysisDate": "2023-10-02",
-        "responsable": "Karen Martinez",
-        "sampleLocation": "Hotel's restaurant"
-      },
+      "reportDate": "2024-08-01",
+      "sampleId": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
       "analyte": "Coliformes totales",
       "analysisMethod": "NTC 4772:2008",
       "criteria": "Resolución 2115/2007",
@@ -73,16 +113,7 @@
     {
       "id": "cf0f69f0-dad8-4c8d-9a0a-69fdd29c2f8f",
       "reportDate": "2023-09-25",
-      "sample": {
-        "id": "bbd4a1e1-2340-431a-8055-e7dc33bbd81d",
-        "sampleCode": "1002",
-        "client": "Pasabocas D'Chic",
-        "getSampleDate": "2024-02-12",
-        "receptionDate": "2024-02-12",
-        "analysisDate": "2024-02-12",
-        "responsable": "Karen Martinez",
-        "sampleLocation": "Main Vault"
-      },
+      "sampleId": "bbd4a1e1-2340-431a-8055-e7dc33bbd81d",
       "analyte": "Contenido de grasa",
       "analysisMethod": "AOAC 945.16",
       "criteria": "Estándar de la industria",
@@ -91,7 +122,7 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "username": "admin"
     }

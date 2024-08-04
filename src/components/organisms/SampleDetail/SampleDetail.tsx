@@ -20,7 +20,9 @@ import {
   StackRowDirectionSpacingPropsProps,
 } from "./Types";
 import {
+  ReportFormFields,
   SamplesFormFields,
+  SelectVariants,
   SharedButtonColors,
   SharedButtonCommonLabels,
   SharedButtonSizes,
@@ -38,14 +40,15 @@ import {
   SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
 } from "../../../utils/constants/pages/samples";
 import {
-  ANALYSIS_DATE_LABEL_TEXT,
-  CLIENT_LABEL_TEXT,
-  GET_SAMPLE_DATE_LABEL_TEXT,
-  RECEPTION_DATE_LABEL_TEXT,
-  RESPONSABLE_LABEL_TEXT,
+  SAMPLE_ANALYSIS_DATE_LABEL_TEXT,
+  SAMPLE_CLIENT_LABEL_TEXT,
+  SAMPLE_GET_SAMPLE_DATE_LABEL_TEXT,
+  SAMPLE_RECEPTION_DATE_LABEL_TEXT,
+  SAMPLE_RESPONSABLE_LABEL_TEXT,
   SAMPLE_CODE_LABEL_TEXT,
   SAMPLE_LOCATION_LABEL_TEXT,
-} from "../../../utils/constants/form/sample";
+  SAMPLE_TYPE_LABEL_TEXT,
+} from "../../../utils/constants/form/formLabel";
 import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -69,6 +72,10 @@ import {FormProps} from "../../../utils/constants/form/formType";
 import SampleSideSectionButtons from "./SampleSideSectionActions";
 import {useSideSection} from "../../../utils/hooks/useSideSection";
 import {SxProps} from "@mui/system";
+import AutoComplete from "../../molecules/AutoComplete/AutoComplete";
+import {AutoCompleteOption} from "../../molecules/AutoComplete/types";
+import {useSampleType} from "../../../utils/hooks/useSampleType";
+import {useClient} from "../../../utils/hooks/useClient";
 
 function SampleDetail({
   isReadOnlyMode,
@@ -80,6 +87,7 @@ function SampleDetail({
 
   const defaultFormValue: FormProps = {
     sampleCode: "",
+    sampleType: "",
     client: "",
     getSampleDate: today.format(DATEPICKER_FORMAT),
     receptionDate: today.format(DATEPICKER_FORMAT),
@@ -96,6 +104,8 @@ function SampleDetail({
     isLoading,
     error,
   } = useSample();
+  const {clients} = useClient();
+  const {sampleTypes} = useSampleType();
   const {setIsSideSectionOpen, sideSectionTitle} = useSideSection();
   const {
     isNotValidForm,
@@ -104,6 +114,7 @@ function SampleDetail({
     formFieldsErrors,
     handleChange,
     handleDateChange,
+    handleAutoCompleteChange,
     getTextFieldHelperText,
     setFormFieldsValidationFunctions,
     cleanForm,
@@ -214,9 +225,28 @@ function SampleDetail({
     return null;
   };
 
+  const getAutoCompleteOptionsFromClients = (): AutoCompleteOption[] => {
+    return (
+      clients?.map((client) => ({
+        id: client.id,
+        optionLabel: client.name,
+      })) ?? []
+    );
+  };
+
+  const getAutoCompleteOptionsFromSampleTypes = (): AutoCompleteOption[] => {
+    return (
+      sampleTypes?.map((sampleType) => ({
+        id: sampleType.id,
+        optionLabel: sampleType.name,
+      })) ?? []
+    );
+  };
+
   useEffect(() => {
     setFormFieldsValidationFunctions({
       sampleCode: [isEmpty],
+      sampleType: [isEmpty],
       client: [isEmpty],
       getSampleDate: [isEmpty, isNotValidDate],
       receptionDate: [isEmpty, isNotValidDate],
@@ -266,41 +296,48 @@ function SampleDetail({
       <Divider />
       <Stack {...getStackContainerProps(isLessThanMediumScreen)}>
         <Stack {...getStackRowProps(isLessThanMediumScreen)}>
-          <TextField
-            required
-            error={!!formFieldsErrors[SamplesFormFields.SAMPLE_CODE]}
-            label={SAMPLE_CODE_LABEL_TEXT}
-            color={SharedButtonColors.PRIMARY}
-            size={SharedButtonSizes.SMALL}
-            name={SamplesFormFields.SAMPLE_CODE}
-            onChange={handleChange}
-            helperText={getTextFieldHelperText(SamplesFormFields.SAMPLE_CODE)}
-            value={form?.sampleCode ?? ""}
-            variant={SharedTextFieldVariants.STANDARD}
-            fullWidth={true}
-            InputProps={{
-              readOnly: isReadOnlyMode,
-            }}
-          />
-          <TextField
-            required
-            error={!!formFieldsErrors[SamplesFormFields.CLIENT]}
-            label={CLIENT_LABEL_TEXT}
-            type="string"
-            color={SharedButtonColors.PRIMARY}
-            size={SharedButtonSizes.SMALL}
-            onChange={handleChange}
-            name={SamplesFormFields.CLIENT}
-            helperText={getTextFieldHelperText(SamplesFormFields.CLIENT)}
-            value={form.client ?? ""}
-            variant={SharedTextFieldVariants.STANDARD}
-            fullWidth={true}
-            InputProps={{
-              readOnly: isReadOnlyMode,
-            }}
-          />
+          <Stack {...getStackFieldProps()}>
+            <TextField
+              required
+              error={!!formFieldsErrors[SamplesFormFields.SAMPLE_CODE]}
+              label={SAMPLE_CODE_LABEL_TEXT}
+              color={SharedButtonColors.PRIMARY}
+              size={SharedButtonSizes.SMALL}
+              name={SamplesFormFields.SAMPLE_CODE}
+              onChange={handleChange}
+              helperText={getTextFieldHelperText(SamplesFormFields.SAMPLE_CODE)}
+              value={form?.sampleCode ?? ""}
+              variant={SharedTextFieldVariants.STANDARD}
+              fullWidth={true}
+              InputProps={{
+                readOnly: isReadOnlyMode,
+              }}
+            />
+          </Stack>
+          <Stack {...getStackFieldProps()}>
+            <AutoComplete
+              options={getAutoCompleteOptionsFromSampleTypes()}
+              label={SAMPLE_TYPE_LABEL_TEXT}
+              value={form.sampleType}
+              variant={SelectVariants.STANDARD}
+              onChange={handleAutoCompleteChange}
+              name={ReportFormFields.SAMPLE_TYPE}
+              readOnly={isReadOnlyMode}
+            />
+          </Stack>
         </Stack>
         <Stack {...getStackRowProps(isLessThanMediumScreen)}>
+          <Stack {...getStackFieldProps()}>
+            <AutoComplete
+              options={getAutoCompleteOptionsFromClients()}
+              label={SAMPLE_CLIENT_LABEL_TEXT}
+              value={form.client}
+              variant={SelectVariants.STANDARD}
+              onChange={handleAutoCompleteChange}
+              name={SamplesFormFields.CLIENT}
+              readOnly={isReadOnlyMode}
+            />
+          </Stack>
           <Stack {...getStackFieldProps()}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
@@ -308,7 +345,7 @@ function SampleDetail({
                 disableFuture
                 defaultValue={today}
                 views={DATEPICKER_VIEWS}
-                label={GET_SAMPLE_DATE_LABEL_TEXT}
+                label={SAMPLE_GET_SAMPLE_DATE_LABEL_TEXT}
                 name={SamplesFormFields.GET_SAMPLE_DATE}
                 onChange={(value) =>
                   handleDateChange(value, SamplesFormFields.GET_SAMPLE_DATE)
@@ -327,6 +364,8 @@ function SampleDetail({
               />
             </LocalizationProvider>
           </Stack>
+        </Stack>
+        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
           <Stack {...SampleDetailStyles.stackField}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
@@ -334,7 +373,7 @@ function SampleDetail({
                 disableFuture
                 defaultValue={today}
                 views={DATEPICKER_VIEWS}
-                label={RECEPTION_DATE_LABEL_TEXT}
+                label={SAMPLE_RECEPTION_DATE_LABEL_TEXT}
                 name={SamplesFormFields.RECEPTION_DATE}
                 onChange={(value) =>
                   handleDateChange(value, SamplesFormFields.RECEPTION_DATE)
@@ -353,8 +392,6 @@ function SampleDetail({
               />
             </LocalizationProvider>
           </Stack>
-        </Stack>
-        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
           <Stack {...getStackFieldProps()}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
@@ -362,7 +399,7 @@ function SampleDetail({
                 disableFuture
                 defaultValue={today}
                 views={DATEPICKER_VIEWS}
-                label={ANALYSIS_DATE_LABEL_TEXT}
+                label={SAMPLE_ANALYSIS_DATE_LABEL_TEXT}
                 name={SamplesFormFields.ANALYSIS_DATE}
                 onChange={(value) =>
                   handleDateChange(value, SamplesFormFields.ANALYSIS_DATE)
@@ -380,6 +417,8 @@ function SampleDetail({
               />
             </LocalizationProvider>
           </Stack>
+        </Stack>
+        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
           <TextField
             required
             error={!!formFieldsErrors[SamplesFormFields.SAMPLE_LOCATION]}
@@ -399,25 +438,25 @@ function SampleDetail({
               readOnly: isReadOnlyMode,
             }}
           />
-        </Stack>
-        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
-          <TextField
-            required
-            error={!!formFieldsErrors[SamplesFormFields.RESPONSABLE]}
-            label={RESPONSABLE_LABEL_TEXT}
-            sx={SampleFormStyles.texfield}
-            type="string"
-            color={SharedButtonColors.PRIMARY}
-            size={SharedButtonSizes.SMALL}
-            name={SamplesFormFields.RESPONSABLE}
-            onChange={handleChange}
-            helperText={getTextFieldHelperText(SamplesFormFields.RESPONSABLE)}
-            value={form.responsable ?? ""}
-            variant={SharedTextFieldVariants.STANDARD}
-            InputProps={{
-              readOnly: isReadOnlyMode,
-            }}
-          />
+          <Stack {...getStackFieldProps()}>
+            <TextField
+              required
+              error={!!formFieldsErrors[SamplesFormFields.RESPONSABLE]}
+              label={SAMPLE_RESPONSABLE_LABEL_TEXT}
+              sx={SampleFormStyles.texfield}
+              type="string"
+              color={SharedButtonColors.PRIMARY}
+              size={SharedButtonSizes.SMALL}
+              name={SamplesFormFields.RESPONSABLE}
+              onChange={handleChange}
+              helperText={getTextFieldHelperText(SamplesFormFields.RESPONSABLE)}
+              value={form.responsable ?? ""}
+              variant={SharedTextFieldVariants.STANDARD}
+              InputProps={{
+                readOnly: isReadOnlyMode,
+              }}
+            />
+          </Stack>
         </Stack>
       </Stack>
       <Box

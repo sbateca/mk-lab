@@ -14,7 +14,7 @@ import {
   SnackBarSeverity,
   SweetAlertIcon,
 } from "../../../utils/enums";
-import {TableActionButtonsProps} from "./Types";
+import {SampleTableActionButtonsProps} from "./Types";
 import {
   SAMPLE_DELETE_CONFIRMATION_SUBTITLE,
   SAMPLE_DELETE_CONFIRMATION_TEXT,
@@ -24,9 +24,9 @@ import {
 } from "../../../utils/constants/pages/samples";
 import {useSideSection} from "../../../utils/hooks/useSideSection";
 
-function TableActionButtons({
+function SampleTableActionButtons({
   sampleId,
-}: TableActionButtonsProps): React.ReactElement {
+}: SampleTableActionButtonsProps): React.ReactElement {
   const {
     getSampleById,
     deleteSample,
@@ -104,4 +104,4 @@ function TableActionButtons({
   );
 }
 
-export default TableActionButtons;
+export default SampleTableActionButtons;
