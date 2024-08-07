@@ -5,13 +5,18 @@ import Header from "../../molecules/Header/Header";
 import Menu from "../../molecules/Menu/Menu";
 import Content from "../../organisms/Content/Content";
 import {COMPANY_NAME, MENU_ITEMS} from "../../../utils/constants/pages/admin";
-import {SampleProvider} from "../../../context/Services/SampleContext";
-import {ReportsProvider} from "../../../context/Services/ReportsContext";
+import {
+  SampleProvider,
+  ReportsProvider,
+  SnackBarProvider,
+  SideSectionProvider,
+  SampleTypeProvider,
+  ClientProvider,
+  AnalyteProvider,
+  CriteriaProvider,
+} from "../../../context/";
 import {AdminStyle} from "./AdminStyle";
-import {SnackBarProvider} from "../../../context/SnackBar/SnackBarContext";
-import {SideSectionProvider} from "../../../context/SideSection/SideSectionContext";
-import {SampleTypeProvider} from "../../../context/Services/SampleType";
-import {ClientProvider} from "../../../context/Services/ClientContext";
+import {AnalysisMethodProvider} from "../../../context/Services/AnalysisMethodContext";
 
 function Admin(): React.ReactElement {
   return (
@@ -21,13 +26,19 @@ function Admin(): React.ReactElement {
           <SampleTypeProvider>
             <SampleProvider>
               <ReportsProvider>
-                <Box sx={AdminStyle}>
-                  <MainTemplate
-                    header={<Header companyName={COMPANY_NAME} />}
-                    menu={<Menu menuItems={MENU_ITEMS} />}
-                    mainContent={<Content />}
-                  />
-                </Box>
+                <AnalyteProvider>
+                  <CriteriaProvider>
+                    <AnalysisMethodProvider>
+                      <Box sx={AdminStyle}>
+                        <MainTemplate
+                          header={<Header companyName={COMPANY_NAME} />}
+                          menu={<Menu menuItems={MENU_ITEMS} />}
+                          mainContent={<Content />}
+                        />
+                      </Box>
+                    </AnalysisMethodProvider>
+                  </CriteriaProvider>
+                </AnalyteProvider>
               </ReportsProvider>
             </SampleProvider>
           </SampleTypeProvider>

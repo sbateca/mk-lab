@@ -6,7 +6,7 @@ export const REPORTS_TITLE_CONFIG: ITypographyProps =
   getSharedPageTitleConfig(REPORTS_PAGE_NAME);
 export const REPORTS_TABLE_HEADER_LABELS = [
   "Report Date",
-  "Sample code / client",
+  "Sample",
   "Analyte",
   "Result",
   "Actions",

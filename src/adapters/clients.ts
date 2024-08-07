@@ -1,5 +1,5 @@
 import {AxiosResponse} from "axios";
-import {Client} from "../model/client";
+import {Client} from "../model/Client";
 import {
   RESPONSE_DATA_NOT_VALID_ERROR,
   getInvalidDataErrorMessage,

@@ -28,6 +28,7 @@ import SideSection from "../SideSection/SideSection";
 import ReportsDetail from "../ReportsDetail/ReportsDetail";
 import {useSample} from "../../../utils/hooks/useSample";
 import {useSampleType} from "../../../utils/hooks/useSampleType";
+import {useAnalyte} from "../../../utils/hooks/useAnalyte";
 
 function ReportsContent(): React.ReactElement {
   const [rows, setRows] = useState<TableRowProps[]>([]);
@@ -37,6 +38,7 @@ function ReportsContent(): React.ReactElement {
     useReports();
   const {sampleTypes} = useSampleType();
   const {samples} = useSample();
+  const {analytes} = useAnalyte();
   const {showSnackBarMessage} = useSnackBar();
   const {isSideSectionOpen, setIsSideSectionOpen, setSideSectionTitle} =
     useSideSection();
@@ -50,7 +52,7 @@ function ReportsContent(): React.ReactElement {
 
   useEffect(() => {
     if (reports) {
-      setRows(reportsToTableRows(reports, samples, sampleTypes));
+      setRows(reportsToTableRows(reports, samples, sampleTypes, analytes));
     }
   }, [reports]);
 

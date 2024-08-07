@@ -2,7 +2,7 @@ import axios from "axios";
 
 import {Sample} from "../model/Sample";
 import EnvManager from "../config/EnvManager";
-import {Client} from "../model/client";
+import {Client} from "../model/Client";
 import {axiosResponseToClient} from "../adapters/clients";
 
 export const getClientsService = async (): Promise<Client[]> => {

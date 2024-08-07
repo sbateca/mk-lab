@@ -1,9 +1,6 @@
 import {TableRowProps} from "../components/molecules/TableRow/Types";
-import {Client, Sample, SampleType, Report} from "../model";
-
-interface GenericModelWithId {
-  id: string;
-}
+import {Client, Sample, SampleType, Report, Analyte} from "../model";
+import {findModelById} from "../utils/model";
 
 export const samplesToTableRows = (
   samples: Sample[],
@@ -25,33 +22,29 @@ export const samplesToTableRows = (
   });
 };
 
-const findModelById = <T extends GenericModelWithId>(
-  id: string | undefined,
-  models: T[] | null,
-) => {
-  return models?.find((model) => model.id === id);
-};
-
 export const reportsToTableRows = (
   reports: Report[],
   samples: Sample[] | null,
   sampleTypes: SampleType[] | null,
+  analytes: Analyte[] | null,
 ): TableRowProps[] => {
   return reports.map((report) => {
-    const reportCellContent = getSampleTypeCellContent(
+    const sampleTypeCellContent = getSampleTypeCellContent(
       report.sampleId,
       samples,
       sampleTypes,
     );
+    const analyteCellContent =
+      analytes?.find((analyte) => analyte.id === report.analyte)?.name ?? "N/A";
     return {
       id: report.id,
       cells: [
         {children: report.reportDate, align: "left"},
         {
-          children: reportCellContent,
+          children: sampleTypeCellContent,
           align: "left",
         },
-        {children: report.analyte, align: "left"},
+        {children: analyteCellContent, align: "left"},
         {children: report.result, align: "left"},
       ],
     };
@@ -68,5 +61,7 @@ const getSampleTypeCellContent = (
     filteredSample?.sampleTypeId,
     sampleTypes || [],
   );
-  return filteredSample ? `${sampleTypeName?.name}` : "N/A";
+  return filteredSample
+    ? `${filteredSample.sampleCode} - ${sampleTypeName?.name}`
+    : "N/A";
 };

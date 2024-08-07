@@ -4,7 +4,7 @@ import {
   getClientByIdService,
   getClientsService,
 } from "../../services/clientService";
-import {Client} from "../../model/client";
+import {Client} from "../../model/Client";
 
 const ClientContext = createContext<{
   clients: Client[] | null;

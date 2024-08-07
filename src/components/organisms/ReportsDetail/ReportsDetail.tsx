@@ -1,9 +1,8 @@
-import React, {SyntheticEvent, useEffect} from "react";
+import React, {useEffect} from "react";
 import {
   Box,
   Chip,
   Divider,
-  SelectChangeEvent,
   Stack,
   TextField,
   Theme,
@@ -15,7 +14,7 @@ import {ReportDetailStyles} from "./ReportsDetailStyles";
 import Typography from "../../atoms/Typography/Typography";
 import {
   BoxContainerProps,
-  SampleDetailProps as ReportDetailProps,
+  ReportDetailProps,
   StackContainerProps,
   StackFieldProps,
   StackRowDirectionSpacingPropsProps,
@@ -72,6 +71,13 @@ import {useSample} from "../../../utils/hooks/useSample";
 import AutoComplete from "../../molecules/AutoComplete/AutoComplete";
 import {AutoCompleteOption} from "../../molecules/AutoComplete/types";
 import {useSampleType} from "../../../utils/hooks/useSampleType";
+import {useAnalysisMethod} from "../../../utils/hooks/useAnalysisMethod";
+import {useAnalyte} from "../../../utils/hooks/useAnalyte";
+import {useCriteria} from "../../../utils/hooks/useCriteria";
+import {
+  findModelById,
+  getAutoCompleteOptionsFromModel,
+} from "../../../utils/model";
 
 function ReportDetail({
   isReadOnlyMode,
@@ -91,7 +97,12 @@ function ReportDetail({
   } = useReports();
   const {samples} = useSample();
   const {sampleTypes} = useSampleType();
+  const {analysisMethods} = useAnalysisMethod();
+  const {analytes} = useAnalyte();
+  const {criterias} = useCriteria();
   const {setIsSideSectionOpen, sideSectionTitle} = useSideSection();
+  const {showSnackBarMessage} = useSnackBar();
+
   const defaultFormValue: FormProps = {
     reportDate: today.format(DATEPICKER_FORMAT),
     sampleId: selectedReport?.sampleId ?? "",
@@ -112,7 +123,6 @@ function ReportDetail({
     setFormFieldsValidationFunctions,
     cleanForm,
   } = useForm();
-  const {showSnackBarMessage} = useSnackBar();
 
   const handleCloseSideSection = () => {
     if (setIsSideSectionOpen) {
@@ -323,64 +333,38 @@ function ReportDetail({
         </Stack>
         <Stack {...getStackRowProps(isLessThanMediumScreen)}>
           <Stack {...getStackFieldProps()}>
-            <TextField
-              required
-              error={!!formFieldsErrors[ReportFormFields.ANALYTE]}
+            <AutoComplete
+              options={getAutoCompleteOptionsFromModel(analytes)}
               label={REPORT_ANALYTE_LABEL_TEXT}
-              type="string"
-              color={SharedButtonColors.PRIMARY}
-              size={SharedButtonSizes.SMALL}
-              onChange={handleChange}
+              value={form.analyte}
+              variant={SelectVariants.STANDARD}
+              onChange={handleAutoCompleteChange}
               name={ReportFormFields.ANALYTE}
-              helperText={getTextFieldHelperText(ReportFormFields.ANALYTE)}
-              value={form.analyte ?? ""}
-              variant={SharedTextFieldVariants.STANDARD}
-              fullWidth={true}
-              InputProps={{
-                readOnly: isReadOnlyMode,
-              }}
+              readOnly={isReadOnlyMode}
             />
           </Stack>
           <Stack {...getStackFieldProps()}>
-            <TextField
-              required
-              error={!!formFieldsErrors[ReportFormFields.ANALYSIS_METHOD]}
+            <AutoComplete
+              options={getAutoCompleteOptionsFromModel(analysisMethods)}
               label={REPORT_ANALYSIS_METHOD_LABEL_TEXT}
-              type="string"
-              color={SharedButtonColors.PRIMARY}
-              size={SharedButtonSizes.SMALL}
-              onChange={handleChange}
+              value={form.analysisMethod}
+              variant={SelectVariants.STANDARD}
+              onChange={handleAutoCompleteChange}
               name={ReportFormFields.ANALYSIS_METHOD}
-              helperText={getTextFieldHelperText(
-                ReportFormFields.ANALYSIS_METHOD,
-              )}
-              value={form.analysisMethod ?? ""}
-              variant={SharedTextFieldVariants.STANDARD}
-              fullWidth={true}
-              InputProps={{
-                readOnly: isReadOnlyMode,
-              }}
+              readOnly={isReadOnlyMode}
             />
           </Stack>
         </Stack>
         <Stack {...getStackRowProps(isLessThanMediumScreen)}>
           <Stack {...getStackFieldProps()}>
-            <TextField
-              required
-              error={!!formFieldsErrors[ReportFormFields.CRITERIA]}
+            <AutoComplete
+              options={getAutoCompleteOptionsFromModel(criterias)}
               label={REPORT_CRITERIA_LABEL_TEXT}
-              type="string"
-              color={SharedButtonColors.PRIMARY}
-              size={SharedButtonSizes.SMALL}
-              onChange={handleChange}
+              value={form.criteria}
+              variant={SelectVariants.STANDARD}
+              onChange={handleAutoCompleteChange}
               name={ReportFormFields.CRITERIA}
-              helperText={getTextFieldHelperText(ReportFormFields.CRITERIA)}
-              value={form.criteria ?? ""}
-              variant={SharedTextFieldVariants.STANDARD}
-              fullWidth={true}
-              InputProps={{
-                readOnly: isReadOnlyMode,
-              }}
+              readOnly={isReadOnlyMode}
             />
           </Stack>
           <Stack {...getStackFieldProps()}>

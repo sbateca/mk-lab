@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {SampleTypeContext} from "../../context/Services/SampleType";
+import {SampleTypeContext} from "../../context/Services/SampleTypeContext";
 
 export const useSampleType = () => {
   const context = useContext(SampleTypeContext);

@@ -39,8 +39,62 @@
       "name": "Pool water"
     },
     {
-      "id": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "id": "fb200838-9a67-45c0-9413-05f08d102997",
       "name": "Drinking water"
+    }
+  ],
+  "analytes": [
+    {
+      "id": "1863060e-4d92-4ff5-b04f-57d4d6d2825a",
+      "name": "Salmonella spp."
+    },
+    {
+      "id": "1b3b3b3b-1b3b-1b3b-1b3b-1b3b1b3b1b3b",
+      "name": "E. coli"
+    },
+    {
+      "id": "6c549aca-fa2e-436e-ac1c-519318766b45",
+      "name": "Total coliforms"
+    },
+    {
+      "id": "2e1d3034-bb36-4606-b455-7bb6cd9171e7",
+      "name": "Faecal coliforms"
+    },
+    {
+      "id": "ab3b3b3b-ab3b-ab3b-ab3b-ab3b3b3b3b3b",
+      "name": "Aerobious mesophilic"
+    },
+    {
+      "id": "642f6e79-64b6-4dc4-b829-966d2232a5b3",
+      "name": "Mods and Campylobacter"
+    },
+    {
+      "id": "eb3b3b3b-eb3b-eb3b-eb3b-eb3b3b3b3b3b",
+      "name": "Pseudomonas aeruginosa"
+    }
+  ],
+  "analysisMethods": [
+    {
+      "id": "c461270c-6682-4f51-9148-efb9fbaab44e",
+      "name": "NTC"
+    },
+    {
+      "id": "1eed01d7-f23b-4e15-8ca7-6bf833c21873",
+      "name": "Standard Methods"
+    }
+  ],
+  "criterias": [
+    {
+      "id": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "name": "0 UFC/100 ml"
+    },
+    {
+      "id": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "name": "0-100 UFC/100 ml"
+    },
+    {
+      "id": "1b3b3b3b-1b3b-1b3b-1b3b-1b3b1b3b1b3b",
+      "name": "30-300 UFC/100 ml"
     }
   ],
   "samples": [
@@ -80,7 +134,7 @@
     {
       "id": "8f129b91-08cf-4cbf-9d89-28545a1b1023",
       "sampleCode": "1004",
-      "sampleTypeId": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "sampleTypeId": "f1b3b3b4-1b3b-4b3b-8b3b-1b3b3b3b3b3b",
       "clientId": "e950af36-1c5a-4b83-a3a0-a927ebe02459",
       "getSampleDate": "2023-09-20",
       "receptionDate": "2023-09-21",
@@ -102,22 +156,31 @@
   ],
   "reports": [
     {
-      "id": "79f23d64-dabb-4cb8-80a9-d004ce55f25c",
-      "reportDate": "2024-08-01",
-      "sampleId": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
-      "analyte": "Coliformes totales",
-      "analysisMethod": "NTC 4772:2008",
-      "criteria": "Resolución 2115/2007",
-      "result": "0 UFC/100 ml"
+      "id": "14860e3c-56df-4a31-96cc-100dc2a8f749",
+      "reportDate": "2024-08-05",
+      "sampleId": "ce59c2ba-c7f2-4df5-a8db-7dd74b7381a9",
+      "analyte": "ab3b3b3b-ab3b-ab3b-ab3b-ab3b3b3b3b3b",
+      "analysisMethod": "c461270c-6682-4f51-9148-efb9fbaab44e",
+      "criteria": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "result": "0 UFC/g"
     },
     {
-      "id": "cf0f69f0-dad8-4c8d-9a0a-69fdd29c2f8f",
-      "reportDate": "2023-09-25",
-      "sampleId": "bbd4a1e1-2340-431a-8055-e7dc33bbd81d",
-      "analyte": "Contenido de grasa",
-      "analysisMethod": "AOAC 945.16",
-      "criteria": "Estándar de la industria",
-      "result": "15%"
+      "id": "83401a31-d691-4549-809b-908d7b72ffa6",
+      "reportDate": "2024-08-05",
+      "sampleId": "7c4972a5-ace8-434e-99cf-f61f21912e4a",
+      "analyte": "ab3b3b3b-ab3b-ab3b-ab3b-ab3b3b3b3b3b",
+      "analysisMethod": "1eed01d7-f23b-4e15-8ca7-6bf833c21873",
+      "criteria": "1b3b3b3b-1b3b-1b3b-1b3b-1b3b1b3b1b3b",
+      "result": "30 UFC/100 ml"
+    },
+    {
+      "id": "36ac9f35-b193-4bf2-a712-45f6f7332890",
+      "reportDate": "2024-08-05",
+      "sampleId": "e3d05cb2-343d-4ad5-a617-c7dbba54f4b5",
+      "analyte": "642f6e79-64b6-4dc4-b829-966d2232a5b3",
+      "analysisMethod": "c461270c-6682-4f51-9148-efb9fbaab44e",
+      "criteria": "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+      "result": "0"
     }
   ],
   "users": [
