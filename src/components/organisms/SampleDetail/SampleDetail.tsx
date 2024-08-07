@@ -323,6 +323,9 @@ function SampleDetail({
               onChange={handleAutoCompleteChange}
               name={ReportFormFields.SAMPLE_TYPE}
               readOnly={isReadOnlyMode}
+              error={!!formFieldsErrors[SamplesFormFields.SAMPLE_TYPE]}
+              helperText={getTextFieldHelperText(SamplesFormFields.SAMPLE_TYPE)}
+              required
             />
           </Stack>
         </Stack>
@@ -336,6 +339,9 @@ function SampleDetail({
               onChange={handleAutoCompleteChange}
               name={SamplesFormFields.CLIENT}
               readOnly={isReadOnlyMode}
+              error={!!formFieldsErrors[SamplesFormFields.CLIENT]}
+              helperText={getTextFieldHelperText(SamplesFormFields.CLIENT)}
+              required
             />
           </Stack>
           <Stack {...getStackFieldProps()}>

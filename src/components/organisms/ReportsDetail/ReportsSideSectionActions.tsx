@@ -7,8 +7,8 @@ import {
   SharedButtonVariants,
 } from "../../../utils/enums";
 import Button from "../../atoms/Button/Button";
-import {EDIT_SAMPLE_BUTTON_LABEL} from "../../../utils/constants/pages/samples";
 import {ReportSideSectionActionsProps} from "./Types";
+import {EDIT_REPORTS_BUTTON_LABEL} from "../../../utils/constants/pages/reports";
 
 function ReportSideSectionButtons({
   isNotValidForm,
@@ -27,7 +27,7 @@ function ReportSideSectionButtons({
       {isReadOnlyMode && report ? (
         <Button
           icon={IconNames.EDIT}
-          label={EDIT_SAMPLE_BUTTON_LABEL}
+          label={EDIT_REPORTS_BUTTON_LABEL}
           disabled={isNotValidForm}
           variant={SharedButtonVariants.OUTLINED}
           size={SharedButtonSizes.SMALL}

@@ -14,6 +14,9 @@ interface AutoCompleteProps {
   ) => void;
   name: string;
   readOnly: boolean;
+  required: boolean;
+  error: boolean;
+  helperText: string;
 }
 
 function AutoComplete({
@@ -24,6 +27,9 @@ function AutoComplete({
   onChange,
   name,
   readOnly,
+  required,
+  error,
+  helperText,
 }: AutoCompleteProps) {
   const [selectedOption, setSelectedOption] =
     useState<AutoCompleteOption | null>(
@@ -51,7 +57,14 @@ function AutoComplete({
       onChange={handleChange}
       includeInputInList
       renderInput={(params) => (
-        <TextField {...params} label={label} variant={variant} />
+        <TextField
+          {...params}
+          label={label}
+          variant={variant}
+          required={required}
+          error={error}
+          helperText={helperText}
+        />
       )}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       readOnly={readOnly}

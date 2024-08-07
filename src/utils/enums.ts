@@ -86,7 +86,7 @@ export enum SharedTypographyAlign {
 
 export enum SamplesFormFields {
   SAMPLE_CODE = "sampleCode",
-  SAMPLE_NAME = "sampleName",
+  SAMPLE_TYPE = "sampleType",
   CLIENT = "client",
   GET_SAMPLE_DATE = "getSampleDate",
   RECEPTION_DATE = "receptionDate",

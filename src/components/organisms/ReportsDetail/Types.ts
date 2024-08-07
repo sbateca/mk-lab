@@ -1,3 +1,5 @@
+import {Report} from "../../../model";
+
 export interface SampleDetailProps {
   isReadOnlyMode: boolean;
   setIsReadOnlyMode: React.Dispatch<React.SetStateAction<boolean>>;

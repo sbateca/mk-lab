@@ -74,10 +74,9 @@ import {useSampleType} from "../../../utils/hooks/useSampleType";
 import {useAnalysisMethod} from "../../../utils/hooks/useAnalysisMethod";
 import {useAnalyte} from "../../../utils/hooks/useAnalyte";
 import {useCriteria} from "../../../utils/hooks/useCriteria";
-import {
-  findModelById,
-  getAutoCompleteOptionsFromModel,
-} from "../../../utils/model";
+import {getAutoCompleteOptionsFromModel} from "../../../utils/model";
+import SampleReportDetails from "./SampleReportDetails";
+import {useClient} from "../../../utils/hooks/useClient";
 
 function ReportDetail({
   isReadOnlyMode,
@@ -95,7 +94,9 @@ function ReportDetail({
     isLoading,
     error,
   } = useReports();
-  const {samples} = useSample();
+  const {samples, selectedSample, getSampleById, setSelectedSample} =
+    useSample();
+  const {clients} = useClient();
   const {sampleTypes} = useSampleType();
   const {analysisMethods} = useAnalysisMethod();
   const {analytes} = useAnalyte();
@@ -175,7 +176,7 @@ function ReportDetail({
       spacing: 2,
       marginTop: "20px",
       padding: isLessThanMediumScreen ? "5px" : "10px",
-      height: "100%",
+      height: "auto",
     };
   };
 
@@ -266,6 +267,18 @@ function ReportDetail({
     }
   }, [error]);
 
+  useEffect(() => {
+    const getSample = async () => {
+      const selectedSample = await getSampleById(form?.sampleId || "");
+      if (form.sampleId === "") {
+        setSelectedSample(null);
+      } else {
+        setSelectedSample(selectedSample);
+      }
+    };
+    getSample();
+  }, [selectedReport, form]);
+
   return (
     <Box sx={getBoxContainerProps(isLessThanMediumScreen) as SxProps}>
       <Stack direction="row">
@@ -328,6 +341,9 @@ function ReportDetail({
               onChange={handleAutoCompleteChange}
               name={ReportFormFields.SAMPLE_ID}
               readOnly={isReadOnlyMode}
+              required
+              error={!!formFieldsErrors[ReportFormFields.SAMPLE_ID]}
+              helperText={getTextFieldHelperText(ReportFormFields.SAMPLE_ID)}
             />
           </Stack>
         </Stack>
@@ -341,6 +357,9 @@ function ReportDetail({
               onChange={handleAutoCompleteChange}
               name={ReportFormFields.ANALYTE}
               readOnly={isReadOnlyMode}
+              required
+              error={!!formFieldsErrors[ReportFormFields.ANALYTE]}
+              helperText={getTextFieldHelperText(ReportFormFields.ANALYTE)}
             />
           </Stack>
           <Stack {...getStackFieldProps()}>
@@ -352,6 +371,11 @@ function ReportDetail({
               onChange={handleAutoCompleteChange}
               name={ReportFormFields.ANALYSIS_METHOD}
               readOnly={isReadOnlyMode}
+              required
+              error={!!formFieldsErrors[ReportFormFields.ANALYSIS_METHOD]}
+              helperText={getTextFieldHelperText(
+                ReportFormFields.ANALYSIS_METHOD,
+              )}
             />
           </Stack>
         </Stack>
@@ -365,6 +389,9 @@ function ReportDetail({
               onChange={handleAutoCompleteChange}
               name={ReportFormFields.CRITERIA}
               readOnly={isReadOnlyMode}
+              required
+              error={!!formFieldsErrors[ReportFormFields.CRITERIA]}
+              helperText={getTextFieldHelperText(ReportFormFields.CRITERIA)}
             />
           </Stack>
           <Stack {...getStackFieldProps()}>
@@ -388,11 +415,17 @@ function ReportDetail({
           </Stack>
         </Stack>
       </Stack>
+      <SampleReportDetails
+        sample={selectedSample}
+        clients={clients || []}
+        sampleTypes={sampleTypes || []}
+      />
       <Box
         sx={{
           display: "flex",
           alignSelf: "flex-end",
           justifyContent: "flex-end",
+          marginTop: "10px",
         }}
       >
         <ReportSideSectionButtons
