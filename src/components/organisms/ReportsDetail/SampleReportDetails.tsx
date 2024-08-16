@@ -1,6 +1,8 @@
-import {Card, CardContent, Grid, Typography} from "@mui/material";
-import {Client, Sample, SampleType} from "../../../model";
 import {useEffect, useState} from "react";
+
+import {Card, CardContent, Grid, Typography} from "@mui/material";
+
+import {Client, Sample, SampleType} from "../../../model";
 
 interface SampleReportDetailsProps {
   sample: Sample | null;
@@ -19,11 +21,11 @@ interface SampleCardDetails {
   responsable: string;
 }
 
-function SampleReportDetails({
+export const SampleReportDetails = ({
   sample,
   sampleTypes,
   clients,
-}: SampleReportDetailsProps) {
+}: SampleReportDetailsProps) => {
   const [sampleCardDetails, setSampleCardDetails] =
     useState<SampleCardDetails>();
 
@@ -158,6 +160,4 @@ function SampleReportDetails({
       </CardContent>
     </Card>
   );
-}
-
-export default SampleReportDetails;
+};

@@ -1,10 +1,11 @@
 import {useEffect} from "react";
+
 import {Box} from "@mui/material";
 import Swal from "sweetalert2";
-import {useSample} from "../../../utils/hooks/useSample";
-import Spinner from "../../atoms/Spinner/Spinner";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import Button from "../../atoms/Button/Button";
+
+import {Button, Spinner} from "../../atoms";
+import {useSample, useSideSection, useSnackBar} from "../../../utils/hooks";
+import {SampleTableActionButtonsProps} from "./Types";
 import {
   IconNames,
   SharedButtonColors,
@@ -14,19 +15,17 @@ import {
   SnackBarSeverity,
   SweetAlertIcon,
 } from "../../../utils/enums";
-import {SampleTableActionButtonsProps} from "./Types";
 import {
   SAMPLE_DELETE_CONFIRMATION_SUBTITLE,
   SAMPLE_DELETE_CONFIRMATION_TEXT,
   SAMPLE_SUCCESSFULLY_DELETED_TEXT,
   SAMPLE_DELETE_CONFIRMATION_TITLE,
   SAMPLE_DETAILS_TITLE_TEXT,
-} from "../../../utils/constants/pages/samples";
-import {useSideSection} from "../../../utils/hooks/useSideSection";
+} from "../../../utils/constants";
 
-function SampleTableActionButtons({
+export const SampleTableActionButtons = ({
   sampleId,
-}: SampleTableActionButtonsProps): React.ReactElement {
+}: SampleTableActionButtonsProps): React.ReactElement => {
   const {
     getSampleById,
     deleteSample,
@@ -102,6 +101,4 @@ function SampleTableActionButtons({
       )}
     </Box>
   );
-}
-
-export default SampleTableActionButtons;
+};

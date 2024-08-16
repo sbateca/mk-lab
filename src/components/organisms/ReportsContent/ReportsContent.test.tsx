@@ -1,8 +1,8 @@
 import {render, screen, waitFor} from "@testing-library/react";
 
-import * as useReportsModule from "../../../utils/hooks/useReports";
+import {useReports as UseReportsModule} from "../../../utils/hooks";
 import {Report} from "../../../model/Report";
-import Reports from "./Reports";
+import {ReportsContent} from "./ReportsContent";
 
 const mockReports: Report[] = [
   {
@@ -39,12 +39,12 @@ describe("ReportsContent test", () => {
       loading: false,
       error: false,
     });
-    jest.spyOn(useReportsModule, "useReports").mockReturnValue({
+    jest.spyOn(UseReportsModule, "useReports").mockReturnValue({
       ...getReportsMock(),
       getReports: getReportsMock,
     });
 
-    render(<Reports />);
+    render(<ReportsContent />);
 
     await waitFor(() => {
       expect(screen.getByText("sam1001 - client name")).toBeInTheDocument();
@@ -64,7 +64,7 @@ describe("ReportsContent test", () => {
       getReports: getReportsMock,
     });
 
-    render(<Reports />);
+    render(<ReportsContent />);
 
     await waitFor(() => {
       expect(screen.getByText("No records to display")).toBeInTheDocument();

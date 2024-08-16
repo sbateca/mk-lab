@@ -1,19 +1,20 @@
 import {ChangeEvent, useState} from "react";
 import {Navigate} from "react-router-dom";
+
 import {FormControl, Button, Box, FormHelperText} from "@mui/material";
 
-import TextField from "../../atoms/TextField/TextField";
+import {getUserByUserName} from "../../../services/userService";
+import {TextField} from "../../atoms";
 import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
-} from "../../../utils/constants/pages/login";
-import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
+  LOCAL_STORAGE_USER_KEY,
+  REQUIRED_FIELD_ERROR_TEXT,
+} from "../../../utils/constants";
 import {LoginFormProps} from "./Types";
 import {LoginFormStyles} from "./LoginFormStyles";
-import {getUserByUserName} from "../../../services/userService";
-import {REQUIRED_FIELD_ERROR_TEXT} from "../../../utils/constants/form/validations";
 
-function LoginForm({fields}: LoginFormProps): React.ReactElement {
+export const LoginForm = ({fields}: LoginFormProps): React.ReactElement => {
   const [fieldsValues, setFieldsValues] = useState<{[key: string]: string}>({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
@@ -116,6 +117,4 @@ function LoginForm({fields}: LoginFormProps): React.ReactElement {
       )}
     </Box>
   );
-}
-
-export default LoginForm;
+};

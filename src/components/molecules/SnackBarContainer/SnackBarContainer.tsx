@@ -1,7 +1,7 @@
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import Snackbar from "./SnackBar";
+import {useSnackBar} from "../../../utils/hooks";
+import {Snackbar} from "./SnackBar";
 
-const SnackBarContainer = () => {
+export const SnackBarContainer = () => {
   const {isSnackBarOpen, snackBarText, snackBarSeverity} = useSnackBar();
   return (
     <Snackbar
@@ -11,5 +11,3 @@ const SnackBarContainer = () => {
     />
   );
 };
-
-export default SnackBarContainer;

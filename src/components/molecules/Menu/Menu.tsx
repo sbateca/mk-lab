@@ -1,11 +1,11 @@
 import {Drawer, List} from "@mui/material";
 
-import ListItemButton from "../../atoms/ListItemButton/ListItemButton";
-import {useMenu} from "../../../utils/hooks/useMenu";
+import {ListItemButton} from "../../atoms";
+import {useMenu} from "../../../utils/hooks";
 import {MenuStyle} from "./MenuStyle";
 import {MenuProps} from "./Types";
 
-function Menu({menuItems}: MenuProps): React.ReactElement {
+export const Menu = ({menuItems}: MenuProps): React.ReactElement => {
   const {menuOpen, toggleMenu} = useMenu();
   return (
     <Drawer anchor="left" open={menuOpen} onClose={toggleMenu}>
@@ -16,6 +16,4 @@ function Menu({menuItems}: MenuProps): React.ReactElement {
       </List>
     </Drawer>
   );
-}
-
-export default Menu;
+};

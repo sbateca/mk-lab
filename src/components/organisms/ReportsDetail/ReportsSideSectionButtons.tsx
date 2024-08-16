@@ -1,4 +1,6 @@
 import {Box} from "@mui/material";
+
+import {Button} from "../../atoms";
 import {
   IconNames,
   SharedButtonColors,
@@ -6,18 +8,17 @@ import {
   SharedButtonSizes,
   SharedButtonVariants,
 } from "../../../utils/enums";
-import Button from "../../atoms/Button/Button";
 import {ReportSideSectionActionsProps} from "./Types";
-import {EDIT_REPORTS_BUTTON_LABEL} from "../../../utils/constants/pages/reports";
+import {EDIT_REPORTS_BUTTON_LABEL} from "../../../utils/constants";
 
-function ReportSideSectionButtons({
+export const ReportSideSectionButtons = ({
   isNotValidForm,
   report,
   isReadOnlyMode,
   setIsReadOnlyMode,
   handleCreateReport,
   handleEdit,
-}: ReportSideSectionActionsProps): React.ReactElement {
+}: ReportSideSectionActionsProps): React.ReactElement => {
   const handleSwitchReadOnlyMode = () => {
     setIsReadOnlyMode(!isReadOnlyMode);
   };
@@ -69,6 +70,4 @@ function ReportSideSectionButtons({
       ) : null}
     </Box>
   );
-}
-
-export default ReportSideSectionButtons;
+};

@@ -1,6 +1,5 @@
 import React, {createContext, useState, useEffect, useMemo} from "react";
 
-import {Sample} from "../../model/Sample";
 import {
   createSampleService,
   deleteSampleService,
@@ -8,10 +7,11 @@ import {
   getSampleByIdService,
   getSamplesService,
 } from "../../services/sampleService";
+import {Sample} from "../../model/Sample";
 import {
   SAMPLE_ID_MISSING_TEXT,
   SAMPLE_ID_OR_SAMPLE_MISSING_TEXT,
-} from "../../utils/constants/pages/samples";
+} from "../../utils/constants";
 
 const SampleContext = createContext<{
   samples: Sample[] | null;

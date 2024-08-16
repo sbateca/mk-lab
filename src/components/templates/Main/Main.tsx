@@ -1,17 +1,17 @@
 import {Box} from "@mui/material";
 import {Navigate} from "react-router";
 
-import {mainContentContainer, mainTemplayeStyle} from "./MainTemplateStyle";
 import {MenuProvider} from "../../../context/Menu/MenuContext";
 import {localStorageContainsField} from "../../../utils/localStorage";
-import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
+import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants";
 import {MainTemplateProps} from "./Type";
+import {mainContentContainer, mainTemplayeStyle} from "./MainTemplateStyle";
 
-function Main({
+export const MainTemplate = ({
   header,
   menu,
   mainContent,
-}: MainTemplateProps): React.ReactElement {
+}: MainTemplateProps): React.ReactElement => {
   const hasUserData = localStorageContainsField(LOCAL_STORAGE_USER_KEY);
 
   return !hasUserData ? (
@@ -25,6 +25,4 @@ function Main({
       </Box>
     </MenuProvider>
   );
-}
-
-export default Main;
+};

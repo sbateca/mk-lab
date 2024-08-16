@@ -1,4 +1,6 @@
 import React, {useEffect} from "react";
+
+import {SxProps} from "@mui/system";
 import {
   Box,
   Chip,
@@ -10,15 +12,20 @@ import {
   useTheme,
 } from "@mui/material";
 import dayjs from "dayjs";
-import {SampleDetailStyles} from "./SampleDetailStyles";
-import Typography from "../../atoms/Typography/Typography";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+
+import {Typography, Button} from "../../atoms";
+import SampleSideSectionButtons from "./SampleSideSectionActions";
+import {AutoComplete} from "../../molecules";
 import {
-  BoxContainerProps,
-  SampleDetailProps,
-  StackContainerProps,
-  StackFieldProps,
-  StackRowDirectionSpacingPropsProps,
-} from "./Types";
+  useSideSection,
+  useSample,
+  useForm,
+  useSnackBar,
+  useSampleType,
+  useClient,
+} from "../../../utils/hooks";
 import {
   ReportFormFields,
   SamplesFormFields,
@@ -36,10 +43,6 @@ import {
   SnackBarSeverity,
 } from "../../../utils/enums";
 import {
-  SAMPLE_SUCCESSFULLY_CREATED_TEXT,
-  SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
-} from "../../../utils/constants/pages/samples";
-import {
   SAMPLE_ANALYSIS_DATE_LABEL_TEXT,
   SAMPLE_CLIENT_LABEL_TEXT,
   SAMPLE_GET_SAMPLE_DATE_LABEL_TEXT,
@@ -48,39 +51,30 @@ import {
   SAMPLE_CODE_LABEL_TEXT,
   SAMPLE_LOCATION_LABEL_TEXT,
   SAMPLE_TYPE_LABEL_TEXT,
-} from "../../../utils/constants/form/formLabel";
-import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
-import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {
+  SAMPLE_SUCCESSFULLY_CREATED_TEXT,
+  SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
   DATEPICKER_FORMAT,
   DATEPICKER_VIEWS,
-} from "../../../utils/constants/pages/shared";
-import {useSample} from "../../../utils/hooks/useSample";
-import {useForm} from "../../../utils/hooks/useForm";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import {
-  sampleFormToSample,
-  sampleToSampleForm,
-} from "../../../adapters/samples";
-import Button from "../../atoms/Button/Button";
-import {
   isEmpty,
   isNotValidDate,
-} from "../../../utils/constants/form/validations";
-import {FormProps} from "../../../utils/constants/form/formType";
-import SampleSideSectionButtons from "./SampleSideSectionActions";
-import {useSideSection} from "../../../utils/hooks/useSideSection";
-import {SxProps} from "@mui/system";
-import AutoComplete from "../../molecules/AutoComplete/AutoComplete";
+  FormProps,
+} from "../../../utils/constants";
+import {sampleFormToSample, sampleToSampleForm} from "../../../adapters";
+import {
+  BoxContainerProps,
+  SampleDetailProps,
+  StackContainerProps,
+  StackFieldProps,
+  StackRowDirectionSpacingPropsProps,
+} from "./Types";
 import {AutoCompleteOption} from "../../molecules/AutoComplete/types";
-import {useSampleType} from "../../../utils/hooks/useSampleType";
-import {useClient} from "../../../utils/hooks/useClient";
+import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
+import {SampleDetailStyles} from "./SampleDetailStyles";
 
-function SampleDetail({
+export const SampleDetail = ({
   isReadOnlyMode,
   setIsReadOnlyMode,
-}: SampleDetailProps): React.ReactElement {
+}: SampleDetailProps): React.ReactElement => {
   const today = dayjs();
   const theme = useTheme<Theme>();
   const isLessThanMediumScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -483,6 +477,4 @@ function SampleDetail({
       </Box>
     </Box>
   );
-}
-
-export default SampleDetail;
+};

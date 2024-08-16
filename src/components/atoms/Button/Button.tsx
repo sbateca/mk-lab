@@ -3,7 +3,9 @@ import {Button as MuiButton} from "@mui/material";
 import {ButtonConfig} from "./Types";
 import {getIcon} from "../../../utils/icons";
 
-function Button(buttonConfig: ButtonConfig): React.ReactElement | null {
+export const Button = (
+  buttonConfig: ButtonConfig,
+): React.ReactElement | null => {
   const {sx, label, disabled, color, icon, variant, size, onClick} =
     buttonConfig;
   return (
@@ -20,6 +22,4 @@ function Button(buttonConfig: ButtonConfig): React.ReactElement | null {
       {label}
     </MuiButton>
   );
-}
-
-export default Button;
+};

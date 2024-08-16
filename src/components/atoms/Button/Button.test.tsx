@@ -1,10 +1,10 @@
 import {render, screen} from "@testing-library/react";
 
-import ActionButtons from "./ActionButtons";
-import {ButtonConfigs} from "./Types";
+import {Button} from "./Button";
+import {ButtonConfig} from "./Types";
 
 describe("ActionsButtons", () => {
-  const actions: ButtonConfigs = {
+  const actions: ButtonConfig = {
     buttonConfigs: [
       {label: "Action 1", color: "primary"},
       {label: "Action 2", color: "secondary"},
@@ -12,7 +12,7 @@ describe("ActionsButtons", () => {
   };
 
   it("renders buttons with correct text and color", () => {
-    render(<ActionButtons buttonConfigs={actions.buttonConfigs} />);
+    render(<Button buttonConfigs={actions.buttonConfigs} />);
 
     actions.buttonConfigs.forEach((actionItem) => {
       const button = screen.getByText(actionItem.label);
@@ -24,7 +24,7 @@ describe("ActionsButtons", () => {
   });
 
   it("renders buttons with the text passed in parameters", () => {
-    render(<ActionButtons buttonConfigs={actions.buttonConfigs} />);
+    render(<Button buttonConfigs={actions.buttonConfigs} />);
 
     actions.buttonConfigs.forEach((buttonConfig) => {
       const buttonText = screen.getByText(buttonConfig.label);

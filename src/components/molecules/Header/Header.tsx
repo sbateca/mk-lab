@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
+
 import {AppBar, Toolbar, IconButton, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import {useMenu} from "../../../utils/hooks/useMenu";
-import UserMenu from "../UserMenu/UserMenu";
-import {HeaderProps} from "./Type";
+import {useMenu} from "../../../utils/hooks";
 import {localStorageToUser} from "../../../adapters/user";
-import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
+import {UserMenu} from "../UserMenu";
+import {HeaderProps} from "./Type";
+import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants";
 
-function Header({companyName}: HeaderProps): React.ReactElement {
+export const Header = ({companyName}: HeaderProps): React.ReactElement => {
   const {toggleMenu} = useMenu();
   const [username, setUsername] = useState("");
   const [userMenu, setUserMenu] = useState(false);
@@ -39,6 +40,4 @@ function Header({companyName}: HeaderProps): React.ReactElement {
       </Toolbar>
     </AppBar>
   );
-}
-
-export default Header;
+};

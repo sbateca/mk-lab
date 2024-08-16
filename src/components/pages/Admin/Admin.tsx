@@ -1,10 +1,9 @@
 import {Box} from "@mui/material";
 
-import MainTemplate from "../../templates/Main/Main";
-import Header from "../../molecules/Header/Header";
-import Menu from "../../molecules/Menu/Menu";
-import Content from "../../organisms/Content/Content";
-import {COMPANY_NAME, MENU_ITEMS} from "../../../utils/constants/pages/admin";
+import {AnalysisMethodProvider} from "../../../context/Services/AnalysisMethodContext";
+import {MainTemplate} from "../../templates";
+import {Header, Menu} from "../../molecules";
+import {Content} from "../../organisms";
 import {
   SampleProvider,
   ReportsProvider,
@@ -15,10 +14,10 @@ import {
   AnalyteProvider,
   CriteriaProvider,
 } from "../../../context/";
+import {COMPANY_NAME, MENU_ITEMS} from "../../../utils/constants";
 import {AdminStyle} from "./AdminStyle";
-import {AnalysisMethodProvider} from "../../../context/Services/AnalysisMethodContext";
 
-function Admin(): React.ReactElement {
+export const Admin = (): React.ReactElement => {
   return (
     <SideSectionProvider>
       <SnackBarProvider>
@@ -46,6 +45,4 @@ function Admin(): React.ReactElement {
       </SnackBarProvider>
     </SideSectionProvider>
   );
-}
-
-export default Admin;
+};

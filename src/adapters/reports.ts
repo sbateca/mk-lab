@@ -1,10 +1,11 @@
 import {AxiosResponse} from "axios";
 import {v4 as uuidv4} from "uuid";
+
 import {Report} from "../model/Report";
 import {
   RESPONSE_DATA_NOT_VALID_ERROR,
   getInvalidDataErrorMessage,
-} from "../utils/constants/adapters";
+} from "../utils/constants";
 
 export const axiosResponseToReports = (
   response: AxiosResponse<unknown>,

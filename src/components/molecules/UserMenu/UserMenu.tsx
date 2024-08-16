@@ -1,16 +1,19 @@
 import {useState} from "react";
+
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
 
+import {
+  USER_MENU_LOGOUT,
+  LOCAL_STORAGE_USER_KEY,
+} from "../../../utils/constants";
 import {UserMenuStyle} from "./UserMenuStyle";
-import {USER_MENU_LOGOUT} from "../../../utils/constants/pages/admin";
-import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
 
 interface UserMenuProps {
   username: string;
 }
 
-function UserMenu({username}: UserMenuProps): React.ReactElement {
+export const UserMenu = ({username}: UserMenuProps): React.ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -49,6 +52,4 @@ function UserMenu({username}: UserMenuProps): React.ReactElement {
       </Menu>
     </div>
   );
-}
-
-export default UserMenu;
+};

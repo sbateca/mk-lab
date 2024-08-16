@@ -1,6 +1,6 @@
-import {TableRowProps} from "../components/molecules/TableRow/Types";
 import {Client, Sample, SampleType, Report, Analyte} from "../model";
 import {findModelById} from "../utils/model";
+import {TableRowProps} from "../components/molecules/TableRow/Types";
 
 export const samplesToTableRows = (
   samples: Sample[],

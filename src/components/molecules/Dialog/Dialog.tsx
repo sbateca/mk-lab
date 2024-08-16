@@ -5,17 +5,18 @@ import {
   DialogActions as MuiDialogActions,
   Box,
 } from "@mui/material";
-import {DialogProps} from "./Types";
-import Typography from "../../atoms/Typography/Typography";
 
-function Dialog({
+import {Typography} from "../../atoms";
+import {DialogProps} from "./Types";
+
+export const Dialog = ({
   isOpen,
   dialogTitle,
   children,
   dialogActions,
   maxWidth,
   onClose,
-}: DialogProps): React.ReactElement {
+}: DialogProps): React.ReactElement => {
   return (
     <MuiDialog open={isOpen} onClose={onClose} maxWidth={maxWidth}>
       <Box>
@@ -32,6 +33,4 @@ function Dialog({
       <MuiDialogActions>{dialogActions}</MuiDialogActions>
     </MuiDialog>
   );
-}
-
-export default Dialog;
+};

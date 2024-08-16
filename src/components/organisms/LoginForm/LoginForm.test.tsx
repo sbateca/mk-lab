@@ -1,10 +1,10 @@
 import {render, screen, fireEvent, waitFor} from "@testing-library/react";
-import LoginForm from "./LoginForm";
+import {LoginForm} from "./LoginForm";
 import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
-} from "../../../utils/constants/pages/login";
-import {getRequiredFieldText} from "../../../utils/constants/form/validations";
+  getRequiredFieldText,
+} from "../../../utils/constants";
 import {LoginFormProps} from "./Types";
 import {getUserByUserName} from "../../../services/userService";
 

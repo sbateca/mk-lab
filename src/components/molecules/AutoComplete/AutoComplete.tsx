@@ -1,25 +1,10 @@
 import {SyntheticEvent, useEffect, useState} from "react";
+
 import {Autocomplete as MuiAutoComplete, TextField} from "@mui/material";
-import {AutoCompleteOption} from "./types";
 
-interface AutoCompleteProps {
-  value: string;
-  options: AutoCompleteOption[];
-  label: string;
-  variant: "standard" | "outlined" | "filled";
-  onChange: (
-    event: SyntheticEvent,
-    value: AutoCompleteOption | null,
-    name: string,
-  ) => void;
-  name: string;
-  readOnly: boolean;
-  required: boolean;
-  error: boolean;
-  helperText: string;
-}
+import {AutoCompleteOption, AutoCompleteProps} from "./types";
 
-function AutoComplete({
+export const AutoComplete = ({
   options,
   label,
   value,
@@ -30,7 +15,7 @@ function AutoComplete({
   required,
   error,
   helperText,
-}: AutoCompleteProps) {
+}: AutoCompleteProps) => {
   const [selectedOption, setSelectedOption] =
     useState<AutoCompleteOption | null>(
       options.find((option) => option.id === value) || null,
@@ -70,6 +55,4 @@ function AutoComplete({
       readOnly={readOnly}
     />
   );
-}
-
-export default AutoComplete;
+};

@@ -1,9 +1,9 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 
 import {MenuProvider} from "../../../context/Menu/MenuContext";
-import Header from "../Header/Header";
+import {Header} from "../Header";
 import {MenuProps} from "./Types";
-import Menu from "./Menu";
+import {Menu} from "./Menu";
 
 describe("Menu component", () => {
   it("should render the menu with the elements passed by arguments successfuly", () => {

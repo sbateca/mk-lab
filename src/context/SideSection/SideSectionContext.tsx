@@ -1,4 +1,5 @@
 import {createContext, useEffect, useState, useMemo} from "react";
+
 import {ChildrenProps, SideSectionContextType} from "./Types";
 
 export const SideSectionContext = createContext<SideSectionContextType>({

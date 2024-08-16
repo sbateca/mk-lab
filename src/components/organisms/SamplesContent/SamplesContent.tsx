@@ -1,18 +1,20 @@
 import {useEffect, useState} from "react";
+
 import {Box} from "@mui/material";
+
+import {Button, Spinner, Typography} from "../../atoms";
+import {SideSection} from "../SideSection/SideSection";
+import {SampleDetail} from "../SampleDetail";
+import {Table} from "../Table";
+
 import {
-  CREATE_SAMPLE_TITLE_TEXT,
-  SAMPLES_CREATE_BUTTON_LABEL,
-  SAMPLES_TABLE_HEADER_LABELS,
-  SAMPLES_TITLE_CONFIG,
-} from "../../../utils/constants/pages/samples";
+  useSideSection,
+  useSnackBar,
+  useSampleType,
+  useClient,
+  useSample,
+} from "../../../utils/hooks";
 import {samplesToTableRows} from "../../../adapters/tableRow";
-import {TableRowProps} from "../../molecules/TableRow/Types";
-import {useSample} from "../../../utils/hooks/useSample";
-import Typography from "../../atoms/Typography/Typography";
-import Spinner from "../../atoms/Spinner/Spinner";
-import Table from "../Table/Table";
-import Button from "../../atoms/Button/Button";
 import {
   SharedButtonColors,
   SharedButtonIcons,
@@ -20,15 +22,16 @@ import {
   SharedButtonVariants,
   SnackBarSeverity,
 } from "../../../utils/enums";
+import {
+  CREATE_SAMPLE_TITLE_TEXT,
+  SAMPLES_CREATE_BUTTON_LABEL,
+  SAMPLES_TABLE_HEADER_LABELS,
+  SAMPLES_TITLE_CONFIG,
+} from "../../../utils/constants";
+import {TableRowProps} from "../../molecules/TableRow/Types";
 import {SampleContentStyles} from "./SamplesContentStyles";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import {useSideSection} from "../../../utils/hooks/useSideSection";
-import SideSection from "../SideSection/SideSection";
-import SampleDetail from "../SampleDetail/SampleDetail";
-import {useSampleType} from "../../../utils/hooks/useSampleType";
-import {useClient} from "../../../utils/hooks/useClient";
 
-function SamplesContent(): React.ReactElement {
+export const SamplesContent = (): React.ReactElement => {
   const [rows, setRows] = useState<TableRowProps[]>([]);
   const [isReadOnlyMode, setIsReadOnlyMode] = useState(true);
 
@@ -85,6 +88,4 @@ function SamplesContent(): React.ReactElement {
       </SideSection>
     </Box>
   );
-}
-
-export default SamplesContent;
+};

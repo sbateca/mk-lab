@@ -1,4 +1,6 @@
 import {Box} from "@mui/material";
+
+import {Button} from "../../atoms";
 import {
   IconNames,
   SharedButtonColors,
@@ -6,8 +8,7 @@ import {
   SharedButtonSizes,
   SharedButtonVariants,
 } from "../../../utils/enums";
-import Button from "../../atoms/Button/Button";
-import {EDIT_SAMPLE_BUTTON_LABEL} from "../../../utils/constants/pages/samples";
+import {EDIT_SAMPLE_BUTTON_LABEL} from "../../../utils/constants";
 import {SampleSideSectionActionsProps} from "./Types";
 
 function SampleSideSectionButtons({

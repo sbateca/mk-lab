@@ -1,6 +1,6 @@
 import {TableHead as MuiTableHead, TableRow} from "@mui/material";
 
-import TableCell from "../TableCell/TableCell";
+import {TableCell} from "../TableCell";
 import {TableHeadProps} from "./Types";
 
 function TableHead({headerLabels}: TableHeadProps): React.ReactElement {

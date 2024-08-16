@@ -1,4 +1,5 @@
 import React, {createContext, useState, useCallback, useEffect} from "react";
+
 import {SnackBarContextType} from "./Types";
 import {SnackBarSeverity} from "../../utils/enums";
 

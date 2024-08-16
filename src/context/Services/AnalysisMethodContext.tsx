@@ -1,10 +1,10 @@
 import React, {createContext, useState, useEffect, useMemo} from "react";
 
-import {AnalysisMethod} from "../../model/AnalysisMethod";
 import {
   getAnalysisMethodByIdService,
   getAnalysisMethodService,
 } from "../../services";
+import {AnalysisMethod} from "../../model/AnalysisMethod";
 
 const AnalysisMethodContext = createContext<{
   analysisMethods: AnalysisMethod[] | null;

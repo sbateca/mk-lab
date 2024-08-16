@@ -1,7 +1,7 @@
 import {render, screen} from "@testing-library/react";
 
 import {TableRowProps} from "../../molecules/TableRow/Types";
-import Table from "./Table";
+import {Table} from "./Table";
 
 const mockHeaderLabels = ["header1", "header2"];
 const mockRows: TableRowProps[] = [
