@@ -1,7 +1,7 @@
 import {render, fireEvent, screen} from "@testing-library/react";
 
-import UserMenu from "./UserMenu";
-import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
+import {UserMenu} from "./UserMenu";
+import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants";
 
 const mockReload = jest.fn();
 Object.defineProperty(window, "location", {

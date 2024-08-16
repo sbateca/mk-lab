@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+
 import {
   Box,
   Chip,
@@ -9,16 +10,16 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import {SxProps} from "@mui/system";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import {ReportDetailStyles} from "./ReportsDetailStyles";
-import Typography from "../../atoms/Typography/Typography";
-import {
-  BoxContainerProps,
-  ReportDetailProps,
-  StackContainerProps,
-  StackFieldProps,
-  StackRowDirectionSpacingPropsProps,
-} from "./Types";
+
+import {Typography, Button} from "../../atoms";
+import {AutoComplete} from "../../molecules";
+import {ReportSideSectionButtons} from "./ReportsSideSectionButtons";
+import {SampleReportDetails} from "./SampleReportDetails";
+import {AutoCompleteOption} from "../../molecules/AutoComplete/types";
 import {
   ReportFormFields,
   SelectVariants,
@@ -34,7 +35,6 @@ import {
   SharedTypographyVariants,
   SnackBarSeverity,
 } from "../../../utils/enums";
-import {SAMPLE_SUCCESSFULLY_UPDATED_TEXT} from "../../../utils/constants/pages/samples";
 import {
   REPORT_SAMPLE_LABEL_TEXT,
   REPORT_ANALYTE_LABEL_TEXT,
@@ -42,46 +42,45 @@ import {
   REPORT_CRITERIA_LABEL_TEXT,
   REPORT_DATE_LABEL_TEXT,
   REPORT_RESULT_LABEL_TEXT,
-} from "../../../utils/constants/form/formLabel";
-import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
-import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {
+  SAMPLE_SUCCESSFULLY_UPDATED_TEXT,
+  REPORT_SUCCESSFULLY_CREATED_TEXT,
   DATEPICKER_FORMAT,
   DATEPICKER_VIEWS,
-} from "../../../utils/constants/pages/shared";
-import {useForm} from "../../../utils/hooks/useForm";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import Button from "../../atoms/Button/Button";
-import {
   isEmpty,
   isNotValidDate,
-} from "../../../utils/constants/form/validations";
-import {FormProps} from "../../../utils/constants/form/formType";
-import ReportSideSectionButtons from "./ReportsSideSectionActions";
-import {useSideSection} from "../../../utils/hooks/useSideSection";
-import {SxProps} from "@mui/system";
-import {useReports} from "../../../utils/hooks/useReports";
+  FormProps,
+} from "../../../utils/constants";
+import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
 import {
   reportFormToReport,
   reportToReportForm,
 } from "../../../adapters/reports";
-import {REPORT_SUCCESSFULLY_CREATED_TEXT} from "../../../utils/constants/pages/reports";
-import {useSample} from "../../../utils/hooks/useSample";
-import AutoComplete from "../../molecules/AutoComplete/AutoComplete";
-import {AutoCompleteOption} from "../../molecules/AutoComplete/types";
-import {useSampleType} from "../../../utils/hooks/useSampleType";
-import {useAnalysisMethod} from "../../../utils/hooks/useAnalysisMethod";
-import {useAnalyte} from "../../../utils/hooks/useAnalyte";
-import {useCriteria} from "../../../utils/hooks/useCriteria";
 import {getAutoCompleteOptionsFromModel} from "../../../utils/model";
-import SampleReportDetails from "./SampleReportDetails";
-import {useClient} from "../../../utils/hooks/useClient";
+import {
+  useSample,
+  useSampleType,
+  useAnalysisMethod,
+  useAnalyte,
+  useCriteria,
+  useClient,
+  useReports,
+  useSideSection,
+  useForm,
+  useSnackBar,
+} from "../../../utils/hooks";
+import {
+  BoxContainerProps,
+  ReportDetailProps,
+  StackContainerProps,
+  StackFieldProps,
+  StackRowDirectionSpacingPropsProps,
+} from "./Types";
+import {ReportDetailStyles} from "./ReportsDetailStyles";
 
-function ReportDetail({
+export const ReportDetail = ({
   isReadOnlyMode,
   setIsReadOnlyMode,
-}: ReportDetailProps): React.ReactElement {
+}: ReportDetailProps): React.ReactElement => {
   const today = dayjs();
   const theme = useTheme<Theme>();
   const isLessThanMediumScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -439,6 +438,4 @@ function ReportDetail({
       </Box>
     </Box>
   );
-}
-
-export default ReportDetail;
+};

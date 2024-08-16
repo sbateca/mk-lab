@@ -4,9 +4,10 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material/";
+
 import {SelectProps} from "./Types";
 
-function Select({
+export const Select = ({
   required,
   label,
   readOnly,
@@ -14,7 +15,7 @@ function Select({
   defaultValue,
   menuItems,
   handleChange,
-}: SelectProps) {
+}: SelectProps) => {
   return (
     <FormControl required={required} variant="standard">
       <InputLabel variant={variant}>{label}</InputLabel>
@@ -31,6 +32,4 @@ function Select({
       </MuiSelect>
     </FormControl>
   );
-}
-
-export default Select;
+};

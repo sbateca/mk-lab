@@ -1,13 +1,13 @@
 import {Box} from "@mui/material";
 
-import {useMenu} from "../../../utils/hooks/useMenu";
+import {useMenu} from "../../../utils/hooks";
 import {ContentStyle} from "./ContentStyle";
-import ReportsContent from "../ReportsContent/ReportsContent";
-import SnackBarContainer from "../../molecules/SnackBarContainer/SnackBarContainer";
-import SamplesContent from "../SamplesContent/SamplesContent";
+import {ReportsContent} from "../ReportsContent";
+import {SnackBarContainer} from "../../molecules";
+import {SamplesContent} from "../SamplesContent";
 import {SharedMenuItems} from "../../../utils/enums";
 
-function Content(): React.ReactElement {
+export const Content = (): React.ReactElement => {
   const {selectedMenuItem} = useMenu();
 
   let contentComponent;
@@ -27,6 +27,4 @@ function Content(): React.ReactElement {
       <SnackBarContainer />
     </Box>
   );
-}
-
-export default Content;
+};

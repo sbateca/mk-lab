@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import {Navigate} from "react-router";
 
-import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants/pages/shared";
-import {localStorageContainsField} from "../../../utils/localStorage";
-import LoginTemplate from "../../templates/Login/Login";
+import {LoginTemplate} from "../../templates";
 
-function Login(): React.ReactElement {
+import {LOCAL_STORAGE_USER_KEY} from "../../../utils/constants";
+import {localStorageContainsField} from "../../../utils/localStorage";
+
+export const Login = (): React.ReactElement => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -16,6 +17,4 @@ function Login(): React.ReactElement {
   }, []);
 
   return redirect ? <Navigate to="/admin" /> : <LoginTemplate />;
-}
-
-export default Login;
+};

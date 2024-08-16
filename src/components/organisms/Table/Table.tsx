@@ -8,11 +8,11 @@ import {
 
 import TableHead from "../../molecules/TableHead/TableHead";
 import TableRow from "../../molecules/TableRow/TableRow";
-import {NO_RECORDS_MESSAGE} from "../../../utils/constants/pages/shared";
+import {NO_RECORDS_MESSAGE} from "../../../utils/constants";
 import {TableProps} from "./Types";
 import {TableStyles} from "./TableStyles";
 
-function Table({headerLabels, rows}: TableProps): React.ReactElement {
+export const Table = ({headerLabels, rows}: TableProps): React.ReactElement => {
   return (
     <TableContainer component={Paper}>
       {rows.length === 0 ? (
@@ -35,6 +35,4 @@ function Table({headerLabels, rows}: TableProps): React.ReactElement {
       )}
     </TableContainer>
   );
-}
-
-export default Table;
+};

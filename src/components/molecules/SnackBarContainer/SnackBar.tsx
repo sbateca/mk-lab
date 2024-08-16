@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
+
 import {Alert, Box, Snackbar as MuiSnackbar} from "@mui/material";
+
 import {SnackbarProps} from "./Types";
 
-function Snackbar({isOpen, snackBarText, severity}: SnackbarProps) {
+export const Snackbar = ({isOpen, snackBarText, severity}: SnackbarProps) => {
   const [open, setOpen] = useState(isOpen);
 
   useEffect(() => {
@@ -18,6 +20,4 @@ function Snackbar({isOpen, snackBarText, severity}: SnackbarProps) {
       </MuiSnackbar>
     </Box>
   );
-}
-
-export default Snackbar;
+};

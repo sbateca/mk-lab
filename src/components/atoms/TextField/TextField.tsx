@@ -2,7 +2,7 @@ import {TextField as MuiTextField} from "@mui/material";
 
 import {TexFieldProps} from "./Types";
 
-function TextField({
+export const TextField = ({
   name,
   label,
   variant,
@@ -12,7 +12,7 @@ function TextField({
   onBlur,
   isRequired,
   hasError,
-}: TexFieldProps): React.ReactElement {
+}: TexFieldProps): React.ReactElement => {
   return (
     <MuiTextField
       name={name}
@@ -26,6 +26,4 @@ function TextField({
       required={isRequired}
     />
   );
-}
-
-export default TextField;
+};

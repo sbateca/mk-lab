@@ -3,7 +3,7 @@ import {Typography as MuiTypography} from "@mui/material";
 import ITypographyProps from "./Types";
 import typographyStyle from "./TypographyStyle";
 
-function Typography({
+export const Typography = ({
   text,
   size,
   padding,
@@ -13,7 +13,7 @@ function Typography({
   align = "left",
   color = "black",
   sx = {},
-}: ITypographyProps): React.ReactElement {
+}: ITypographyProps): React.ReactElement => {
   const textColor = typographyStyle[color];
   return (
     <MuiTypography
@@ -29,6 +29,4 @@ function Typography({
       {text}
     </MuiTypography>
   );
-}
-
-export default Typography;
+};

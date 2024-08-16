@@ -1,9 +1,10 @@
 import {AxiosResponse} from "axios";
-import {Client} from "../model/Client";
+
 import {
   RESPONSE_DATA_NOT_VALID_ERROR,
   getInvalidDataErrorMessage,
-} from "../utils/constants/adapters";
+} from "../utils/constants";
+import {Client} from "../model/Client";
 
 export const axiosResponseToClient = (
   response: AxiosResponse<unknown>,

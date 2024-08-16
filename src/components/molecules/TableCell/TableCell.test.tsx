@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 
-import TableCell from "./TableCell";
+import {TableCell} from "./TableCell";
 
 describe("TableCell", () => {
   it("TableCell renders the text passed as parameter", () => {

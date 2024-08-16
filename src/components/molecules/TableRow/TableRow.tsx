@@ -1,10 +1,12 @@
 import {TableRow as MuiTableRow} from "@mui/material";
 
-import TableCell from "../TableCell/TableCell";
+import {TableCell} from "../TableCell";
+import {
+  ReportTableActionButtons,
+  SampleTableActionButtons,
+} from "../TableActionButtons";
+import {useMenu} from "../../../utils/hooks";
 import {TableRowProps} from "./Types";
-import SampleTableActionButtons from "../TableActionButtons/SampleTableActionButtons";
-import {useMenu} from "../../../utils/hooks/useMenu";
-import ReportTableActionButtons from "../TableActionButtons/ReportTableActionButtons";
 import {SharedMenuItems} from "../../../utils/enums";
 
 function TableRow({id, cells}: TableRowProps): React.ReactElement {

@@ -1,6 +1,8 @@
 import {ChangeEvent} from "react";
-import {FormProps} from "../../../utils/constants/form/formType";
+
 import {Dayjs} from "dayjs";
+
+import {FormProps} from "../../../utils/constants";
 
 export interface SampleFormProps {
   form: FormProps;

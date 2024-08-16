@@ -1,9 +1,11 @@
 import {useEffect} from "react";
+
 import {Box} from "@mui/material";
 import Swal from "sweetalert2";
-import Spinner from "../../atoms/Spinner/Spinner";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import Button from "../../atoms/Button/Button";
+
+import {Button, Spinner} from "../../atoms";
+import {useSnackBar, useSideSection, useReports} from "../../../utils/hooks";
+import {ReportTableActionButtonsProps} from "./Types";
 import {
   IconNames,
   SharedButtonColors,
@@ -13,20 +15,17 @@ import {
   SnackBarSeverity,
   SweetAlertIcon,
 } from "../../../utils/enums";
-import {ReportTableActionButtonsProps} from "./Types";
-import {SAMPLE_SUCCESSFULLY_DELETED_TEXT} from "../../../utils/constants/pages/samples";
-import {useSideSection} from "../../../utils/hooks/useSideSection";
-import {useReports} from "../../../utils/hooks/useReports";
 import {
   REPORT_DELETE_CONFIRMATION_SUBTITLE,
   REPORT_DELETE_CONFIRMATION_TITLE,
   REPORT_DETAILS_TITLE_TEXT,
   REPORT_DELETE_CONFIRMATION_TEXT,
-} from "../../../utils/constants/pages/reports";
+  SAMPLE_SUCCESSFULLY_DELETED_TEXT,
+} from "../../../utils/constants";
 
-function ReportTableActionButtons({
+export const ReportTableActionButtons = ({
   reportId,
-}: ReportTableActionButtonsProps): React.ReactElement {
+}: ReportTableActionButtonsProps): React.ReactElement => {
   const {
     isLoading,
     error,
@@ -102,6 +101,4 @@ function ReportTableActionButtons({
       )}
     </Box>
   );
-}
-
-export default ReportTableActionButtons;
+};

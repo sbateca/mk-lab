@@ -1,9 +1,10 @@
 import {AxiosResponse} from "axios";
+
 import {Criteria} from "../model/Criteria";
 import {
   RESPONSE_DATA_NOT_VALID_ERROR,
   getInvalidDataErrorMessage,
-} from "../utils/constants/adapters";
+} from "../utils/constants";
 
 export const axiosResponseToCriteria = (
   response: AxiosResponse<unknown>,

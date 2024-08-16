@@ -1,6 +1,5 @@
 import React, {createContext, useState, useEffect, useMemo} from "react";
 
-import {Report} from "../../model/Report";
 import {
   createReportService,
   deleteReportService,
@@ -8,10 +7,11 @@ import {
   getReportByIdService,
   getReportsService,
 } from "../../services/reportsService";
+import {Report} from "../../model/Report";
 import {
   REPORT_ID_MISSING_TEXT,
   REPORT_ID_OR_REPORTS_MISSING_TEXT,
-} from "../../utils/constants/pages/reports";
+} from "../../utils/constants";
 
 const ReportsContext = createContext<{
   reports: Report[] | null;

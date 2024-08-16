@@ -1,11 +1,12 @@
-import {Box, FormControl, Grid, TextField} from "@mui/material";
 import React from "react";
+
+import {Box, FormControl, Grid, TextField} from "@mui/material";
 
 import dayjs from "dayjs";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {LocalizationProvider} from "@mui/x-date-pickers";
 
-import {SampleFormStyles} from "./SampleFormStyles";
 import {
   SamplesFormFields,
   SharedButtonColors,
@@ -19,18 +20,18 @@ import {
   SAMPLE_RESPONSABLE_LABEL_TEXT,
   SAMPLE_CODE_LABEL_TEXT,
   SAMPLE_LOCATION_LABEL_TEXT,
-} from "../../../utils/constants/form/formLabel";
+  DATEPICKER_VIEWS,
+} from "../../../utils/constants";
 import {SampleFormProps} from "./Types";
-import {LocalizationProvider} from "@mui/x-date-pickers";
-import {DATEPICKER_VIEWS} from "../../../utils/constants/pages/shared";
+import {SampleFormStyles} from "./SampleFormStyles";
 
-function SampleForm({
+export const SampleForm = ({
   form,
   formFieldsErrors,
   handleChange,
   handleDateChange,
   getTextFieldHelperText,
-}: SampleFormProps): React.ReactElement {
+}: SampleFormProps): React.ReactElement => {
   const today = dayjs();
   return (
     <Box component="form" autoComplete="off" sx={SampleFormStyles.mainBox}>
@@ -183,6 +184,4 @@ function SampleForm({
       </Grid>
     </Box>
   );
-}
-
-export default SampleForm;
+};

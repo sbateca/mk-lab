@@ -1,19 +1,27 @@
 import {useEffect, useState} from "react";
+
 import {Box} from "@mui/material";
 
+import {TableRowProps} from "../../molecules/TableRow/Types";
+import {Button, Spinner, Typography} from "../../atoms";
+import {Table} from "../Table";
+import {SideSection} from "../SideSection";
+import {ReportDetail} from "../ReportsDetail";
+import {reportsToTableRows} from "../../../adapters/tableRow";
+import {
+  useAnalyte,
+  useSampleType,
+  useSample,
+  useSideSection,
+  useSnackBar,
+  useReports,
+} from "../../../utils/hooks";
 import {
   REPORTS_TITLE_CONFIG,
   REPORTS_TABLE_HEADER_LABELS,
   REPORT_CREATE_BUTTON_LABEL,
   CREATE_REPORT_TITLE_TEXT,
-} from "../../../utils/constants/pages/reports";
-import {reportsToTableRows} from "../../../adapters/tableRow";
-import {TableRowProps} from "../../molecules/TableRow/Types";
-import {useReports} from "../../../utils/hooks/useReports";
-import Typography from "../../atoms/Typography/Typography";
-import Spinner from "../../atoms/Spinner/Spinner";
-import Table from "../Table/Table";
-import Button from "../../atoms/Button/Button";
+} from "../../../utils/constants";
 import {ReportsContentStyles} from "./ReportsContentStyles";
 import {
   SharedButtonColors,
@@ -22,15 +30,8 @@ import {
   SharedButtonVariants,
   SnackBarSeverity,
 } from "../../../utils/enums";
-import {useSnackBar} from "../../../utils/hooks/useSnackBar";
-import {useSideSection} from "../../../utils/hooks/useSideSection";
-import SideSection from "../SideSection/SideSection";
-import ReportsDetail from "../ReportsDetail/ReportsDetail";
-import {useSample} from "../../../utils/hooks/useSample";
-import {useSampleType} from "../../../utils/hooks/useSampleType";
-import {useAnalyte} from "../../../utils/hooks/useAnalyte";
 
-function ReportsContent(): React.ReactElement {
+export const ReportsContent = (): React.ReactElement => {
   const [rows, setRows] = useState<TableRowProps[]>([]);
   const [isReadOnlyMode, setIsReadOnlyMode] = useState(true);
 
@@ -84,13 +85,11 @@ function ReportsContent(): React.ReactElement {
       </Box>
       <Table headerLabels={REPORTS_TABLE_HEADER_LABELS} rows={rows} />
       <SideSection isOpen={isSideSectionOpen}>
-        <ReportsDetail
+        <ReportDetail
           isReadOnlyMode={isReadOnlyMode}
           setIsReadOnlyMode={setIsReadOnlyMode}
         />
       </SideSection>
     </Box>
   );
-}
-
-export default ReportsContent;
+};
