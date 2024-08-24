@@ -1,5 +1,4 @@
 export * from "./AutoComplete";
-export * from "./Dialog";
 export * from "./Header";
 export * from "./Menu";
 export * from "./Select";

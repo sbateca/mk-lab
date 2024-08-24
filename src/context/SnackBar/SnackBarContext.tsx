@@ -42,6 +42,8 @@ export const SnackBarProvider = ({children}: SnackBarProviderProps) => {
       }, 3000);
 
       return () => clearTimeout(timer);
+    } else {
+      return () => {};
     }
   }, [isSnackBarOpen, callbackFunction]);
 

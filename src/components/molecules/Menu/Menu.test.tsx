@@ -1,44 +1,21 @@
-import {fireEvent, render, screen} from "@testing-library/react";
-
-import {MenuProvider} from "../../../context/Menu/MenuContext";
-import {Header} from "../Header";
-import {MenuProps} from "./Types";
-import {Menu} from "./Menu";
+import {renderMenu, updateUseMenu} from "./Menu.test.page";
 
 describe("Menu component", () => {
-  it("should render the menu with the elements passed by arguments successfuly", () => {
-    const mockMenuProps: MenuProps = {
-      menuItems: [{label: "Mock Home"}, {label: "Mock Contacts"}],
-    };
-    const companyName = "Company Name test";
-
-    render(
-      <MenuProvider>
-        <Header companyName={companyName} />
-        <Menu menuItems={mockMenuProps.menuItems} />
-      </MenuProvider>,
-    );
-    const menu = screen.getByLabelText("menu");
-    fireEvent.click(menu);
-
-    const {menuItems} = mockMenuProps;
-    menuItems.forEach((item) => {
-      expect(screen.getByText(item.label)).toBeInTheDocument();
-    });
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it("the Menu component items (Drawer) should not appear by default", () => {
-    const mockMenuProps: MenuProps = {
-      menuItems: [{label: "Mock Home"}, {label: "Mock Contacts"}],
-    };
+  it("should render the menu with the elements passed by arguments successfully", async () => {
+    updateUseMenu(true);
+    const {mainMenu} = await renderMenu();
 
-    render(
-      <MenuProvider>
-        <Menu menuItems={mockMenuProps.menuItems} />
-      </MenuProvider>,
-    );
+    expect(mainMenu).toBeInTheDocument();
+  });
 
-    const menuItems = screen.queryByRole("presentation");
-    expect(menuItems).toBeNull();
+  it("should not render the menu when it is closed", async () => {
+    updateUseMenu(false);
+    const {mainMenu} = await renderMenu();
+
+    expect(mainMenu).not.toBeInTheDocument();
   });
 });

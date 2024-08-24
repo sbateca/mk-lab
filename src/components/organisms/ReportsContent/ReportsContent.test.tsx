@@ -1,29 +1,67 @@
-import {render, screen, waitFor} from "@testing-library/react";
+import {fireEvent, render, screen, waitFor} from "@testing-library/react";
 
-import {useReports as UseReportsModule} from "../../../utils/hooks";
+import * as useReportsModule from "../../../utils/hooks/useReports";
+import * as useSideSectionModule from "../../../utils/hooks/useSideSection";
 import {Report} from "../../../model/Report";
 import {ReportsContent} from "./ReportsContent";
+import {Sample, SampleType, Analyte} from "../../../model";
 
-const mockReports: Report[] = [
+const mockSampleTypes: SampleType[] = [
   {
-    id: "1234",
-    reportDate: "2021-10-10",
-    sample: {
-      id: "1",
-      sampleCode: "sam1001",
-      client: "client name",
-      getSampleDate: "12/12/2021",
-      receptionDate: "12/12/2021",
-      analysisDate: "12/12/2021",
-      sampleLocation: "location",
-      responsable: "responsable name",
-    },
-    analyte: "Total coliforms",
-    analysisMethod: "NTC 4772:2008",
-    criteria: "Law 00/2007",
-    result: "0 UFC/100 ml",
+    id: "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+    name: "Total coliforms",
   },
 ];
+const mockSamples: Sample[] = [
+  {
+    id: "ce59c2ba-c7f2-4df5-a8db-7dd74b7381a9",
+    sampleCode: "sam1001",
+    sampleTypeId: "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+    clientId: "ab3b3b3b-ab3b-ab3b-ab3b-ab3b3b3b3b3b",
+    getSampleDate: "2024-08-05",
+    receptionDate: "2024-08-05",
+    analysisDate: "2024-08-05",
+    sampleLocation: "mock location",
+    responsable: "mock responsable",
+  },
+];
+const mockAnalytes: Analyte[] = [
+  {
+    id: "ab3b3b3b-ab3b-ab3b-ab3b-ab3b3b3b3b3b",
+    name: "mock analyte name",
+  },
+];
+const mockReports: Report[] = [
+  {
+    id: "14860e3c-56df-4a31-96cc-100dc2a8f749",
+    reportDate: "2024-08-05",
+    sampleId: "ce59c2ba-c7f2-4df5-a8db-7dd74b7381a9",
+    analyte: "ab3b3b3b-ab3b-ab3b-ab3b-ab3b3b3b3b3b",
+    analysisMethod: "c461270c-6682-4f51-9148-efb9fbaab44e",
+    criteria: "b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3",
+    result: "0 UFC/g",
+  },
+];
+
+const mockUseReportArgs = {
+  reports: mockReports,
+  selectedReport: null,
+  setSelectedReport: jest.fn(),
+  getReports: jest.fn(),
+  getReportById: jest.fn(),
+  createReport: jest.fn(),
+  editReport: jest.fn(),
+  deleteReport: jest.fn(),
+  isLoading: false,
+  error: null,
+};
+
+const mockUseSideSectionArgs = {
+  isSideSectionOpen: false,
+  setIsSideSectionOpen: jest.fn(),
+  sideSectionTitle: "",
+  setSideSectionTitle: jest.fn(),
+};
 
 jest.mock("../../../Config/envManager", () => ({
   __esModule: true,
@@ -31,37 +69,55 @@ jest.mock("../../../Config/envManager", () => ({
     BACKEND_URL: "http://mockurl.com/api",
   },
 }));
+jest.mock("../ReportsDetail/ReportsDetail", () => ({
+  ReportDetail: () => (
+    <div data-testid="reportsDetail">Reports Detail Component</div>
+  ),
+}));
+jest.mock("../../../utils/hooks/useSampleType", () => ({
+  useSampleType: () => ({
+    sampleTypes: mockSampleTypes,
+    getSampleTypes: jest.fn(),
+  }),
+}));
+jest.mock("../../../utils/hooks/useSample", () => ({
+  useSample: () => ({
+    samples: mockSamples,
+    getSamples: jest.fn(),
+  }),
+}));
+jest.mock("../../../utils/hooks/useAnalyte", () => ({
+  useAnalyte: () => ({
+    analytes: mockAnalytes,
+    getAnalytes: jest.fn(),
+  }),
+}));
 
 describe("ReportsContent test", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render reports data successfully", async () => {
-    const getReportsMock = jest.fn().mockReturnValue({
+    jest.spyOn(useReportsModule, "useReports").mockReturnValue({
+      ...mockUseReportArgs,
       reports: mockReports,
-      loading: false,
-      error: false,
-    });
-    jest.spyOn(UseReportsModule, "useReports").mockReturnValue({
-      ...getReportsMock(),
-      getReports: getReportsMock,
     });
 
     render(<ReportsContent />);
 
     await waitFor(() => {
-      expect(screen.getByText("sam1001 - client name")).toBeInTheDocument();
-      expect(screen.getByText("Total coliforms")).toBeInTheDocument();
-      expect(screen.getByText("Law 00/2007")).toBeInTheDocument();
+      expect(screen.getByText("2024-08-05")).toBeInTheDocument();
+      expect(screen.getByText("sam1001 - Total coliforms")).toBeInTheDocument();
+      expect(screen.getByText("mock analyte name")).toBeInTheDocument();
+      expect(screen.getByText("0 UFC/g")).toBeInTheDocument();
     });
   });
 
   it("should render no data text when does not retrieve reports", async () => {
-    const getReportsMock = jest.fn().mockReturnValue({
-      reports: [],
-      loading: false,
-      error: false,
-    });
     jest.spyOn(useReportsModule, "useReports").mockReturnValue({
-      ...getReportsMock(),
-      getReports: getReportsMock,
+      ...mockUseReportArgs,
+      reports: [],
     });
 
     render(<ReportsContent />);
@@ -69,5 +125,50 @@ describe("ReportsContent test", () => {
     await waitFor(() => {
       expect(screen.getByText("No records to display")).toBeInTheDocument();
     });
+  });
+
+  it("should render loading spinner when is loading", async () => {
+    jest.spyOn(useReportsModule, "useReports").mockReturnValue({
+      ...mockUseReportArgs,
+      isLoading: true,
+    });
+
+    render(<ReportsContent />);
+
+    await waitFor(() => {
+      expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    });
+  });
+
+  it("should render error message when there is an error", async () => {
+    jest.spyOn(useReportsModule, "useReports").mockReturnValue({
+      ...mockUseReportArgs,
+      error: "Error message",
+    });
+
+    render(<ReportsContent />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Error message")).toBeInTheDocument();
+    });
+  });
+
+  it("should render the report detail when click in details button", async () => {
+    jest.spyOn(useReportsModule, "useReports").mockReturnValue({
+      ...mockUseReportArgs,
+      reports: mockReports,
+    });
+    jest.spyOn(useSideSectionModule, "useSideSection").mockReturnValue({
+      ...mockUseSideSectionArgs,
+      isSideSectionOpen: true,
+    });
+
+    render(<ReportsContent />);
+
+    const detailsButton = screen.queryByDisplayValue("View");
+    if (detailsButton) {
+      fireEvent.click(detailsButton);
+      expect(screen.getByTestId("reportsDetail")).toBeInTheDocument();
+    }
   });
 });

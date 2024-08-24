@@ -3,7 +3,6 @@ import {LoginForm} from "./LoginForm";
 import {
   LOGIN_ERROR_ACCESS_DENIED_MESSAGE,
   LOGIN_FORM_SIGN_IN,
-  getRequiredFieldText,
 } from "../../../utils/constants";
 import {LoginFormProps} from "./Types";
 import {getUserByUserName} from "../../../services/userService";
@@ -85,7 +84,7 @@ describe("LoginForm component", () => {
     const usernameInput = document.querySelector('input[name="username"]');
     if (usernameInput) {
       fireEvent.blur(usernameInput);
-      const errorMessage = getRequiredFieldText(loginFormProps.fields[0].name);
+      const errorMessage = "This field is required.";
       expect(screen.getByText(errorMessage)).toBeInTheDocument();
     }
   });

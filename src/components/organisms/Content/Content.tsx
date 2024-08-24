@@ -23,7 +23,9 @@ export const Content = (): React.ReactElement => {
   }
   return (
     <Box>
-      <Box sx={ContentStyle}>{contentComponent}</Box>
+      <Box sx={ContentStyle} data-testid="contentContainer">
+        {contentComponent}
+      </Box>
       <SnackBarContainer />
     </Box>
   );

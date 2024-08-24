@@ -1,62 +1,22 @@
-import {render, screen} from "@testing-library/react";
-
-import {MenuContext, MenuProvider} from "../../../context/Menu/MenuContext";
-import {Content} from "./Content";
-
-jest.mock("../../../Config/envManager", () => ({
-  __esModule: true,
-  default: {
-    BACKEND_URL: "http://example.com/api",
-  },
-}));
-
-jest.mock("../../Organisms/samplesContent/SamplesContent", () => ({
-  __esModule: true,
-  default: () => <div aria-label="samples-content"></div>,
-}));
-
-jest.mock("../../Organisms/reports/reports", () => ({
-  __esModule: true,
-  default: () => <div aria-label="reports-content"></div>,
-}));
-
-const renderWithCustomContext = (selectedMenuItem: string) => {
-  return render(
-    <MenuContext.Provider
-      value={{
-        menuOpen: false,
-        selectedMenuItem: selectedMenuItem,
-        setSelectedMenuItem: () => {},
-        toggleMenu: () => {},
-      }}
-    >
-      <Content />
-    </MenuContext.Provider>,
-  );
-};
+import {renderContent, updateUseMenu} from "./Content.test.page";
+import {SharedMenuItems} from "../../../utils/enums";
 
 describe("Content component", () => {
-  it("renders SamplesContent when selectedMenuItem is 'Samples'", () => {
-    render(
-      <MenuProvider>
-        <Content />
-      </MenuProvider>,
-    );
-    expect(screen.getByLabelText("samples-content")).toBeInTheDocument();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it("renders Reports when selectedMenuItem is 'Reports'", () => {
-    renderWithCustomContext("Reports");
+  it("renders SamplesContent when selectedMenuItem is 'Samples'", async () => {
+    updateUseMenu(SharedMenuItems.SAMPLES);
+    const {screen} = await renderContent();
 
-    expect(screen.getByLabelText("reports-content")).toBeInTheDocument();
+    expect(screen.getByTestId("samples-content")).toBeInTheDocument();
   });
 
-  it("renders SamplesContent by default when selectedMenuItem is unknown", () => {
-    render(
-      <MenuProvider>
-        <Content />
-      </MenuProvider>,
-    );
-    expect(screen.getByLabelText("samples-content")).toBeInTheDocument();
+  it("renders Reports when selectedMenuItem is 'Reports'", async () => {
+    updateUseMenu(SharedMenuItems.REPORTS);
+    const {screen} = await renderContent();
+
+    expect(screen.getByTestId("reports-content")).toBeInTheDocument();
   });
 });

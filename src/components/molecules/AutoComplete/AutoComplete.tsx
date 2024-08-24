@@ -49,6 +49,7 @@ export const AutoComplete = ({
           required={required}
           error={error}
           helperText={helperText}
+          data-testid="auto-complete"
         />
       )}
       isOptionEqualToValue={(option, value) => option.id === value.id}
