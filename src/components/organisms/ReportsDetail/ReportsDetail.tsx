@@ -276,7 +276,7 @@ export const ReportDetail = ({
       }
     };
     getSample();
-  }, [selectedReport, form]);
+  }, [selectedReport, form.sampleId]);
 
   return (
     <Box sx={getBoxContainerProps(isLessThanMediumScreen) as SxProps}>
