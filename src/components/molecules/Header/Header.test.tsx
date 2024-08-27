@@ -1,20 +1,23 @@
-import {render, screen} from "@testing-library/react";
-
-import {Header} from "./Header";
+import {fireEvent} from "@testing-library/react";
+import {renderHeader, setupMocks} from "./Header.test.page";
 
 describe("Header", () => {
-  let companyName: string;
-
   beforeEach(() => {
-    companyName = "Company Name test";
-    render(<Header companyName={companyName} />);
+    setupMocks();
+  });
+  it("should render the header", async () => {
+    const {header, mainMenuButton} = await renderHeader();
+
+    expect(header).toBeInTheDocument();
+    expect(mainMenuButton).toBeInTheDocument();
   });
 
-  it("should render the company name passed by arguments", () => {
-    expect(screen.getByText(companyName)).toBeInTheDocument();
-  });
+  it("should appear the main menu when click in menu button", async () => {
+    const {mainMenuButton, screen} = await renderHeader();
 
-  it("Should render the menu icon successfuly", () => {
-    expect(screen.getByLabelText("menu")).toBeInTheDocument();
+    fireEvent.click(mainMenuButton);
+    const mainMenuComponent = screen.getByTestId("mainMenu");
+
+    expect(mainMenuComponent).toBeInTheDocument();
   });
 });

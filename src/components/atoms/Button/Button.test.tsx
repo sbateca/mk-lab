@@ -1,51 +1,50 @@
-import {render, screen} from "@testing-library/react";
+import "@testing-library/jest-dom";
+import {mockButtonConfig, renderListItemButton} from "./Button.test.page";
+import {fireEvent} from "@testing-library/react";
 
-import {Button} from "./Button";
-import {ButtonConfig} from "./Types";
-
-describe("ActionsButtons", () => {
-  const actions: ButtonConfig = {
-    buttonConfigs: [
-      {label: "Action 1", color: "primary"},
-      {label: "Action 2", color: "secondary"},
-    ],
-  };
-
-  it("renders buttons with correct text and color", () => {
-    render(<Button buttonConfigs={actions.buttonConfigs} />);
-
-    actions.buttonConfigs.forEach((actionItem) => {
-      const button = screen.getByText(actionItem.label);
-      expect(button).toBeInTheDocument();
-      expect(button).toHaveClass(
-        `MuiButton-contained${actionItem.color.charAt(0).toUpperCase() + actionItem.color.slice(1)}`,
-      );
-    });
+describe("Button Component", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it("renders buttons with the text passed in parameters", () => {
-    render(<Button buttonConfigs={actions.buttonConfigs} />);
+  it("should render with the label passed in props", async () => {
+    const {button} = await renderListItemButton();
 
-    actions.buttonConfigs.forEach((buttonConfig) => {
-      const buttonText = screen.getByText(buttonConfig.label);
-      expect(buttonText).toBeInTheDocument();
-    });
+    expect(button).toBeInTheDocument();
   });
 
-  it("renders buttons with the icon passed in parameters", () => {
-    const mockActionButtons: ButtonConfigs = {
-      buttonConfigs: [
-        {label: "Action 1", color: "primary", icon: "create"},
-        {label: "Action 2", color: "secondary", icon: "delete"},
-      ],
-    };
-    const dataTestIds = ["AddIcon", "DeleteIcon"];
+  it("should handle click event successfuly", async () => {
+    const {button} = await renderListItemButton();
 
-    render(<ActionButtons buttonConfigs={mockActionButtons.buttonConfigs} />);
+    fireEvent.click(button);
 
-    mockActionButtons.buttonConfigs.forEach((_actionItem, index) => {
-      const buttonText = screen.getByTestId(dataTestIds[index]);
-      expect(buttonText).toBeInTheDocument();
-    });
+    expect(mockButtonConfig.onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("should apply the correct styles passed in its parameters", async () => {
+    const {button} = await renderListItemButton();
+
+    expect(button).toHaveStyle("font-size: 20px");
+  });
+
+  it("should render with the correct variant", async () => {
+    const expectedClass = "MuiButton-contained";
+    const {button} = await renderListItemButton();
+
+    expect(button).toHaveClass(expectedClass);
+  });
+
+  it("should render with the correct size", async () => {
+    const expectedClass = "MuiButton-sizeSmall";
+    const {button} = await renderListItemButton();
+
+    expect(button).toHaveClass(expectedClass);
+  });
+
+  it("should render with the correct color", async () => {
+    const expectedClass = "MuiButton-colorPrimary";
+    const {button} = await renderListItemButton();
+
+    expect(button).toHaveClass(expectedClass);
   });
 });

@@ -1,8 +1,9 @@
+import React from "react";
+
 import {ListItemButton as MuiListItemButton, ListItemText} from "@mui/material";
 
 import {useMenu} from "../../../utils/hooks";
 import {LisItemButtonProps} from "./Types";
-import React from "react";
 import {SharedMenuItems} from "../../../utils/enums";
 
 export const ListItemButton = ({

@@ -1,4 +1,4 @@
-export * from "./analysysMethodService";
+export * from "./analysisMethodService";
 export * from "./analyteService";
 export * from "./criteriaService";
 export * from "./clientService";

@@ -25,13 +25,14 @@ export const Header = ({companyName}: HeaderProps): React.ReactElement => {
   }, []);
 
   return (
-    <AppBar position="fixed">
-      <Toolbar>
+    <AppBar position="fixed" data-testid="header">
+      <Toolbar data-testid="toolBar">
         <IconButton
           edge="start"
           color="inherit"
           aria-label="menu"
           onClick={toggleMenu}
+          data-testid="toggleMainMenu"
         >
           <MenuIcon />
         </IconButton>

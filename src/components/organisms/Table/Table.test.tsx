@@ -7,17 +7,23 @@ const mockHeaderLabels = ["header1", "header2"];
 const mockRows: TableRowProps[] = [
   {
     cells: [
-      {text: "cell1", align: "left"},
-      {text: "cell2", align: "left"},
+      {children: "cell1", align: "left"},
+      {children: "cell2", align: "left"},
     ],
   },
   {
     cells: [
-      {text: "cell3", align: "left"},
-      {text: "cell4", align: "left"},
+      {children: "cell3", align: "left"},
+      {children: "cell4", align: "left"},
     ],
   },
 ];
+jest.mock("../../../Config/envManager", () => ({
+  __esModule: true,
+  default: {
+    BACKEND_URL: "http://mockurl.com/api",
+  },
+}));
 
 describe("Table", () => {
   it("should render the table component with headers and cells provided", () => {
