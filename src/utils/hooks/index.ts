@@ -4,7 +4,6 @@ export * from "./useClient";
 export * from "./useCriteria";
 export * from "./useForm";
 export * from "./useMenu";
-export * from "./useModal";
 export * from "./useReports";
 export * from "./useSample";
 export * from "./useSampleType";
