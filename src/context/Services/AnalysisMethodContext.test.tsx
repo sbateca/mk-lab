@@ -9,7 +9,7 @@ jest.mock("../../config/EnvManager", () => ({
   },
 }));
 
-jest.mock("../../services/analysysMethodService", () => ({
+jest.mock("../../services/analysisMethodService", () => ({
   getAnalysisMethodByIdService: jest.fn().mockResolvedValue({
     id: "1",
     name: "Analysis Method 1",
