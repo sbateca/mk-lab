@@ -63,6 +63,7 @@ function SampleProvider({children}: IProviderProps) {
 
   const getSampleById = async (sampleId: string): Promise<Sample | null> => {
     try {
+      setIsLoading(true);
       return await getSampleByIdService(sampleId);
     } catch (error) {
       setError((error as Error).message);

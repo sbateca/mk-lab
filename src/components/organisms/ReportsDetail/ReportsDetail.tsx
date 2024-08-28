@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 import {
   Box,
@@ -15,7 +15,7 @@ import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
-import {Typography, Button} from "../../atoms";
+import {Typography, Button, Spinner} from "../../atoms";
 import {AutoComplete} from "../../molecules";
 import {ReportSideSectionButtons} from "./ReportsSideSectionButtons";
 import {SampleReportDetails} from "./SampleReportDetails";
@@ -93,15 +93,22 @@ export const ReportDetail = ({
     isLoading,
     error,
   } = useReports();
-  const {samples, selectedSample, getSampleById, setSelectedSample} =
-    useSample();
-  const {clients} = useClient();
-  const {sampleTypes} = useSampleType();
-  const {analysisMethods} = useAnalysisMethod();
-  const {analytes} = useAnalyte();
-  const {criterias} = useCriteria();
+  const {
+    samples,
+    selectedSample,
+    isLoading: isLoadingSample,
+    getSampleById,
+    setSelectedSample,
+  } = useSample();
+  const {clients, isLoading: isLoadingClients} = useClient();
+  const {sampleTypes, isLoading: isLoadingSampleTypes} = useSampleType();
+  const {analysisMethods, isLoading: isLoadingAnalysisMethods} =
+    useAnalysisMethod();
+  const {analytes, isLoading: isLoadingAnalytes} = useAnalyte();
+  const {criterias, isLoading: isLoadingCriterias} = useCriteria();
   const {setIsSideSectionOpen, sideSectionTitle} = useSideSection();
   const {showSnackBarMessage} = useSnackBar();
+  const [loadingState, setLoadingState] = useState(false);
 
   const defaultFormValue: FormProps = {
     reportDate: today.format(DATEPICKER_FORMAT),
@@ -267,6 +274,24 @@ export const ReportDetail = ({
   }, [error]);
 
   useEffect(() => {
+    if (
+      isLoadingClients ||
+      isLoadingSampleTypes ||
+      isLoadingAnalysisMethods ||
+      isLoadingAnalytes ||
+      isLoadingCriterias
+    ) {
+      setLoadingState(true);
+    }
+  }, [
+    isLoadingClients,
+    isLoadingSampleTypes,
+    isLoadingAnalysisMethods,
+    isLoadingAnalytes,
+    isLoadingCriterias,
+  ]);
+
+  useEffect(() => {
     const getSample = async () => {
       const selectedSample = await getSampleById(form?.sampleId || "");
       if (form.sampleId === "") {
@@ -303,122 +328,129 @@ export const ReportDetail = ({
         />
       </Stack>
       <Divider />
-      <Stack {...getStackContainerProps(isLessThanMediumScreen)}>
-        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
-          <Stack {...getStackFieldProps()}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                sx={SampleFormStyles.datePicker}
-                disableFuture
-                defaultValue={today}
-                views={DATEPICKER_VIEWS}
-                label={REPORT_DATE_LABEL_TEXT}
-                name={ReportFormFields.REPORT_DATE}
-                onChange={(value) =>
-                  handleDateChange(value, ReportFormFields.REPORT_DATE)
-                }
-                slotProps={{
-                  textField: {
-                    error: !!formFieldsErrors[ReportFormFields.REPORT_DATE],
-                    helperText: getTextFieldHelperText(
-                      ReportFormFields.REPORT_DATE,
-                    ),
-                    variant: SharedTextFieldVariants.STANDARD,
-                  },
-                }}
-                value={dayjs(form.reportDate) ?? null}
+      {loadingState ? (
+        <Spinner />
+      ) : (
+        <Stack {...getStackContainerProps(isLessThanMediumScreen)}>
+          <Stack {...getStackRowProps(isLessThanMediumScreen)}>
+            <Stack {...getStackFieldProps()}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  sx={SampleFormStyles.datePicker}
+                  disableFuture
+                  defaultValue={today}
+                  views={DATEPICKER_VIEWS}
+                  label={REPORT_DATE_LABEL_TEXT}
+                  name={ReportFormFields.REPORT_DATE}
+                  onChange={(value) =>
+                    handleDateChange(value, ReportFormFields.REPORT_DATE)
+                  }
+                  slotProps={{
+                    textField: {
+                      error: !!formFieldsErrors[ReportFormFields.REPORT_DATE],
+                      helperText: getTextFieldHelperText(
+                        ReportFormFields.REPORT_DATE,
+                      ),
+                      variant: SharedTextFieldVariants.STANDARD,
+                    },
+                  }}
+                  value={dayjs(form.reportDate) ?? null}
+                  readOnly={isReadOnlyMode}
+                />
+              </LocalizationProvider>
+            </Stack>
+            <Stack {...getStackFieldProps()}>
+              <AutoComplete
+                options={getSampleTypeAutoCompleteOptionsFromSamples()}
+                label={REPORT_SAMPLE_LABEL_TEXT}
+                value={form.sampleId}
+                variant={SelectVariants.STANDARD}
+                onChange={handleAutoCompleteChange}
+                name={ReportFormFields.SAMPLE_ID}
                 readOnly={isReadOnlyMode}
+                required
+                error={!!formFieldsErrors[ReportFormFields.SAMPLE_ID]}
+                helperText={getTextFieldHelperText(ReportFormFields.SAMPLE_ID)}
               />
-            </LocalizationProvider>
+            </Stack>
           </Stack>
-          <Stack {...getStackFieldProps()}>
-            <AutoComplete
-              options={getSampleTypeAutoCompleteOptionsFromSamples()}
-              label={REPORT_SAMPLE_LABEL_TEXT}
-              value={form.sampleId}
-              variant={SelectVariants.STANDARD}
-              onChange={handleAutoCompleteChange}
-              name={ReportFormFields.SAMPLE_ID}
-              readOnly={isReadOnlyMode}
-              required
-              error={!!formFieldsErrors[ReportFormFields.SAMPLE_ID]}
-              helperText={getTextFieldHelperText(ReportFormFields.SAMPLE_ID)}
-            />
+          <Stack {...getStackRowProps(isLessThanMediumScreen)}>
+            <Stack {...getStackFieldProps()}>
+              <AutoComplete
+                options={getAutoCompleteOptionsFromModel(analytes)}
+                label={REPORT_ANALYTE_LABEL_TEXT}
+                value={form.analyte}
+                variant={SelectVariants.STANDARD}
+                onChange={handleAutoCompleteChange}
+                name={ReportFormFields.ANALYTE}
+                readOnly={isReadOnlyMode}
+                required
+                error={!!formFieldsErrors[ReportFormFields.ANALYTE]}
+                helperText={getTextFieldHelperText(ReportFormFields.ANALYTE)}
+              />
+            </Stack>
+            <Stack {...getStackFieldProps()}>
+              <AutoComplete
+                options={getAutoCompleteOptionsFromModel(analysisMethods)}
+                label={REPORT_ANALYSIS_METHOD_LABEL_TEXT}
+                value={form.analysisMethod}
+                variant={SelectVariants.STANDARD}
+                onChange={handleAutoCompleteChange}
+                name={ReportFormFields.ANALYSIS_METHOD}
+                readOnly={isReadOnlyMode}
+                required
+                error={!!formFieldsErrors[ReportFormFields.ANALYSIS_METHOD]}
+                helperText={getTextFieldHelperText(
+                  ReportFormFields.ANALYSIS_METHOD,
+                )}
+              />
+            </Stack>
           </Stack>
-        </Stack>
-        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
-          <Stack {...getStackFieldProps()}>
-            <AutoComplete
-              options={getAutoCompleteOptionsFromModel(analytes)}
-              label={REPORT_ANALYTE_LABEL_TEXT}
-              value={form.analyte}
-              variant={SelectVariants.STANDARD}
-              onChange={handleAutoCompleteChange}
-              name={ReportFormFields.ANALYTE}
-              readOnly={isReadOnlyMode}
-              required
-              error={!!formFieldsErrors[ReportFormFields.ANALYTE]}
-              helperText={getTextFieldHelperText(ReportFormFields.ANALYTE)}
-            />
-          </Stack>
-          <Stack {...getStackFieldProps()}>
-            <AutoComplete
-              options={getAutoCompleteOptionsFromModel(analysisMethods)}
-              label={REPORT_ANALYSIS_METHOD_LABEL_TEXT}
-              value={form.analysisMethod}
-              variant={SelectVariants.STANDARD}
-              onChange={handleAutoCompleteChange}
-              name={ReportFormFields.ANALYSIS_METHOD}
-              readOnly={isReadOnlyMode}
-              required
-              error={!!formFieldsErrors[ReportFormFields.ANALYSIS_METHOD]}
-              helperText={getTextFieldHelperText(
-                ReportFormFields.ANALYSIS_METHOD,
-              )}
-            />
-          </Stack>
-        </Stack>
-        <Stack {...getStackRowProps(isLessThanMediumScreen)}>
-          <Stack {...getStackFieldProps()}>
-            <AutoComplete
-              options={getAutoCompleteOptionsFromModel(criterias)}
-              label={REPORT_CRITERIA_LABEL_TEXT}
-              value={form.criteria}
-              variant={SelectVariants.STANDARD}
-              onChange={handleAutoCompleteChange}
-              name={ReportFormFields.CRITERIA}
-              readOnly={isReadOnlyMode}
-              required
-              error={!!formFieldsErrors[ReportFormFields.CRITERIA]}
-              helperText={getTextFieldHelperText(ReportFormFields.CRITERIA)}
-            />
-          </Stack>
-          <Stack {...getStackFieldProps()}>
-            <TextField
-              required
-              error={!!formFieldsErrors[ReportFormFields.RESULT]}
-              label={REPORT_RESULT_LABEL_TEXT}
-              type="string"
-              color={SharedButtonColors.PRIMARY}
-              size={SharedButtonSizes.SMALL}
-              onChange={handleChange}
-              name={ReportFormFields.RESULT}
-              helperText={getTextFieldHelperText(ReportFormFields.RESULT)}
-              value={form.result ?? ""}
-              variant={SharedTextFieldVariants.STANDARD}
-              fullWidth={true}
-              InputProps={{
-                readOnly: isReadOnlyMode,
-              }}
-            />
+          <Stack {...getStackRowProps(isLessThanMediumScreen)}>
+            <Stack {...getStackFieldProps()}>
+              <AutoComplete
+                options={getAutoCompleteOptionsFromModel(criterias)}
+                label={REPORT_CRITERIA_LABEL_TEXT}
+                value={form.criteria}
+                variant={SelectVariants.STANDARD}
+                onChange={handleAutoCompleteChange}
+                name={ReportFormFields.CRITERIA}
+                readOnly={isReadOnlyMode}
+                required
+                error={!!formFieldsErrors[ReportFormFields.CRITERIA]}
+                helperText={getTextFieldHelperText(ReportFormFields.CRITERIA)}
+              />
+            </Stack>
+            <Stack {...getStackFieldProps()}>
+              <TextField
+                required
+                error={!!formFieldsErrors[ReportFormFields.RESULT]}
+                label={REPORT_RESULT_LABEL_TEXT}
+                type="string"
+                color={SharedButtonColors.PRIMARY}
+                size={SharedButtonSizes.SMALL}
+                onChange={handleChange}
+                name={ReportFormFields.RESULT}
+                helperText={getTextFieldHelperText(ReportFormFields.RESULT)}
+                value={form.result ?? ""}
+                variant={SharedTextFieldVariants.STANDARD}
+                fullWidth={true}
+                InputProps={{
+                  readOnly: isReadOnlyMode,
+                }}
+              />
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
-      <SampleReportDetails
-        sample={selectedSample}
-        clients={clients || []}
-        sampleTypes={sampleTypes || []}
-      />
+      )}
+      <Box sx={ReportDetailStyles.sampleDetailsContainer}>
+        <SampleReportDetails
+          sample={selectedSample}
+          clients={clients || []}
+          sampleTypes={sampleTypes || []}
+          isLoadingSample={isLoadingSample}
+        />
+      </Box>
       <Box
         sx={{
           display: "flex",
