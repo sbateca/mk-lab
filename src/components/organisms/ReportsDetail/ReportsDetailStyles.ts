@@ -16,4 +16,8 @@ export const ReportDetailStyles = {
     alignSelf: "start",
     fontSize: "9px",
   },
+  sampleDetailsContainer: {
+    height: "100%",
+    marginTop: "20px",
+  },
 };
