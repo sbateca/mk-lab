@@ -1,5 +1,4 @@
 export * from "./Content";
-export * from "./Detail";
 export * from "./LoginForm";
 export * from "./ReportsContent";
 export * from "./ReportsDetail";
