@@ -3,12 +3,24 @@ import {ChangeEvent, SyntheticEvent, useEffect, useState} from "react";
 import {SelectChangeEvent} from "@mui/material";
 import {Dayjs} from "dayjs";
 
-import {
-  FieldValidations,
-  FormError,
-} from "../../components/organisms/SampleForm/Types";
 import {AutoCompleteOption} from "../../components/molecules/AutoComplete/types";
 import {FormProps, DATEPICKER_FORMAT} from "../constants";
+
+export interface SampleFormProps {
+  form: FormProps;
+  formFieldsErrors: FormError;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleDateChange: (value: Dayjs | null, fieldName: string) => void;
+  getTextFieldHelperText: (fieldName: string) => string;
+}
+
+export interface FormError {
+  [key: string]: string[];
+}
+
+export interface FieldValidations {
+  [key: string]: Array<(fieldValue?: string) => string>;
+}
 
 export const useForm = () => {
   const [formFieldsErrors, setFormFieldsErrors] = useState<FormError>({});
