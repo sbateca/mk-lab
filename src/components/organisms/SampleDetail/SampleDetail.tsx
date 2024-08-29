@@ -68,8 +68,7 @@ import {
   StackRowDirectionSpacingPropsProps,
 } from "./Types";
 import {AutoCompleteOption} from "../../molecules/AutoComplete/types";
-import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
-import {SampleDetailStyles} from "./SampleDetailStyles";
+import {SampleDetailStyles, SampleFormStyles} from "./SampleDetailStyles";
 
 export const SampleDetail = ({
   isReadOnlyMode,

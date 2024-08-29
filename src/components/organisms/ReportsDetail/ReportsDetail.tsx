@@ -50,7 +50,7 @@ import {
   isNotValidDate,
   FormProps,
 } from "../../../utils/constants";
-import {SampleFormStyles} from "../SampleForm/SampleFormStyles";
+
 import {
   reportFormToReport,
   reportToReportForm,
@@ -75,7 +75,7 @@ import {
   StackFieldProps,
   StackRowDirectionSpacingPropsProps,
 } from "./Types";
-import {ReportDetailStyles} from "./ReportsDetailStyles";
+import {ReportDetailStyles, SampleFormStyles} from "./ReportsDetailStyles";
 
 export const ReportDetail = ({
   isReadOnlyMode,
