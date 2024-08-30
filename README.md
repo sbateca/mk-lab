@@ -13,19 +13,12 @@ What things you need to install the software and how to install them.
 - Node.js version 20.11.0. You can download it from [Node.js official](https://nodejs.org/).
 - npm (comes with Node.js).
 - GNU Make. You can donwload it from [GNU Make Official](https://www.gnu.org/software/make/)
+- json-server. To run the mock server we need to install this library. You can see more details here: https://www.npmjs.com/package/json-server
 
 ### Installation 🔧
 
 A step-by-step series of examples that tell you how to get a development environment running.
 
-#### Environment Variables
-Before starting the application, you need to set up the following environment variables in your `.env` file:
-```bash
-VITE_BACKEND_URL="http://localhost:4000"
-```
-If you do not have a `.env` file, create one in the root directory of the project. You can use the provided valur `.env.example`.
-
-Ensure the variable names match those in the src/config/constants file for consistency.
 
 1. Clone the repository:
 ```bash
@@ -35,11 +28,21 @@ git clone https://github.com/sbateca/mk-lab.git
 ```bash
 npm install
 ```
-3. Run the mock server:
+3. set environment variables:
+Before starting the application, you need to set up the following environment variables in your `.env` file:
+```bash
+VITE_BACKEND_URL="http://localhost:4000"
+```
+If you do not have a `.env` file, create one in the root directory of the project.
+
+Ensure the variable names match those in the src/config/EnvManager.ts file for consistency.
+
+
+4. Run the mock server:
 ```bash
 make start-server
 ```
-4. Run the project:
+5. Run the project:
 ```bash
 npm run dev
 ```
@@ -49,7 +52,6 @@ this will start the project in development mode. Open [ localhost:5173]( http://
 Once you have started the application, you can log in using the following credentials:
 ```
 Username: admin
-Password: 123456
 ```
 
 ## Running the tests ⚙️
@@ -73,41 +75,52 @@ This project follows the Atomic Design pattern for frontend, meaning we organize
 
 ```
 src/
-├── Adapters
-├── Assets
-├── Components
-│   ├── Atoms
+├── adapters
+├── assets
+├── components
+│   ├── atoms
+│   │   ├── Button
 │   │   ├── LisItemButton
 │   │   ├── Spinner
 │   │   ├── TableCell
 │   │   ├── TextField
 │   │   └── Typography
-│   ├── Molecules
-│   │   ├── ActionButton
+│   ├── molecules
+│   │   ├── AutoComplete
+│   │   ├── Header
+│   │   ├── Menu
+│   │   ├── SnackBarContainer
+│   │   ├── TableActionButtons
+│   │   ├── TableCell
 │   │   ├── TableHead
 │   │   ├── TableRow
-│   │   ├── header
-│   │   ├── menu
-│   │   └── userMenu
-│   ├── Organisms
-│   │   ├── LoginForm
+│   │   └── UserMenu
+│   ├── organisms
 │   │   ├── Content
-│   │   ├── reports
-│   │   ├── samplesContent
-│   │   └── table
-│   ├── Pages
+│   │   ├── LoginForm
+│   │   ├── ReportsContent
+│   │   ├── ReportsDetail
+│   │   ├── SampleDetail
+│   │   ├── SamplesContent
+│   │   ├── SideSection
+│   │   └── Table
+│   ├── pages
 │   │   ├── AdminPage
 │   │   └── Login
 │   └── Templates
-│       ├── loginTemplate
-│       └── mainTemplate
-├── Config
-├── Context
+│       ├── login
+│       └── main
+├── config
+├── context
 │   ├── Menu
-│   └── Services
+│   ├── Services
+│   ├── SideSection
+│   └── SnackBar
+│
 ├── model
 ├── services
-└── Utils
+└── utils
+    ├── constants
     └── hooks
   
 ```
