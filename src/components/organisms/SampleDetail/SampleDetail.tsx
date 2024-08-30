@@ -317,6 +317,7 @@ export const SampleDetail = ({
                 InputProps={{
                   readOnly: isReadOnlyMode,
                 }}
+                data-testid={SamplesFormFields.SAMPLE_CODE}
               />
             </Stack>
             <Stack {...getStackFieldProps()}>
@@ -374,6 +375,8 @@ export const SampleDetail = ({
                     },
                   }}
                   readOnly={isReadOnlyMode}
+                  value={dayjs(form.getSampleDate) ?? null}
+                  data-testid={SamplesFormFields.GET_SAMPLE_DATE}
                 />
               </LocalizationProvider>
             </Stack>
@@ -428,6 +431,7 @@ export const SampleDetail = ({
                       variant: SharedTextFieldVariants.STANDARD,
                     },
                   }}
+                  value={dayjs(form.analysisDate) ?? null}
                   readOnly={isReadOnlyMode}
                 />
               </LocalizationProvider>
